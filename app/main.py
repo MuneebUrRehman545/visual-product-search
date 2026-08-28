@@ -4,19 +4,58 @@ from contextlib import asynccontextmanager
 import io
 import os
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, List, Optional
+import uuid
 
-from fastapi import FastAPI, File, Form, HTTPException, Query, UploadFile, status
+from dotenv import load_dotenv
+
+# Load .env once at application startup
+load_dotenv()
+
+from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Query, UploadFile, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from PIL import Image
 
+from app.db.database import (
+    create_db_user,
+    get_catalog_count,
+    get_catalog_items_by_category,
+    get_db_user_by_email,
+    get_db_user_by_id,
+    get_top_catalog_categories,
+    init_user_tables,
+    is_postgres,
+    update_user_last_login,
+)
+from app.schemas.auth import AuthResponse, LoginRequest, SignupRequest, UserResponse
 from app.schemas.search import SearchResponse, SearchResultItem
+from app.schemas.vision_pipeline import VisionMatchItem, VisionProcessResponse
+from app.db.shared_database import (
+    check_pipeline_run_exists,
+    insert_asset,
+    insert_extracted_data,
+    insert_module_event,
+    is_shared_db_configured,
+)
+from app.services.auth_service import (
+    create_access_token,
+    hash_password,
+    verify_access_token,
+    verify_password,
+)
 from app.services.clip_search_service import CLIPSearchService
+from app.services.resnet_search_service import ResNetSearchService
 
 # Dynamic root resolution for catalog images directory
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-CATALOG_IMAGES_DIR = (PROJECT_ROOT / "data" / "catalog" / "images").resolve()
+env_img_dir = os.getenv("CATALOG_IMAGES_DIR")
+if env_img_dir:
+    CATALOG_IMAGES_DIR = (PROJECT_ROOT / env_img_dir).resolve() if not Path(env_img_dir).is_absolute() else Path(env_img_dir).resolve()
+elif (PROJECT_ROOT / "data" / "images").exists():
+    CATALOG_IMAGES_DIR = (PROJECT_ROOT / "data" / "images").resolve()
+else:
+    CATALOG_IMAGES_DIR = (PROJECT_ROOT / "data" / "catalog" / "images").resolve()
 
 # Allowed frontend origins for CORS (Localhost and LAN development)
 ALLOWED_ORIGINS = [
@@ -31,16 +70,25 @@ env_origins = os.getenv("ALLOWED_ORIGINS")
 if env_origins:
     ALLOWED_ORIGINS = [origin.strip() for origin in env_origins.split(",") if origin.strip()]
 
-# Global search service instance (loaded once on demand / app startup)
-_search_service: Optional[CLIPSearchService] = None
+# Global search service instances (loaded on demand / app startup)
+_clip_search_service: Optional[CLIPSearchService] = None
+_resnet_search_service: Optional[ResNetSearchService] = None
 
 
 def get_search_service() -> CLIPSearchService:
     """Retrieve or initialize singleton CLIPSearchService instance."""
-    global _search_service
-    if _search_service is None:
-        _search_service = CLIPSearchService()
-    return _search_service
+    global _clip_search_service
+    if _clip_search_service is None:
+        _clip_search_service = CLIPSearchService()
+    return _clip_search_service
+
+
+def get_resnet_search_service() -> ResNetSearchService:
+    """Retrieve or initialize singleton ResNetSearchService instance."""
+    global _resnet_search_service
+    if _resnet_search_service is None:
+        _resnet_search_service = ResNetSearchService()
+    return _resnet_search_service
 
 
 @asynccontextmanager
@@ -61,29 +109,232 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
-    allow_origin_regex=r"http://(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2\d|3[01])\.\d+\.\d+):(5173|5174|3000)",
+    allow_origin_regex=r"http://(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2\d|3[01])\.\d+\.\d+)(:\d+)?",
     allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
 @app.get("/health", tags=["Health"])
 async def health_check():
-    """Health check endpoint to verify backend operational status."""
-    return {"status": "ok"}
+    """Health check endpoint to verify backend operational status and catalog readiness."""
+    try:
+        count = get_catalog_count()
+        db_type = "postgresql" if is_postgres() else "sqlite"
+        return {
+            "status": "ok",
+            "database": db_type,
+            "catalog_count": count,
+            "model": "OpenCLIP_ViT_B_32",
+            "embedding_dimension": 512,
+        }
+    except Exception as e:
+        return {
+            "status": "degraded",
+            "error": str(e),
+            "model": "OpenCLIP_ViT_B_32",
+        }
+
+
+# ============================================================================
+# Authentication Dependency & Endpoints
+# ============================================================================
+
+def get_current_user_optional(authorization: Optional[str] = Header(None)) -> Optional[Dict[str, Any]]:
+    """Extract authenticated user payload if valid Bearer token provided."""
+    if not authorization or not authorization.startswith("Bearer "):
+        return None
+    token = authorization[len("Bearer ") :].strip()
+    return verify_access_token(token)
+
+
+def get_current_user(authorization: Optional[str] = Header(None)) -> Dict[str, Any]:
+    """Require authenticated user from Bearer token."""
+    user_payload = get_current_user_optional(authorization)
+    if not user_payload:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Authentication token is missing, expired, or invalid.",
+        )
+    return user_payload
+
+
+@app.post("/api/auth/signup", response_model=AuthResponse, tags=["Authentication"])
+async def signup(payload: SignupRequest):
+    """Register a new user account."""
+    existing_user = get_db_user_by_email(payload.email)
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="An account with this email already exists.",
+        )
+
+    pwd_hash, salt = hash_password(payload.password)
+    try:
+        created = create_db_user(
+            email=payload.email,
+            username=payload.username,
+            password_hash=pwd_hash,
+            salt=salt,
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to create user account: {str(e)}",
+        )
+
+    token = create_access_token(created["id"], created["email"], created["username"])
+    return AuthResponse(
+        token=token,
+        user=UserResponse(
+            id=created["id"],
+            email=created["email"],
+            username=created["username"],
+            created_at=str(created.get("created_at", "")),
+        ),
+        message="Account created successfully!",
+    )
+
+
+@app.post("/api/auth/login", response_model=AuthResponse, tags=["Authentication"])
+async def login(payload: LoginRequest):
+    """Authenticate existing user and return access token."""
+    user = get_db_user_by_email(payload.email)
+    if not user or not verify_password(payload.password, user["password_hash"], user["salt"]):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid email or password.",
+        )
+
+    update_user_last_login(user["id"])
+    token = create_access_token(user["id"], user["email"], user["username"])
+    return AuthResponse(
+        token=token,
+        user=UserResponse(
+            id=user["id"],
+            email=user["email"],
+            username=user["username"],
+            created_at=str(user.get("created_at", "")),
+            last_login=str(user.get("last_login", "")),
+        ),
+        message="Logged in successfully!",
+    )
+
+
+@app.get("/api/auth/me", response_model=UserResponse, tags=["Authentication"])
+async def get_my_profile(auth_user: Dict[str, Any] = Depends(get_current_user)):
+    """Fetch profile of currently authenticated user."""
+    user = get_db_user_by_id(auth_user["user_id"])
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User profile not found.",
+        )
+    return UserResponse(
+        id=user["id"],
+        email=user["email"],
+        username=user["username"],
+        created_at=str(user.get("created_at", "")),
+        last_login=str(user.get("last_login", "")),
+    )
+
+
+@app.get("/api/auth/demo", response_model=AuthResponse, tags=["Authentication"])
+async def demo_login():
+    """One-click instant demo login for guest evaluation."""
+    demo_email = "demo.user@antigravity.ai"
+    demo_user = get_db_user_by_email(demo_email)
+
+    if not demo_user:
+        pwd_hash, salt = hash_password("DemoPassword2026!")
+        demo_user = create_db_user(
+            email=demo_email,
+            username="Demo Explorer",
+            password_hash=pwd_hash,
+            salt=salt,
+        )
+
+    token = create_access_token(demo_user["id"], demo_user["email"], demo_user["username"])
+    return AuthResponse(
+        token=token,
+        user=UserResponse(
+            id=demo_user["id"],
+            email=demo_user["email"],
+            username=demo_user["username"],
+            created_at=str(demo_user.get("created_at", "")),
+        ),
+        message="Demo session activated!",
+    )
+
+
+# ============================================================================
+# Catalog Category Presets Endpoints
+# ============================================================================
+
+@app.get("/api/catalog/categories", tags=["Catalog Categories"])
+async def list_top_categories(limit: int = 8):
+    """Retrieve top categories from catalog with item counts and sample images."""
+    try:
+        categories = get_top_catalog_categories(limit=limit)
+        return {"total_categories": len(categories), "categories": categories}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to fetch catalog categories: {str(e)}",
+        )
+
+
+@app.get("/api/catalog/category/{category_name}", response_model=SearchResponse, tags=["Catalog Categories"])
+async def get_items_by_category_endpoint(
+    category_name: str,
+    limit: int = Query(20, ge=1, le=50, description="Max items to return"),
+):
+    """Retrieve products for a given category from the catalog database."""
+    items = get_catalog_items_by_category(category_name=category_name, limit=limit)
+    if not items:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"No products found for category '{category_name}'.",
+        )
+
+    formatted_results = []
+    for rank, item in enumerate(items, start=1):
+        cid = item["id"]
+        fn = item.get("filename") or f"{item.get('image_id')}.jpg"
+        img_url = item.get("image_url") or f"/catalog-images/{fn}"
+        formatted_results.append(
+            SearchResultItem(
+                rank=rank,
+                catalog_item_id=cid,
+                product_id=int(item.get("product_id", cid)),
+                external_id=str(item.get("external_id") or item.get("image_id") or cid),
+                filename=fn,
+                product_display_name=item.get("product_display_name"),
+                category=item.get("category"),
+                sub_category=item.get("sub_category"),
+                article_type=item.get("article_type"),
+                base_colour=item.get("base_colour"),
+                gender=item.get("gender"),
+                season=item.get("season"),
+                usage=item.get("usage"),
+                image_url=img_url,
+                similarity_score=0.0,
+            )
+        )
+
+    return SearchResponse(
+        query_filename=f"Category: {category_name}",
+        top_k=limit,
+        total_results=len(formatted_results),
+        model_used="Database_Catalog_Browse",
+        results=formatted_results,
+    )
 
 
 @app.get("/catalog-images/{filename}", tags=["Catalog Images"])
 async def get_catalog_image(filename: str):
-    """Serve catalog images safely by filename.
-
-    Args:
-        filename: Name of the image file (e.g. '15025.jpg').
-
-    Returns:
-        FileResponse: Image file stream with appropriate Content-Type header.
-    """
+    """Serve catalog images safely by filename."""
     if ".." in filename or "/" in filename or "\\" in filename:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -114,31 +365,141 @@ async def get_catalog_image(filename: str):
     return FileResponse(image_path)
 
 
+async def _execute_search(
+    file: Optional[UploadFile] = None,
+    catalog_filename: Optional[str] = None,
+    catalog_item_id: Optional[int] = None,
+    requested_top_k: int = 10,
+    model_choice: Optional[str] = "clip",
+) -> SearchResponse:
+    """Core search execution pipeline supporting uploaded images and direct catalog items."""
+    rgb_image: Optional[Image.Image] = None
+    query_filename: str = "query.jpg"
+
+    if catalog_filename:
+        safe_fn = os.path.basename(catalog_filename)
+        image_path = (CATALOG_IMAGES_DIR / safe_fn).resolve()
+        if not image_path.exists() or not image_path.is_file():
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Catalog image '{safe_fn}' not found.",
+            )
+        try:
+            rgb_image = Image.open(image_path).convert("RGB")
+            query_filename = safe_fn
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Failed to read catalog image: {str(e)}",
+            )
+    elif file is not None:
+        query_filename = file.filename if file.filename else "query.jpg"
+        try:
+            contents = await file.read()
+        except Exception:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Failed to read uploaded file.",
+            )
+
+        if not contents or len(contents) == 0:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Uploaded file is empty.",
+            )
+
+        # Validate image decoding with PIL
+        try:
+            image_stream = io.BytesIO(contents)
+            img = Image.open(image_stream)
+            img.verify()
+            image_stream.seek(0)
+            rgb_image = Image.open(image_stream).convert("RGB")
+        except Exception:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Uploaded file is not a valid or supported image.",
+            )
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Either an image file or a catalog_filename must be provided.",
+        )
+
+    # Resolve model service
+    model_key = (model_choice or "clip").lower().strip()
+    if model_key in ["resnet", "resnet50", "resnet-50", "resnet_50"]:
+        service = get_resnet_search_service()
+        model_used = "ResNet_50"
+    else:
+        service = get_search_service()
+        model_used = "OpenCLIP_ViT_B_32"
+
+    # Perform visual search
+    try:
+        raw_results = service.search(rgb_image, top_k=requested_top_k)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Visual search processing error ({model_used}): {str(e)}",
+        )
+
+    formatted_results = []
+    for item in raw_results:
+        fn = item.get("filename") or f"{item.get('image_id')}.jpg"
+        img_url = item.get("image_url") or f"/catalog-images/{fn}"
+        formatted_results.append(
+            SearchResultItem(
+                rank=item["rank"],
+                catalog_item_id=int(item["catalog_item_id"]),
+                product_id=int(item["product_id"]),
+                external_id=str(item.get("external_id") or item["product_id"]),
+                filename=fn,
+                product_display_name=item.get("product_display_name"),
+                category=item.get("category"),
+                sub_category=item.get("sub_category"),
+                article_type=item.get("article_type"),
+                base_colour=item.get("base_colour"),
+                gender=item.get("gender"),
+                season=item.get("season"),
+                usage=item.get("usage"),
+                image_url=img_url,
+                similarity_score=float(item["similarity_score"]),
+            )
+        )
+
+    return SearchResponse(
+        query_filename=query_filename,
+        top_k=requested_top_k,
+        total_results=len(formatted_results),
+        model_used=model_used,
+        results=formatted_results,
+    )
+
+
 @app.post(
-    "/api/v1/search",
+    "/search",
     response_model=SearchResponse,
     tags=["Search"],
     summary="Search catalog for visually similar products",
 )
-async def search_products(
-    file: UploadFile = File(..., description="Query image file (JPG, PNG, WebP)"),
+async def search_endpoint(
+    file: Optional[UploadFile] = File(None, description="Query image file (JPG, PNG, WebP)"),
+    catalog_filename: Optional[str] = Form(None, description="Catalog image filename to search with directly"),
+    catalog_filename_query: Optional[str] = Query(None, alias="catalog_filename", description="Catalog image filename (Query param)"),
     top_k: Optional[int] = Form(None, description="Number of top results to return (1-50)"),
     top_k_query: Optional[int] = Query(None, alias="top_k", description="Number of top results (Query param)"),
+    model: Optional[str] = Form(None, description="Model choice: 'clip' (default) or 'resnet'"),
+    model_query: Optional[str] = Query(None, alias="model", description="Model choice: 'clip' or 'resnet'"),
 ):
-    """Search catalog by uploaded query image.
-
-    Args:
-        file: Uploaded image file.
-        top_k: Optional top_k count passed in Form payload.
-        top_k_query: Optional top_k count passed as Query parameter.
-
-    Returns:
-        SearchResponse: Ranked list of visual search matches with similarity scores.
-    """
-    # 1. Resolve and validate top_k
+    """Primary visual search endpoint with CLIP / ResNet model selection."""
     requested_top_k = top_k if top_k is not None else top_k_query
     if requested_top_k is None:
         requested_top_k = 10
+
+    selected_model = model if model is not None else model_query
+    if not selected_model:
+        selected_model = "clip"
 
     if not isinstance(requested_top_k, int) or requested_top_k < 1 or requested_top_k > 50:
         raise HTTPException(
@@ -146,24 +507,113 @@ async def search_products(
             detail="top_k must be an integer between 1 and 50.",
         )
 
-    # 2. Validate uploaded file presence & size
-    query_filename = file.filename if file.filename else "query.jpg"
+    resolved_catalog_fn = catalog_filename if catalog_filename is not None else catalog_filename_query
 
+    return await _execute_search(
+        file=file,
+        catalog_filename=resolved_catalog_fn,
+        requested_top_k=requested_top_k,
+        model_choice=selected_model,
+    )
+
+
+@app.post(
+    "/api/v1/search",
+    response_model=SearchResponse,
+    tags=["Search"],
+    summary="Search catalog for visually similar products (v1 API)",
+)
+async def api_v1_search_endpoint(
+    file: Optional[UploadFile] = File(None, description="Query image file (JPG, PNG, WebP)"),
+    catalog_filename: Optional[str] = Form(None, description="Catalog image filename to search with directly"),
+    catalog_filename_query: Optional[str] = Query(None, alias="catalog_filename", description="Catalog image filename (Query param)"),
+    top_k: Optional[int] = Form(None, description="Number of top results to return (1-50)"),
+    top_k_query: Optional[int] = Query(None, alias="top_k", description="Number of top results (Query param)"),
+    model: Optional[str] = Form(None, description="Model choice: 'clip' (default) or 'resnet'"),
+    model_query: Optional[str] = Query(None, alias="model", description="Model choice: 'clip' or 'resnet'"),
+):
+    """API v1 visual search endpoint with CLIP / ResNet model selection."""
+    requested_top_k = top_k if top_k is not None else top_k_query
+    if requested_top_k is None:
+        requested_top_k = 10
+
+    selected_model = model if model is not None else model_query
+    if not selected_model:
+        selected_model = "clip"
+
+    if not isinstance(requested_top_k, int) or requested_top_k < 1 or requested_top_k > 50:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="top_k must be an integer between 1 and 50.",
+        )
+
+    resolved_catalog_fn = catalog_filename if catalog_filename is not None else catalog_filename_query
+
+    return await _execute_search(
+        file=file,
+        catalog_filename=resolved_catalog_fn,
+        requested_top_k=requested_top_k,
+        model_choice=selected_model,
+    )
+
+
+# ============================================================================
+# Week 4 Vision -> RAG Integration Endpoint
+# ============================================================================
+
+@app.post(
+    "/api/v1/vision/process",
+    response_model=VisionProcessResponse,
+    tags=["Integration"],
+    summary="Process query image and persist visual matches for RAG module handoff",
+)
+async def vision_process_endpoint(
+    image: UploadFile = File(..., description="Query image file (JPEG, PNG, WebP)"),
+    pipeline_run_id: str = Form(..., description="Orchestrator-assigned Pipeline Run UUID"),
+    top_k: Optional[int] = Form(10, description="Number of top results to return (1-50)"),
+    model: Optional[str] = Form("clip", description="Model choice: 'clip' (default) or 'resnet'"),
+):
+    """Week 4 canonical integration endpoint for Vision -> RAG handoff."""
+    # 1. Validate pipeline_run_id UUID format
     try:
-        contents = await file.read()
+        valid_run_uuid = uuid.UUID(pipeline_run_id.strip())
+    except (ValueError, TypeError, AttributeError):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="pipeline_run_id must be a valid UUID.",
+        )
+
+    # 2. Validate top_k
+    resolved_top_k = top_k if top_k is not None else 10
+    if not isinstance(resolved_top_k, int) or resolved_top_k < 1 or resolved_top_k > 50:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="top_k must be an integer between 1 and 50.",
+        )
+
+    # 3. Validate canonical model choice
+    clean_model = (model or "clip").lower().strip()
+    if clean_model not in ["clip", "resnet"]:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Unsupported model. Allowed canonical values: 'clip', 'resnet'.",
+        )
+
+    # 4. Validate image file and decoding
+    try:
+        contents = await image.read()
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Failed to read uploaded file.",
+            detail="Failed to read uploaded image file.",
         )
 
     if not contents or len(contents) == 0:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Uploaded file is empty.",
+            detail="Uploaded image file is empty.",
         )
 
-    # 3. Decode & validate image integrity with PIL
     try:
         image_stream = io.BytesIO(contents)
         img = Image.open(image_stream)
@@ -176,35 +626,132 @@ async def search_products(
             detail="Uploaded file is not a valid or supported image.",
         )
 
-    # 4. Perform visual search using CLIPSearchService
+    # 5. Require Shared Database Configuration
+    if not is_shared_db_configured():
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Shared integration database is not configured. SHARED_DATABASE_URL environment variable is missing or invalid.",
+        )
+
+    # 6. Verify pipeline_run_id exists in shared pipeline_runs table
     try:
-        service = get_search_service()
-        raw_results = service.search(rgb_image, top_k=requested_top_k)
+        exists = check_pipeline_run_exists(str(valid_run_uuid))
+        if not exists:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"pipeline_run_id '{str(valid_run_uuid)}' not found in shared pipeline_runs table.",
+            )
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Visual search processing error: {str(e)}",
+            detail=f"Failed to verify pipeline run in shared database: {str(e)}",
         )
 
-    # 5. Format results with frontend HTTP URLs
-    formatted_results = []
+    # 7. Record started event & query asset in shared database
+    insert_module_event(
+        pipeline_run_id=str(valid_run_uuid),
+        event="started",
+        message="Visual search started.",
+    )
+    try:
+        asset_id = insert_asset(
+            pipeline_run_id=str(valid_run_uuid),
+            filename=image.filename or "query.jpg",
+            mime_type=image.content_type or "image/jpeg",
+            storage_uri=f"assets/{image.filename or 'query.jpg'}",
+        )
+    except Exception as e:
+        insert_module_event(str(valid_run_uuid), "failed", f"Failed to persist asset: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to record query asset in shared database: {str(e)}",
+        )
+
+    # 8. Execute visual search using existing CLIP / ResNet services
+    if clean_model == "resnet":
+        service = get_resnet_search_service()
+        model_used = "ResNet_50"
+    else:
+        service = get_search_service()
+        model_used = "OpenCLIP_ViT_B_32"
+
+    try:
+        raw_results = service.search(rgb_image, top_k=resolved_top_k)
+    except Exception as e:
+        insert_module_event(str(valid_run_uuid), "failed", f"Visual search error: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Visual search processing error ({model_used}): {str(e)}",
+        )
+
+    matches: List[VisionMatchItem] = []
     for item in raw_results:
-        filename = item["filename"]
-        formatted_results.append(
-            SearchResultItem(
+        fn = item.get("filename") or f"{item.get('image_id')}.jpg"
+        img_url = item.get("image_url") or f"/catalog-images/{fn}"
+        matches.append(
+            VisionMatchItem(
                 rank=item["rank"],
-                product_id=item["product_id"],
-                external_id=str(item["external_id"]),
-                filename=filename,
+                catalog_item_id=int(item["catalog_item_id"]),
+                product_id=int(item["product_id"]),
+                external_id=str(item.get("external_id") or item["product_id"]),
+                filename=fn,
+                product_display_name=item.get("product_display_name"),
                 category=item.get("category"),
-                image_url=f"/catalog-images/{filename}",
-                similarity_score=item["similarity_score"],
+                sub_category=item.get("sub_category"),
+                article_type=item.get("article_type"),
+                base_colour=item.get("base_colour"),
+                gender=item.get("gender"),
+                season=item.get("season"),
+                usage=item.get("usage"),
+                image_url=img_url,
+                similarity_score=float(item["similarity_score"]),
             )
         )
 
-    return SearchResponse(
-        query_filename=query_filename,
-        top_k=requested_top_k,
-        total_results=len(formatted_results),
-        results=formatted_results,
+    if not matches:
+        insert_module_event(str(valid_run_uuid), "failed", "No matching products found in catalog.")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="No matching products found in catalog.",
+        )
+
+    primary_match = matches[0]
+    confidence = float(primary_match.similarity_score)
+
+    # 9. Persist extracted_data and completed event
+    content_payload = {
+        "primary_match": primary_match.model_dump(),
+        "matches": [m.model_dump() for m in matches],
+    }
+    try:
+        extracted_data_id = insert_extracted_data(
+            pipeline_run_id=str(valid_run_uuid),
+            asset_id=asset_id,
+            content=content_payload,
+            model=model_used,
+            confidence=confidence,
+        )
+    except Exception as e:
+        insert_module_event(str(valid_run_uuid), "failed", f"Failed to persist extracted data: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to record extracted data in shared database: {str(e)}",
+        )
+
+    insert_module_event(
+        pipeline_run_id=str(valid_run_uuid),
+        event="completed",
+        message="Visual search completed.",
     )
+
+    return VisionProcessResponse(
+        pipeline_run_id=str(valid_run_uuid),
+        status="completed",
+        primary_match=primary_match,
+        matches=matches,
+        confidence=confidence,
+        extracted_data_id=extracted_data_id,
+    )
+

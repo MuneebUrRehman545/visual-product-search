@@ -2,8 +2,13 @@ torch
 torchvision
 open-clip-torch
 numpy
+pandas
 Pillow
 faiss-cpu
 fastapi
 uvicorn
 python-multipart
+python-dotenv
+psycopg2-binary
+pgvector
+httpx
