@@ -28,9 +28,19 @@ from app.db.database import (
     is_postgres,
     update_user_last_login,
 )
+from app.db.shared_database import (
+    check_pipeline_run_exists,
+    get_assets_by_run_id,
+    get_extracted_data_by_run_id,
+    get_module_events_by_run_id,
+    get_pipeline_run,
+    is_shared_db_configured,
+    update_pipeline_run_status,
+)
 from app.schemas.auth import AuthResponse, LoginRequest, SignupRequest, UserResponse
+from app.schemas.gateway import GatewayRunDetailResponse, GatewayRunResponse
 from app.schemas.search import SearchResponse, SearchResultItem
-from app.schemas.vision_pipeline import VisionProcessResponse
+from app.schemas.vision_pipeline import VisionMatchItem, VisionProcessResponse
 from app.modules.vision.adapter import process_vision_request
 from app.services.auth_service import (
     create_access_token,
@@ -612,3 +622,198 @@ async def vision_process_endpoint(
         model=clean_model,
     )
 
+
+# ============================================================================
+# Week 5 Gateway -> Vision Orchestration Endpoints
+# ============================================================================
+
+@app.post(
+    "/api/v1/gateway/run",
+    response_model=GatewayRunResponse,
+    tags=["Gateway"],
+    summary="Execute Vision module processing for an orchestrator-created pipeline run",
+)
+async def gateway_run_endpoint(
+    image: UploadFile = File(..., description="Query image file (JPEG, PNG, WebP)"),
+    run_id: str = Form(..., description="Orchestrator-assigned Pipeline Run UUID (Required)"),
+    top_k: Optional[int] = Form(10, description="Number of top results to return (1-50)"),
+    model: Optional[str] = Form("clip", description="Model choice: 'clip' (default) or 'resnet'"),
+):
+    """Gateway entrypoint: Verifies seeded run, executes Vision adapter, and transitions status to vision_complete."""
+    # 1. Require Shared Database Configuration
+    if not is_shared_db_configured():
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Shared integration database is not configured. SHARED_DATABASE_URL environment variable is missing or invalid.",
+        )
+
+    # 2. Validate orchestrator-supplied run_id
+    if not run_id or not run_id.strip():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Missing required field: run_id.",
+        )
+
+    try:
+        resolved_run_uuid = uuid.UUID(run_id.strip())
+    except (ValueError, TypeError, AttributeError):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="run_id must be a valid UUID.",
+        )
+
+    run_id_str = str(resolved_run_uuid)
+
+    # 3. Verify that the orchestrator-created run exists
+    if not check_pipeline_run_exists(run_id_str):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"pipeline_run_id '{run_id_str}' not found in shared pipeline_runs table.",
+        )
+
+    # 4. Validate top_k
+    resolved_top_k = top_k if top_k is not None else 10
+    if not isinstance(resolved_top_k, int) or resolved_top_k < 1 or resolved_top_k > 50:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="top_k must be an integer between 1 and 50.",
+        )
+
+    # 5. Validate canonical model choice
+    clean_model = (model or "clip").lower().strip()
+    if clean_model not in ["clip", "resnet"]:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Unsupported model. Allowed canonical values: 'clip', 'resnet'.",
+        )
+
+    # 6. Validate image file and decoding
+    try:
+        contents = await image.read()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Failed to read uploaded image file.",
+        )
+
+    if not contents or len(contents) == 0:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Uploaded image file is empty.",
+        )
+
+    try:
+        image_stream = io.BytesIO(contents)
+        img = Image.open(image_stream)
+        img.verify()
+        image_stream.seek(0)
+        rgb_image = Image.open(image_stream).convert("RGB")
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Uploaded file is not a valid or supported image.",
+        )
+
+    # 7. Execute Vision adapter processing (Vision writes assets, extracted_data, module_events)
+    vision_resp = process_vision_request(
+        query_image=rgb_image,
+        pipeline_run_id=run_id_str,
+        filename=image.filename,
+        mime_type=image.content_type,
+        top_k=resolved_top_k,
+        model=clean_model,
+    )
+
+    # 8. Gateway layer transitions pipeline_runs status to vision_complete
+    status_updated = update_pipeline_run_status(run_id_str, "vision_complete")
+    if not status_updated:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to transition run status to vision_complete in shared database.",
+        )
+
+    return GatewayRunResponse(
+        run_id=run_id_str,
+        pipeline_run_id=run_id_str,
+        status="vision_complete",
+        primary_match=vision_resp.primary_match,
+        matches=vision_resp.matches,
+        confidence=vision_resp.confidence,
+        extracted_data_id=vision_resp.extracted_data_id,
+    )
+
+
+@app.get(
+    "/api/v1/gateway/run/{run_id}",
+    response_model=GatewayRunDetailResponse,
+    tags=["Gateway"],
+    summary="Retrieve run status, assets, audit events, and normalized vision output by run_id",
+)
+async def get_gateway_run_endpoint(run_id: str):
+    """Retrieve complete execution details for a run_id."""
+    if not is_shared_db_configured():
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Shared integration database is not configured.",
+        )
+
+    try:
+        val_uuid = uuid.UUID(run_id.strip())
+    except (ValueError, TypeError, AttributeError):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="run_id must be a valid UUID.",
+        )
+
+    run_id_str = str(val_uuid)
+    run_record = get_pipeline_run(run_id_str)
+    if not run_record:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Run '{run_id_str}' not found.",
+        )
+
+    # Hydrate vision_result from extracted_data if available
+    extracted_row = get_extracted_data_by_run_id(run_id_str)
+    vision_result = None
+    if extracted_row and extracted_row.get("content"):
+        try:
+            content = extracted_row["content"]
+            pm = content.get("primary_match")
+            matches_list = content.get("matches", [])
+            if pm:
+                vision_result = VisionProcessResponse(
+                    pipeline_run_id=run_id_str,
+                    status="completed",
+                    primary_match=VisionMatchItem(**pm),
+                    matches=[VisionMatchItem(**m) for m in matches_list],
+                    confidence=float(extracted_row.get("confidence") or pm.get("similarity_score", 0.0)),
+                    extracted_data_id=extracted_row["id"],
+                )
+        except Exception:
+            pass
+
+    assets = get_assets_by_run_id(run_id_str)
+    module_events = get_module_events_by_run_id(run_id_str)
+
+    return GatewayRunDetailResponse(
+        run_id=run_id_str,
+        pipeline_run_id=run_id_str,
+        status=run_record["status"],
+        vision_result=vision_result,
+        assets=assets,
+        module_events=module_events,
+        created_at=run_record.get("created_at"),
+        updated_at=run_record.get("updated_at"),
+    )
+
+
+@app.get(
+    "/api/v1/runs/{run_id}",
+    response_model=GatewayRunDetailResponse,
+    tags=["Gateway"],
+    summary="Alias for /api/v1/gateway/run/{run_id}",
+)
+async def get_run_alias_endpoint(run_id: str):
+    """Convenience alias for /api/v1/gateway/run/{run_id}."""
+    return await get_gateway_run_endpoint(run_id=run_id)

@@ -39,7 +39,7 @@ def process_vision_request(
     model: str = "clip",
 ) -> VisionProcessResponse:
     """Execute visual search pipeline and persist artifacts to shared database.
-    
+
     Args:
         query_image: Decoded RGB PIL image.
         pipeline_run_id: Orchestrator-assigned pipeline run UUID string.
@@ -47,7 +47,7 @@ def process_vision_request(
         mime_type: Optional uploaded file MIME type.
         top_k: Number of candidate products to retrieve (1-50).
         model: Canonical model identifier ('clip' or 'resnet').
-        
+
     Returns:
         VisionProcessResponse: Standardized contract response.
     """

@@ -72,10 +72,10 @@ def get_shared_connection() -> Generator[Any, None, None]:
 
 def check_pipeline_run_exists(pipeline_run_id: str) -> bool:
     """Verify that the supplied pipeline_run_id exists in the shared pipeline_runs table.
-    
+
     Args:
         pipeline_run_id: UUID string of the pipeline run.
-        
+
     Returns:
         bool: True if record exists, False otherwise.
     """
@@ -105,14 +105,14 @@ def insert_asset(
     asset_type: str = "query_image",
 ) -> str:
     """Insert a query image asset into the shared assets table and return its UUID.
-    
+
     Args:
         pipeline_run_id: Parent pipeline run UUID.
         filename: Original file name.
         mime_type: File MIME type (e.g. image/jpeg, image/png).
         storage_uri: Relative or absolute storage path / URI.
         asset_type: Classification string (default 'query_image').
-        
+
     Returns:
         str: Generated asset UUID.
     """
@@ -146,7 +146,7 @@ def insert_extracted_data(
     module: str = "vision",
 ) -> str:
     """Insert structured visual search output into the shared extracted_data table.
-    
+
     Args:
         pipeline_run_id: Parent pipeline run UUID.
         content: Structured dictionary containing primary_match and ranked matches.
@@ -155,7 +155,7 @@ def insert_extracted_data(
         asset_id: Optional UUID of parent asset record.
         data_type: Data type classification.
         module: Module identifier ('vision').
-        
+
     Returns:
         str: Generated extracted_data UUID (handed off as extracted_data_id to RAG).
     """
@@ -196,14 +196,14 @@ def insert_module_event(
     module: str = "vision",
 ) -> Optional[str]:
     """Insert an execution lifecycle event into the shared module_events audit table.
-    
+
     Args:
         pipeline_run_id: Parent pipeline run UUID.
         event: Lifecycle state ('started', 'completed', 'failed').
         message: Informational message.
         payload: Optional structured JSON metadata.
         module: Module identifier ('vision').
-        
+
     Returns:
         Optional[str]: Event UUID if inserted successfully, None on error without raising.
     """
@@ -228,3 +228,189 @@ def insert_module_event(
     except Exception as e:
         logger.warning("Failed to record module_event '%s' for run '%s': %s", event, pipeline_run_id, e)
         return None
+
+
+def update_pipeline_run_status(pipeline_run_id: str, status: str) -> bool:
+    """Update the status of an existing pipeline_run record in the gateway/orchestration layer.
+
+    Args:
+        pipeline_run_id: Pipeline run UUID string.
+        status: New status (e.g. 'vision_complete', 'completed', 'failed', 'vision_failed').
+
+    Returns:
+        bool: True if record was updated, False otherwise.
+    """
+    try:
+        val_uuid = str(uuid.UUID(pipeline_run_id))
+    except (ValueError, TypeError):
+        return False
+
+    with get_shared_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                UPDATE pipeline_runs
+                SET status = %s, updated_at = NOW()
+                WHERE id = %s;
+                """,
+                (status, val_uuid),
+            )
+            return cur.rowcount > 0
+
+
+def get_pipeline_run(pipeline_run_id: str) -> Optional[Dict[str, Any]]:
+    """Fetch pipeline_run metadata by UUID.
+
+    Args:
+        pipeline_run_id: UUID string of the pipeline run.
+
+    Returns:
+        Optional[Dict[str, Any]]: Run record dict or None if not found.
+    """
+    try:
+        val_uuid = str(uuid.UUID(pipeline_run_id))
+    except (ValueError, TypeError):
+        return None
+
+    with get_shared_connection() as conn:
+        with conn.cursor(cursor_factory=extras.RealDictCursor) as cur:
+            cur.execute(
+                "SELECT id, status, created_at, updated_at FROM pipeline_runs WHERE id = %s;",
+                (val_uuid,),
+            )
+            row = cur.fetchone()
+            if row:
+                return {
+                    "id": str(row["id"]),
+                    "status": row["status"],
+                    "created_at": row["created_at"].isoformat() if row.get("created_at") else None,
+                    "updated_at": row["updated_at"].isoformat() if row.get("updated_at") else None,
+                }
+            return None
+
+
+def get_extracted_data_by_run_id(pipeline_run_id: str) -> Optional[Dict[str, Any]]:
+    """Fetch the latest Vision module extracted_data record for a pipeline run.
+
+    Filters specifically for module='vision' and data_type='visual_product_search_matches'
+    so that downstream records from other modules (e.g., RAG) are not mistakenly returned.
+
+    Args:
+        pipeline_run_id: UUID string of the pipeline run.
+
+    Returns:
+        Optional[Dict[str, Any]]: Record dictionary with content JSONB and confidence.
+    """
+    try:
+        val_uuid = str(uuid.UUID(pipeline_run_id))
+    except (ValueError, TypeError):
+        return None
+
+    with get_shared_connection() as conn:
+        with conn.cursor(cursor_factory=extras.RealDictCursor) as cur:
+            cur.execute(
+                """
+                SELECT id, pipeline_run_id, asset_id, module, data_type, content, model, confidence, created_at
+                FROM extracted_data
+                WHERE pipeline_run_id = %s
+                  AND module = 'vision'
+                  AND data_type = 'visual_product_search_matches'
+                ORDER BY created_at DESC
+                LIMIT 1;
+                """,
+                (val_uuid,),
+            )
+            row = cur.fetchone()
+            if row:
+                return {
+                    "id": str(row["id"]),
+                    "pipeline_run_id": str(row["pipeline_run_id"]),
+                    "asset_id": str(row["asset_id"]) if row.get("asset_id") else None,
+                    "module": row["module"],
+                    "data_type": row["data_type"],
+                    "content": row["content"],
+                    "model": row["model"],
+                    "confidence": float(row["confidence"]) if row.get("confidence") is not None else None,
+                    "created_at": row["created_at"].isoformat() if row.get("created_at") else None,
+                }
+            return None
+
+
+def get_assets_by_run_id(pipeline_run_id: str) -> List[Dict[str, Any]]:
+    """Fetch all assets attached to a pipeline run.
+
+    Args:
+        pipeline_run_id: UUID string of the pipeline run.
+
+    Returns:
+        List[Dict[str, Any]]: List of asset records.
+    """
+    try:
+        val_uuid = str(uuid.UUID(pipeline_run_id))
+    except (ValueError, TypeError):
+        return []
+
+    with get_shared_connection() as conn:
+        with conn.cursor(cursor_factory=extras.RealDictCursor) as cur:
+            cur.execute(
+                """
+                SELECT id, pipeline_run_id, asset_type, filename, mime_type, storage_uri, created_at
+                FROM assets
+                WHERE pipeline_run_id = %s
+                ORDER BY created_at ASC;
+                """,
+                (val_uuid,),
+            )
+            rows = cur.fetchall()
+            return [
+                {
+                    "id": str(r["id"]),
+                    "pipeline_run_id": str(r["pipeline_run_id"]),
+                    "asset_type": r["asset_type"],
+                    "filename": r["filename"],
+                    "mime_type": r["mime_type"],
+                    "storage_uri": r["storage_uri"],
+                    "created_at": r["created_at"].isoformat() if r.get("created_at") else None,
+                }
+                for r in rows
+            ]
+
+
+def get_module_events_by_run_id(pipeline_run_id: str) -> List[Dict[str, Any]]:
+    """Fetch all module_events lifecycle audit logs for a pipeline run.
+
+    Args:
+        pipeline_run_id: UUID string of the pipeline run.
+
+    Returns:
+        List[Dict[str, Any]]: Chronological list of event records.
+    """
+    try:
+        val_uuid = str(uuid.UUID(pipeline_run_id))
+    except (ValueError, TypeError):
+        return []
+
+    with get_shared_connection() as conn:
+        with conn.cursor(cursor_factory=extras.RealDictCursor) as cur:
+            cur.execute(
+                """
+                SELECT id, pipeline_run_id, module, event, message, payload, created_at
+                FROM module_events
+                WHERE pipeline_run_id = %s
+                ORDER BY created_at ASC;
+                """,
+                (val_uuid,),
+            )
+            rows = cur.fetchall()
+            return [
+                {
+                    "id": str(r["id"]),
+                    "pipeline_run_id": str(r["pipeline_run_id"]),
+                    "module": r["module"],
+                    "event": r["event"],
+                    "message": r["message"],
+                    "payload": r["payload"],
+                    "created_at": r["created_at"].isoformat() if r.get("created_at") else None,
+                }
+                for r in rows
+            ]
