@@ -44,15 +44,39 @@ _pg_pool: Optional[Any] = None
 
 
 def get_database_url() -> Optional[str]:
-    """Retrieve DATABASE_URL from environment if configured."""
-    url = os.getenv("DATABASE_URL")
-    if url and url.strip():
-        clean_url = url.strip()
-        # Normalize postgres:// to postgresql://
+    """Retrieve catalog database URL with unambiguous integration precedence.
+
+    Precedence:
+    1. CATALOG_DATABASE_URL: Dedicated Vision catalog PostgreSQL URL.
+       Highest priority. Normalized from postgres:// to postgresql://.
+    2. Legacy DATABASE_URL: Preserved ONLY for standalone backward compatibility.
+       Interpreted as Vision catalog DB ONLY when SHARED_DATABASE_URL is NOT configured.
+    3. If SHARED_DATABASE_URL exists and CATALOG_DATABASE_URL is absent:
+       Ignore DATABASE_URL for Vision catalog access and return None so callers
+       fall back to local SQLite DATABASE_PATH.
+    """
+    # 1. Dedicated catalog URL takes highest priority
+    catalog_url = os.getenv("CATALOG_DATABASE_URL")
+    if catalog_url and catalog_url.strip():
+        clean_url = catalog_url.strip()
         if clean_url.startswith("postgres://"):
             clean_url = "postgresql://" + clean_url[len("postgres://") :]
         return clean_url
+
+    # 2. Legacy fallback: Only interpret DATABASE_URL as catalog DB when SHARED_DATABASE_URL is not configured
+    shared_url = os.getenv("SHARED_DATABASE_URL")
+    if not (shared_url and shared_url.strip()):
+        legacy_url = os.getenv("DATABASE_URL")
+        if legacy_url and legacy_url.strip():
+            clean_legacy = legacy_url.strip()
+            if clean_legacy.startswith("postgres://"):
+                clean_legacy = "postgresql://" + clean_legacy[len("postgres://") :]
+            return clean_legacy
+
+    # 3. In unified integration mode (SHARED_DATABASE_URL configured) without CATALOG_DATABASE_URL,
+    # ignore DATABASE_URL and return None so callers use SQLite DATABASE_PATH fallback.
     return None
+
 
 
 def is_postgres() -> bool:
