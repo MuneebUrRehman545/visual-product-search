@@ -1,0 +1,39 @@
+{
+  "random_seed": 42,
+  "total_manifest_records": 44419,
+  "searchable_catalog_size": 44119,
+  "validation_queries_count": 100,
+  "final_test_queries_count": 200,
+  "total_queries_count": 300,
+  "leakage_check": "PASSED (0 query images in catalog)",
+  "ground_truth_stats": {
+    "total_query_records": 300,
+    "min_matches_per_query": 1,
+    "max_matches_per_query": 16,
+    "mean_matches_per_query": 2.31,
+    "median_matches_per_query": 1.0
+  },
+  "category_distribution": {
+    "catalog": {
+      "Apparel": 21233,
+      "Accessories": 11192,
+      "Footwear": 9165,
+      "Personal Care": 2399,
+      "Free Items": 104,
+      "Sporting Goods": 25,
+      "Home": 1
+    },
+    "validation_queries": {
+      "Apparel": 48,
+      "Accessories": 33,
+      "Footwear": 19
+    },
+    "test_queries": {
+      "Apparel": 111,
+      "Accessories": 49,
+      "Footwear": 35,
+      "Personal Care": 4,
+      "Free Items": 1
+    }
+  }
+}

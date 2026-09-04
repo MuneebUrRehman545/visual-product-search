@@ -1,78 +1,63 @@
 import React, { useState } from 'react'
-import ImageUploader from './components/ImageUploader'
-import SearchControls from './components/SearchControls'
-import SearchResults from './components/SearchResults'
-import { searchProducts } from './services/searchApi'
+import { AuthProvider } from './context/AuthContext'
+import { SearchProvider, useSearch } from './context/SearchContext'
+import { BrowserRouter, Routes, Route, useNavigate } from './context/RouterContext'
+import Navbar from './components/Navbar'
+import AuthModal from './components/AuthModal'
+import HomePage from './pages/HomePage'
+import ResultsPage from './pages/ResultsPage'
 
-function App() {
-  const [selectedFile, setSelectedFile] = useState(null)
-  const [topK, setTopK] = useState(10)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [searchResults, setSearchResults] = useState(null)
+function NavigationHeader({ onOpenAuth }) {
+  const { clearSearch } = useSearch()
+  const navigate = useNavigate()
 
-  const handleFileChange = (newFile) => {
-    setSelectedFile(newFile)
-    setSearchResults(null)
-    setError(null)
+  const handleResetSearch = () => {
+    clearSearch()
+    navigate('/')
   }
 
-  const handleSearch = async () => {
-    if (!selectedFile || loading) return
+  return <Navbar onOpenAuth={onOpenAuth} onResetSearch={handleResetSearch} />
+}
 
-    setError(null)
-    setLoading(true)
-
-    try {
-      const response = await searchProducts(selectedFile, topK)
-      setSearchResults(response)
-    } catch (err) {
-      setError(err.detail || err.message || 'Visual search failed.')
-      setSearchResults(null)
-    } finally {
-      setLoading(false)
-    }
-  }
+function MainApp() {
+  const [authModalOpen, setAuthModalOpen] = useState(false)
+  const [authModalMode, setAuthModalMode] = useState('login')
 
   return (
-    <div className="container">
-      <header className="header">
-        <h1>Visual Product Search</h1>
-        <p className="subtitle">
-          Upload an image to find visually similar catalog products.
-        </p>
-      </header>
+    <div className="app-layout">
+      {/* Universal Top Navigation */}
+      <NavigationHeader
+        onOpenAuth={(mode) => {
+          setAuthModalMode(mode)
+          setAuthModalOpen(true)
+        }}
+      />
 
-      <main className="main-content">
-        <ImageUploader file={selectedFile} onFileChange={handleFileChange} />
+      {/* Dynamic Route Switching */}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/results" element={<ResultsPage />} />
+        <Route path="*" element={<HomePage />} />
+      </Routes>
 
-        {selectedFile && (
-          <SearchControls
-            topK={topK}
-            onTopKChange={setTopK}
-            onSearch={handleSearch}
-            disabled={!selectedFile}
-            loading={loading}
-          />
-        )}
-
-        {error && (
-          <div className="api-error-banner" role="alert">
-            <p className="error-title">Search Error</p>
-            <p className="error-message">{error}</p>
-          </div>
-        )}
-
-        {searchResults && (
-          <SearchResults
-            queryFilename={searchResults.query_filename}
-            totalResults={searchResults.total_results}
-            results={searchResults.results}
-          />
-        )}
-      </main>
+      {/* Global Authentication Modal */}
+      <AuthModal
+        isOpen={authModalOpen}
+        initialMode={authModalMode}
+        onClose={() => setAuthModalOpen(false)}
+      />
     </div>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <SearchProvider>
+          <MainApp />
+        </SearchProvider>
+      </BrowserRouter>
+    </AuthProvider>
+  )
+}

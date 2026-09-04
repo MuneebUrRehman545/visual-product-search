@@ -1,0 +1,22 @@
+{
+  "model": "ResNet-50",
+  "split": "validation",
+  "num_queries": 100,
+  "metrics": {
+    "P@1": 0.11,
+    "P@5": 0.074,
+    "P@10": 0.051,
+    "R@1": 0.0644,
+    "R@5": 0.1693,
+    "R@10": 0.2135,
+    "Hit@1": 0.11,
+    "Hit@5": 0.27,
+    "Hit@10": 0.34,
+    "MRR": 0.1792
+  },
+  "latency_ms": {
+    "avg_embedding_latency_ms": 145.47,
+    "avg_faiss_search_latency_ms": 54.187,
+    "avg_total_query_latency_ms": 199.66
+  }
+}

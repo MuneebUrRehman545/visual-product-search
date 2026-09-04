@@ -1,0 +1,201 @@
+query_id,source_query_id,source_image_id,product_id,product_name,category,variation_type,messy_image_path,relevant_catalog_ids,split
+messy_test_q001_crop,test_q001,26957,26957,Jealous 21 Women Purple Shirt,Apparel,crop,evaluation/queries/messy/messy_test_q001_crop.jpg,26960,messy_test
+messy_test_q002_darker_lighting,test_q002,29726,29726,Kiara Women Teal Handbag,Accessories,darker_lighting,evaluation/queries/messy/messy_test_q002_darker_lighting.jpg,"29738,29742,53668,54018,54033",messy_test
+messy_test_q003_brighter_lighting,test_q003,49660,49660,Mineral Women Green Top,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q003_brighter_lighting.jpg,"37944,49653,49659",messy_test
+messy_test_q004_contrast_change,test_q004,58177,58177,Rocky S Women Brown Handbag,Accessories,contrast_change,evaluation/queries/messy/messy_test_q004_contrast_change.jpg,58173,messy_test
+messy_test_q005_small_rotation,test_q005,30501,30501,Lovable Women Fiona Purple Bra,Apparel,small_rotation,evaluation/queries/messy/messy_test_q005_small_rotation.jpg,"30496,30500",messy_test
+messy_test_q006_mild_perspective,test_q006,27210,27210,Doodle Kids Boy Check Green Shirt,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q006_mild_perspective.jpg,33489,messy_test
+messy_test_q007_blur,test_q007,41402,41402,Wrangler Women Pink T-shirt,Apparel,blur,evaluation/queries/messy/messy_test_q007_blur.jpg,41406,messy_test
+messy_test_q008_background_padding,test_q008,46411,46411,ADIDAS Men Black Sweatshirt,Apparel,background_padding,evaluation/queries/messy/messy_test_q008_background_padding.jpg,46383,messy_test
+messy_test_q009_crop,test_q009,15354,15354,Red Tape Men Casual Black Casual Shoes,Footwear,crop,evaluation/queries/messy/messy_test_q009_crop.jpg,12507,messy_test
+messy_test_q010_darker_lighting,test_q010,29314,29314,ADIDAS Unisex Blue Backpack,Accessories,darker_lighting,evaluation/queries/messy/messy_test_q010_darker_lighting.jpg,"24324,29317",messy_test
+messy_test_q011_brighter_lighting,test_q011,43531,43531,French Connection Women Off White Top,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q011_brighter_lighting.jpg,48501,messy_test
+messy_test_q012_contrast_change,test_q012,34650,34650,Fila Women Top Fuel Black Sports Shoes,Footwear,contrast_change,evaluation/queries/messy/messy_test_q012_contrast_change.jpg,34651,messy_test
+messy_test_q013_small_rotation,test_q013,20054,20054,United Colors Of Benetton Women Black Muffler,Accessories,small_rotation,evaluation/queries/messy/messy_test_q013_small_rotation.jpg,20063,messy_test
+messy_test_q014_mild_perspective,test_q014,58188,58188,Rocky S Women Blue Handbag,Accessories,mild_perspective,evaluation/queries/messy/messy_test_q014_mild_perspective.jpg,58179,messy_test
+messy_test_q015_blur,test_q015,27870,27870,Scullers For Her Women White Striped Shirt,Apparel,blur,evaluation/queries/messy/messy_test_q015_blur.jpg,27868,messy_test
+messy_test_q016_background_padding,test_q016,49674,49674,United Colors of Benetton Men Sunglass,Accessories,background_padding,evaluation/queries/messy/messy_test_q016_background_padding.jpg,"49663,49665,49672,49675",messy_test
+messy_test_q017_crop,test_q017,27209,27209,Doodle Kids Boy Check Red Shirt,Apparel,crop,evaluation/queries/messy/messy_test_q017_crop.jpg,"27202,33487",messy_test
+messy_test_q018_darker_lighting,test_q018,47734,47734,Murcia Women Grey Handbag,Accessories,darker_lighting,evaluation/queries/messy/messy_test_q018_darker_lighting.jpg,"27703,27726,27733,47880",messy_test
+messy_test_q019_brighter_lighting,test_q019,33995,33995,Femella Women Black Top,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q019_brighter_lighting.jpg,"25969,33966,34000,54146,54987,59898",messy_test
+messy_test_q020_contrast_change,test_q020,46878,46878,Lino Perros Men Pack of 2 Socks,Accessories,contrast_change,evaluation/queries/messy/messy_test_q020_contrast_change.jpg,"46862,46863,46868,46872",messy_test
+messy_test_q021_small_rotation,test_q021,27693,27693,Murcia Women Maroon Handbag,Accessories,small_rotation,evaluation/queries/messy/messy_test_q021_small_rotation.jpg,"43334,57247,57266",messy_test
+messy_test_q022_mild_perspective,test_q022,32162,32162,Playboy Women Playmate Black Ankle Socks,Accessories,mild_perspective,evaluation/queries/messy/messy_test_q022_mild_perspective.jpg,32156,messy_test
+messy_test_q023_blur,test_q023,51255,51255,Park Avenue Men Black Belt,Accessories,blur,evaluation/queries/messy/messy_test_q023_blur.jpg,"51252,51259",messy_test
+messy_test_q024_background_padding,test_q024,52884,52884,FNF Orange Printed Sari,Apparel,background_padding,evaluation/queries/messy/messy_test_q024_background_padding.jpg,52917,messy_test
+messy_test_q025_crop,test_q025,57991,57991,Latin Quarters Women Blue Dress,Apparel,crop,evaluation/queries/messy/messy_test_q025_crop.jpg,"38836,57989,57997,57998,58003",messy_test
+messy_test_q026_darker_lighting,test_q026,25914,25914,Femella Women Olive Leggings,Apparel,darker_lighting,evaluation/queries/messy/messy_test_q026_darker_lighting.jpg,40495,messy_test
+messy_test_q027_brighter_lighting,test_q027,39745,39745,Gini Jony Boys Blue Shorts,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q027_brighter_lighting.jpg,36211,messy_test
+messy_test_q028_contrast_change,test_q028,12130,12130,Aurelia Women Printed Green Kurtas,Apparel,contrast_change,evaluation/queries/messy/messy_test_q028_contrast_change.jpg,12121,messy_test
+messy_test_q029_small_rotation,test_q029,48511,48511,French Connection Women Black Top,Apparel,small_rotation,evaluation/queries/messy/messy_test_q029_small_rotation.jpg,"48088,48488,48502,48507,48513",messy_test
+messy_test_q030_mild_perspective,test_q030,16538,16538,Basics Men White Slim Fit Checked Shirt,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q030_mild_perspective.jpg,"12172,12180,12183,12187,12936,12948,12950,14660,14665,14667,14668,16544,16548",messy_test
+messy_test_q031_blur,test_q031,14808,14808,United Colors of Benetton Women Solid Maroon Handbags,Accessories,blur,evaluation/queries/messy/messy_test_q031_blur.jpg,"14794,14797,14802,14811",messy_test
+messy_test_q032_background_padding,test_q032,29607,29607,Indigo Nation Men Striped Purple Shirt,Apparel,background_padding,evaluation/queries/messy/messy_test_q032_background_padding.jpg,"29632,29652,29665,31635,31648,32759",messy_test
+messy_test_q033_crop,test_q033,54580,54580,Sushilas Women Printed Red Kurta,Apparel,crop,evaluation/queries/messy/messy_test_q033_crop.jpg,"54570,54590",messy_test
+messy_test_q034_darker_lighting,test_q034,14096,14096,Flying Machine Men Stripes Blue Tshirts,Apparel,darker_lighting,evaluation/queries/messy/messy_test_q034_darker_lighting.jpg,14105,messy_test
+messy_test_q035_brighter_lighting,test_q035,10457,10457,Flying Machine Men Pink Polo Tshirts,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q035_brighter_lighting.jpg,10436,messy_test
+messy_test_q036_contrast_change,test_q036,27999,27999,Jockey ZONE Men Grey Tanga Brief US18,Apparel,contrast_change,evaluation/queries/messy/messy_test_q036_contrast_change.jpg,28002,messy_test
+messy_test_q037_small_rotation,test_q037,47207,47207,Franco Leone Men Brown Shoes,Footwear,small_rotation,evaluation/queries/messy/messy_test_q037_small_rotation.jpg,"11903,47190",messy_test
+messy_test_q038_mild_perspective,test_q038,42239,42239,Sepia Women Blue Tunic,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q038_mild_perspective.jpg,"33183,42249",messy_test
+messy_test_q039_blur,test_q039,12996,12996,Timberland Kids Boys Brown Casual Shoes,Footwear,blur,evaluation/queries/messy/messy_test_q039_blur.jpg,12995,messy_test
+messy_test_q040_background_padding,test_q040,54382,54382,Baggit Women Olive Handbag,Accessories,background_padding,evaluation/queries/messy/messy_test_q040_background_padding.jpg,"47334,47394,54406,58268",messy_test
+messy_test_q041_crop,test_q041,39717,39717,Arrow Woman Red Top,Apparel,crop,evaluation/queries/messy/messy_test_q041_crop.jpg,"27259,44642",messy_test
+messy_test_q042_darker_lighting,test_q042,23837,23837,ADIDAS Men White Razor Sports Shoes,Footwear,darker_lighting,evaluation/queries/messy/messy_test_q042_darker_lighting.jpg,23848,messy_test
+messy_test_q043_brighter_lighting,test_q043,33602,33602,Lino Perros Women Black Wallet,Accessories,brighter_lighting,evaluation/queries/messy/messy_test_q043_brighter_lighting.jpg,"33609,33622",messy_test
+messy_test_q044_contrast_change,test_q044,31723,31723,Fabindia Women Ananya Gold Pendant,Accessories,contrast_change,evaluation/queries/messy/messy_test_q044_contrast_change.jpg,35335,messy_test
+messy_test_q045_small_rotation,test_q045,33074,33074,U.S.Polo Assn. Men Green Polo T-shirt,Apparel,small_rotation,evaluation/queries/messy/messy_test_q045_small_rotation.jpg,33073,messy_test
+messy_test_q046_mild_perspective,test_q046,42663,42663,Alma Women Cream Printed Kurta,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q046_mild_perspective.jpg,"42646,53424",messy_test
+messy_test_q047_blur,test_q047,17644,17644,Converse Unisex Casual Green Slipper,Footwear,blur,evaluation/queries/messy/messy_test_q047_blur.jpg,17649,messy_test
+messy_test_q048_background_padding,test_q048,50946,50946,Lee Womens Blue Roxy Fit Jeans,Apparel,background_padding,evaluation/queries/messy/messy_test_q048_background_padding.jpg,"50952,50955",messy_test
+messy_test_q049_crop,test_q049,30610,30610,Nike Men Black Shorts,Apparel,crop,evaluation/queries/messy/messy_test_q049_crop.jpg,"22604,28514,30609,30634,32649,44625",messy_test
+messy_test_q050_darker_lighting,test_q050,25118,25118,Lino Perros Women Beaded Black Clutch,Accessories,darker_lighting,evaluation/queries/messy/messy_test_q050_darker_lighting.jpg,25120,messy_test
+messy_test_q051_brighter_lighting,test_q051,35208,35208,Wildcraft Unisex Blue & Grey Backpack,Accessories,brighter_lighting,evaluation/queries/messy/messy_test_q051_brighter_lighting.jpg,"7092,7097,32860,35187,35201,35211,38136",messy_test
+messy_test_q052_contrast_change,test_q052,7869,7869,Provogue Men's Formal Black Shoe,Footwear,contrast_change,evaluation/queries/messy/messy_test_q052_contrast_change.jpg,"7858,7860,7863,7871,7876,7877,7881",messy_test
+messy_test_q053_small_rotation,test_q053,29608,29608,Indigo Nation Men Striped Blue Shirt,Apparel,small_rotation,evaluation/queries/messy/messy_test_q053_small_rotation.jpg,"29649,29653,31611,31649",messy_test
+messy_test_q054_mild_perspective,test_q054,35465,35465,Franco Leone Men Blue Shoes,Footwear,mild_perspective,evaluation/queries/messy/messy_test_q054_mild_perspective.jpg,31332,messy_test
+messy_test_q055_blur,test_q055,5721,5721,Basics Men Blue & White Striped Polo T-shirt,Apparel,blur,evaluation/queries/messy/messy_test_q055_blur.jpg,3794,messy_test
+messy_test_q056_background_padding,test_q056,22594,22594,Nike Men Navy Blue T-shirt,Apparel,background_padding,evaluation/queries/messy/messy_test_q056_background_padding.jpg,22614,messy_test
+messy_test_q057_crop,test_q057,53002,53002,FNF Purple Printed Sari,Apparel,crop,evaluation/queries/messy/messy_test_q057_crop.jpg,"52892,52897,52903,52973",messy_test
+messy_test_q058_darker_lighting,test_q058,29467,29467,Giordano Men Silver Dial Watch,Accessories,darker_lighting,evaluation/queries/messy/messy_test_q058_darker_lighting.jpg,"29413,29416,29466",messy_test
+messy_test_q059_brighter_lighting,test_q059,40258,40258,Scullers Men White & Navy Blue Shirt,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q059_brighter_lighting.jpg,43036,messy_test
+messy_test_q060_contrast_change,test_q060,36446,36446,Spinn Men Orbit Black Sports Shoes,Footwear,contrast_change,evaluation/queries/messy/messy_test_q060_contrast_change.jpg,36445,messy_test
+messy_test_q061_small_rotation,test_q061,22404,22404,Mark Taylor Men Striped Green Shirt,Apparel,small_rotation,evaluation/queries/messy/messy_test_q061_small_rotation.jpg,27153,messy_test
+messy_test_q062_mild_perspective,test_q062,15569,15569,Catwalk Women Casual Red Flats,Footwear,mild_perspective,evaluation/queries/messy/messy_test_q062_mild_perspective.jpg,14371,messy_test
+messy_test_q063_blur,test_q063,17512,17512,Classic Polo Men Stripes Blue Polo T-Shirt,Apparel,blur,evaluation/queries/messy/messy_test_q063_blur.jpg,17500,messy_test
+messy_test_q064_background_padding,test_q064,44408,44408,Force 10 Men Grey Sports Shoes,Footwear,background_padding,evaluation/queries/messy/messy_test_q064_background_padding.jpg,51741,messy_test
+messy_test_q065_crop,test_q065,16888,16888,Police Men Casual Black Sunglasses,Accessories,crop,evaluation/queries/messy/messy_test_q065_crop.jpg,"16883,16887,16889,16891",messy_test
+messy_test_q066_darker_lighting,test_q066,45949,45949,Tokyo Talkies Women White Top,Apparel,darker_lighting,evaluation/queries/messy/messy_test_q066_darker_lighting.jpg,40373,messy_test
+messy_test_q067_brighter_lighting,test_q067,29837,29837,Basics Men Yellow Checked Shirt,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q067_brighter_lighting.jpg,41611,messy_test
+messy_test_q068_contrast_change,test_q068,12238,12238,Genesis Men Stripes Blue Shirts,Apparel,contrast_change,evaluation/queries/messy/messy_test_q068_contrast_change.jpg,"12271,12297",messy_test
+messy_test_q069_small_rotation,test_q069,11084,11084,Scullers Men Check Blue Shirts,Apparel,small_rotation,evaluation/queries/messy/messy_test_q069_small_rotation.jpg,"11053,11054,11056,11083,11090,13856,13857,13858,13859,13862,13863",messy_test
+messy_test_q070_mild_perspective,test_q070,35409,35409,Enroute Men Black Formal Shoes,Footwear,mild_perspective,evaluation/queries/messy/messy_test_q070_mild_perspective.jpg,"35399,35407,35411,35414,35416,35418,58555",messy_test
+messy_test_q071_blur,test_q071,15000,15000,ADIDAS Men Solid White Tshirts,Apparel,blur,evaluation/queries/messy/messy_test_q071_blur.jpg,14317,messy_test
+messy_test_q072_background_padding,test_q072,53043,53043,FNF Printed Purple Sari,Apparel,background_padding,evaluation/queries/messy/messy_test_q072_background_padding.jpg,"52937,52962,52965",messy_test
+messy_test_q073_crop,test_q073,39035,39035,Belmonte Men Steel Bright Assorted Cufflinks,Accessories,crop,evaluation/queries/messy/messy_test_q073_crop.jpg,"39032,39033,39037,39041,39043",messy_test
+messy_test_q074_darker_lighting,test_q074,16824,16824,Little Miss Women Printed Purple T-shirt,Apparel,darker_lighting,evaluation/queries/messy/messy_test_q074_darker_lighting.jpg,"9821,9836,16821,16825",messy_test
+messy_test_q075_brighter_lighting,test_q075,53878,53878,U.S. Polo Assn. Men Navy Blue Flip Flops,Footwear,brighter_lighting,evaluation/queries/messy/messy_test_q075_brighter_lighting.jpg,"53875,53880",messy_test
+messy_test_q076_contrast_change,test_q076,59919,59919,Diva Women Multi Colour Kurta,Apparel,contrast_change,evaluation/queries/messy/messy_test_q076_contrast_change.jpg,59920,messy_test
+messy_test_q077_small_rotation,test_q077,16807,16807,Locomotive Men Check Blue Shirt,Apparel,small_rotation,evaluation/queries/messy/messy_test_q077_small_rotation.jpg,"16456,16460,16466,16468,16470,16472,16482,16532,16812,16814,16817,21389",messy_test
+messy_test_q078_mild_perspective,test_q078,17787,17787,Reid & Taylor Men Solid Grey Socks,Accessories,mild_perspective,evaluation/queries/messy/messy_test_q078_mild_perspective.jpg,"12398,12404,17786,17792",messy_test
+messy_test_q079_blur,test_q079,59917,59917,Diva Women Pink Kurta,Apparel,blur,evaluation/queries/messy/messy_test_q079_blur.jpg,"39466,39478",messy_test
+messy_test_q080_background_padding,test_q080,12485,12485,Clarks Men Leather Brown Sandals,Footwear,background_padding,evaluation/queries/messy/messy_test_q080_background_padding.jpg,12489,messy_test
+messy_test_q081_crop,test_q081,32846,32846,Grendha Women Jola Cigana Brown Flats,Footwear,crop,evaluation/queries/messy/messy_test_q081_crop.jpg,32839,messy_test
+messy_test_q082_darker_lighting,test_q082,22068,22068,Vishudh Women Printed Grey Kurta,Apparel,darker_lighting,evaluation/queries/messy/messy_test_q082_darker_lighting.jpg,"22054,32270",messy_test
+messy_test_q083_brighter_lighting,test_q083,25465,25465,Nike Men Downshifter 4 MSL White Sports Shoes,Footwear,brighter_lighting,evaluation/queries/messy/messy_test_q083_brighter_lighting.jpg,15743,messy_test
+messy_test_q084_contrast_change,test_q084,19059,19059,Aurelia Women Solid Black Kurta,Apparel,contrast_change,evaluation/queries/messy/messy_test_q084_contrast_change.jpg,19055,messy_test
+messy_test_q085_small_rotation,test_q085,26476,26476,Puma Men Graphic Black T-shirt,Apparel,small_rotation,evaluation/queries/messy/messy_test_q085_small_rotation.jpg,"26489,26726",messy_test
+messy_test_q086_mild_perspective,test_q086,12040,12040,Mark Taylor Men Solid Blue Shirts,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q086_mild_perspective.jpg,"8869,9069,9070",messy_test
+messy_test_q087_blur,test_q087,13355,13355,Timberland Men Toddler Brown Casual Shoes,Footwear,blur,evaluation/queries/messy/messy_test_q087_blur.jpg,"13369,13384",messy_test
+messy_test_q088_background_padding,test_q088,34593,34593,Tonga Women Pink Printed Top,Apparel,background_padding,evaluation/queries/messy/messy_test_q088_background_padding.jpg,34587,messy_test
+messy_test_q089_crop,test_q089,7910,7910,Proline Men Multicoloured Striped Polo T-shirt,Apparel,crop,evaluation/queries/messy/messy_test_q089_crop.jpg,"7873,7918",messy_test
+messy_test_q090_darker_lighting,test_q090,13389,13389,United Colors of Benetton Men Check Green Shirts,Apparel,darker_lighting,evaluation/queries/messy/messy_test_q090_darker_lighting.jpg,"13393,13404,13405,13934",messy_test
+messy_test_q091_brighter_lighting,test_q091,41976,41976,Gini and Jony Girls White Pedal Pusher,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q091_brighter_lighting.jpg,"40161,41975",messy_test
+messy_test_q092_contrast_change,test_q092,12519,12519,Red Tape Men Beige Shoes,Footwear,contrast_change,evaluation/queries/messy/messy_test_q092_contrast_change.jpg,34542,messy_test
+messy_test_q093_small_rotation,test_q093,39656,39656,Lotto Men Black Shoes,Footwear,small_rotation,evaluation/queries/messy/messy_test_q093_small_rotation.jpg,"39639,39640,39645,39658,39659,39663,39678,39685",messy_test
+messy_test_q094_mild_perspective,test_q094,51165,51165,Raymond Men Navy Blue Socks,Accessories,mild_perspective,evaluation/queries/messy/messy_test_q094_mild_perspective.jpg,"51175,51179,51185,51338",messy_test
+messy_test_q095_blur,test_q095,51843,51843,New Hide Men Black Wallet,Accessories,blur,evaluation/queries/messy/messy_test_q095_blur.jpg,"50825,50826,50827,50828,58201",messy_test
+messy_test_q096_background_padding,test_q096,21610,21610,Enamor Women Smooth Black Bra,Apparel,background_padding,evaluation/queries/messy/messy_test_q096_background_padding.jpg,"21624,21639,21652,21659",messy_test
+messy_test_q097_crop,test_q097,40232,40232,Provogue Men Black Leather Belt,Accessories,crop,evaluation/queries/messy/messy_test_q097_crop.jpg,"40221,40223,40227,40230",messy_test
+messy_test_q098_darker_lighting,test_q098,30515,30515,Lovable Women Spice Blue Bra,Apparel,darker_lighting,evaluation/queries/messy/messy_test_q098_darker_lighting.jpg,30517,messy_test
+messy_test_q099_brighter_lighting,test_q099,24921,24921,United Colors of Benetton Women Black Top,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q099_brighter_lighting.jpg,"24918,24987,37161,37164,37186,37189,37190",messy_test
+messy_test_q100_contrast_change,test_q100,23563,23563,Police Pure Men Perfume,Personal Care,contrast_change,evaluation/queries/messy/messy_test_q100_contrast_change.jpg,23557,messy_test
+messy_test_q101_small_rotation,test_q101,48074,48074,French Connection Men Purple T-shirt,Apparel,small_rotation,evaluation/queries/messy/messy_test_q101_small_rotation.jpg,48448,messy_test
+messy_test_q102_mild_perspective,test_q102,26239,26239,Proline Men Black Printed T-shirt,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q102_mild_perspective.jpg,26281,messy_test
+messy_test_q103_blur,test_q103,18536,18536,Puma Men Commander White Sports Shoes,Footwear,blur,evaluation/queries/messy/messy_test_q103_blur.jpg,18602,messy_test
+messy_test_q104_background_padding,test_q104,49555,49555,Rocia Women Brown Handbag,Accessories,background_padding,evaluation/queries/messy/messy_test_q104_background_padding.jpg,"49553,53061,53064,53065,53067,53070",messy_test
+messy_test_q105_crop,test_q105,16002,16002,Turtle Solid Men Grey Sweaters,Apparel,crop,evaluation/queries/messy/messy_test_q105_crop.jpg,16003,messy_test
+messy_test_q106_darker_lighting,test_q106,22652,22652,Wildcraft Unisex Grey Duffle Bag,Accessories,darker_lighting,evaluation/queries/messy/messy_test_q106_darker_lighting.jpg,22645,messy_test
+messy_test_q107_brighter_lighting,test_q107,32864,32864,Wildcraft Unisex Pink & Grey Backpack,Accessories,brighter_lighting,evaluation/queries/messy/messy_test_q107_brighter_lighting.jpg,"38137,38138",messy_test
+messy_test_q108_contrast_change,test_q108,48407,48407,French Connection Men Brown Printed T-shirt,Apparel,contrast_change,evaluation/queries/messy/messy_test_q108_contrast_change.jpg,43495,messy_test
+messy_test_q109_small_rotation,test_q109,9719,9719,Hush Puppies Men Walsh Black Sandals,Footwear,small_rotation,evaluation/queries/messy/messy_test_q109_small_rotation.jpg,9706,messy_test
+messy_test_q110_mild_perspective,test_q110,38931,38931,Gini and Jony Girls Blue Jeans,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q110_mild_perspective.jpg,"33147,38930",messy_test
+messy_test_q111_blur,test_q111,43321,43321,United Colors of Benetton Women Pink T-shirt,Apparel,blur,evaluation/queries/messy/messy_test_q111_blur.jpg,"19673,24953,24972,37183,43325",messy_test
+messy_test_q112_background_padding,test_q112,48070,48070,French Connection Men Off White T-shirt,Apparel,background_padding,evaluation/queries/messy/messy_test_q112_background_padding.jpg,43492,messy_test
+messy_test_q113_crop,test_q113,48248,48248,The Amazing Spiderman Boys Black T-shirt,Apparel,crop,evaluation/queries/messy/messy_test_q113_crop.jpg,"48258,48259",messy_test
+messy_test_q114_darker_lighting,test_q114,18220,18220,Manchester United Men Red Socks,Accessories,darker_lighting,evaluation/queries/messy/messy_test_q114_darker_lighting.jpg,"35240,35244,35247",messy_test
+messy_test_q115_brighter_lighting,test_q115,32005,32005,Playboy Men Grey Socks,Accessories,brighter_lighting,evaluation/queries/messy/messy_test_q115_brighter_lighting.jpg,"31993,32002,32035",messy_test
+messy_test_q116_contrast_change,test_q116,48218,48218,United Colors of Benetton Women Black Sunglasses,Accessories,contrast_change,evaluation/queries/messy/messy_test_q116_contrast_change.jpg,"48220,48222,48224,48232,48235",messy_test
+messy_test_q117_small_rotation,test_q117,31819,31819,Titan Men Chronograph Blue Dial Watch,Accessories,small_rotation,evaluation/queries/messy/messy_test_q117_small_rotation.jpg,"31816,31863",messy_test
+messy_test_q118_mild_perspective,test_q118,35645,35645,U.S. Polo Assn. Men Black Sandals,Footwear,mild_perspective,evaluation/queries/messy/messy_test_q118_mild_perspective.jpg,"35644,35649,35662,35664,51876",messy_test
+messy_test_q119_blur,test_q119,58194,58194,Puma Women Black Handbag,Accessories,blur,evaluation/queries/messy/messy_test_q119_blur.jpg,"25707,34556,43570,43572",messy_test
+messy_test_q120_background_padding,test_q120,45535,45535,Fila Men White T-Shirt,Apparel,background_padding,evaluation/queries/messy/messy_test_q120_background_padding.jpg,45534,messy_test
+messy_test_q121_crop,test_q121,20015,20015,United Colors of Benetton Women Printed Olive T-shirt,Apparel,crop,evaluation/queries/messy/messy_test_q121_crop.jpg,19671,messy_test
+messy_test_q122_darker_lighting,test_q122,17183,17183,U.S. Polo Assn. Men Stripes Maroon Shirt,Apparel,darker_lighting,evaluation/queries/messy/messy_test_q122_darker_lighting.jpg,"17192,19847",messy_test
+messy_test_q123_brighter_lighting,test_q123,19876,19876,ADIDAS Men Plugged IN Blue Flip Flops,Footwear,brighter_lighting,evaluation/queries/messy/messy_test_q123_brighter_lighting.jpg,20945,messy_test
+messy_test_q124_contrast_change,test_q124,32228,32228,Fabindia Women Printed Mustard Kurta,Apparel,contrast_change,evaluation/queries/messy/messy_test_q124_contrast_change.jpg,32230,messy_test
+messy_test_q125_small_rotation,test_q125,30555,30555,Opium Men Black Sunglass,Accessories,small_rotation,evaluation/queries/messy/messy_test_q125_small_rotation.jpg,30567,messy_test
+messy_test_q126_mild_perspective,test_q126,7914,7914,Proline Men Purple Printed T-shirt,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q126_mild_perspective.jpg,7859,messy_test
+messy_test_q127_blur,test_q127,40929,40929,Gini and Jony Boys Rodeo Blue Jeans,Apparel,blur,evaluation/queries/messy/messy_test_q127_blur.jpg,"38993,38996,40928,40933",messy_test
+messy_test_q128_background_padding,test_q128,50485,50485,Chromozome Men Grey Melange Briefs,Apparel,background_padding,evaluation/queries/messy/messy_test_q128_background_padding.jpg,"50451,50615,50625",messy_test
+messy_test_q129_crop,test_q129,47600,47600,Portia Women Maroon Flats,Footwear,crop,evaluation/queries/messy/messy_test_q129_crop.jpg,47585,messy_test
+messy_test_q130_darker_lighting,test_q130,24160,24160,Aurelia Women Purple Striped Kurta,Apparel,darker_lighting,evaluation/queries/messy/messy_test_q130_darker_lighting.jpg,24156,messy_test
+messy_test_q131_brighter_lighting,test_q131,30907,30907,Fabindia Women Black Kurti,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q131_brighter_lighting.jpg,"30911,30934",messy_test
+messy_test_q132_contrast_change,test_q132,25871,25871,American Tourister Unisex Buzz Black Backpack,Accessories,contrast_change,evaluation/queries/messy/messy_test_q132_contrast_change.jpg,"25873,25876",messy_test
+messy_test_q133_small_rotation,test_q133,26068,26068,John Miller Men Striped Green Shirt,Apparel,small_rotation,evaluation/queries/messy/messy_test_q133_small_rotation.jpg,29709,messy_test
+messy_test_q134_mild_perspective,test_q134,55825,55825,SDL by Sweet Dreams Women Black Nightdress,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q134_mild_perspective.jpg,"55786,55789,55790",messy_test
+messy_test_q135_blur,test_q135,51592,51592,Wrangler Women Black Jeggings,Apparel,blur,evaluation/queries/messy/messy_test_q135_blur.jpg,51582,messy_test
+messy_test_q136_background_padding,test_q136,59008,59008,Skechers Women White Sports Shoes,Footwear,background_padding,evaluation/queries/messy/messy_test_q136_background_padding.jpg,"41827,41840",messy_test
+messy_test_q137_crop,test_q137,12926,12926,iD Men Casual Black Shoes,Footwear,crop,evaluation/queries/messy/messy_test_q137_crop.jpg,"12923,12927",messy_test
+messy_test_q138_darker_lighting,test_q138,18241,18241,Manchester United Men Printed Red Tshirt,Apparel,darker_lighting,evaluation/queries/messy/messy_test_q138_darker_lighting.jpg,"18224,18229,18233,18249",messy_test
+messy_test_q139_brighter_lighting,test_q139,44791,44791,Calvin Klein Mens blue Boxers,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q139_brighter_lighting.jpg,44790,messy_test
+messy_test_q140_contrast_change,test_q140,13650,13650,ADIDAS White  Snova Sequence 4M Sports Shoe,Footwear,contrast_change,evaluation/queries/messy/messy_test_q140_contrast_change.jpg,13652,messy_test
+messy_test_q141_small_rotation,test_q141,56855,56855,John Players Men Blue Shirt,Apparel,small_rotation,evaluation/queries/messy/messy_test_q141_small_rotation.jpg,56819,messy_test
+messy_test_q142_mild_perspective,test_q142,45025,45025,Maxima Women Silver Dial Pearl Strap Watch,Accessories,mild_perspective,evaluation/queries/messy/messy_test_q142_mild_perspective.jpg,45026,messy_test
+messy_test_q143_blur,test_q143,10643,10643,Doodle Boy D Print Blue Tshirts,Apparel,blur,evaluation/queries/messy/messy_test_q143_blur.jpg,10644,messy_test
+messy_test_q144_background_padding,test_q144,32511,32511,Franco Leone Men Slip On Black Formal Shoes,Footwear,background_padding,evaluation/queries/messy/messy_test_q144_background_padding.jpg,31331,messy_test
+messy_test_q145_crop,test_q145,25160,25160,Lino Perros Women Leatherite Black Handbag,Accessories,crop,evaluation/queries/messy/messy_test_q145_crop.jpg,25165,messy_test
+messy_test_q146_darker_lighting,test_q146,48752,48752,Lucera Women Silver Bangle,Accessories,darker_lighting,evaluation/queries/messy/messy_test_q146_darker_lighting.jpg,"48747,48748,48749,48750,48751,48753",messy_test
+messy_test_q147_brighter_lighting,test_q147,58235,58235,Baggit Women Grey Wallet,Accessories,brighter_lighting,evaluation/queries/messy/messy_test_q147_brighter_lighting.jpg,"47387,54390",messy_test
+messy_test_q148_contrast_change,test_q148,13466,13466,United Colors of Benetton Men Stripes Blue Tshirts,Apparel,contrast_change,evaluation/queries/messy/messy_test_q148_contrast_change.jpg,"13433,13435",messy_test
+messy_test_q149_small_rotation,test_q149,13291,13291,Gini and Jony Kids Boys Printed Green Tshirts,Apparel,small_rotation,evaluation/queries/messy/messy_test_q149_small_rotation.jpg,13292,messy_test
+messy_test_q150_mild_perspective,test_q150,43972,43972,DKNY Men Perfume,Personal Care,mild_perspective,evaluation/queries/messy/messy_test_q150_mild_perspective.jpg,43971,messy_test
+messy_test_q151_blur,test_q151,50962,50962,Lee Womens Blue Maxi Fit Jeans,Apparel,blur,evaluation/queries/messy/messy_test_q151_blur.jpg,"50943,50945,50953",messy_test
+messy_test_q152_background_padding,test_q152,20818,20818,Red Tape Men Brown Leather Casual Shoes,Footwear,background_padding,evaluation/queries/messy/messy_test_q152_background_padding.jpg,"20711,20716",messy_test
+messy_test_q153_crop,test_q153,30083,30083,Ed Hardy Women Silver Dial Watch,Accessories,crop,evaluation/queries/messy/messy_test_q153_crop.jpg,30086,messy_test
+messy_test_q154_darker_lighting,test_q154,22559,22559,Reebok Men Reeplay Deo,Personal Care,darker_lighting,evaluation/queries/messy/messy_test_q154_darker_lighting.jpg,26744,messy_test
+messy_test_q155_brighter_lighting,test_q155,46529,46529,Timex Men Silver Toned Dial Watch,Accessories,brighter_lighting,evaluation/queries/messy/messy_test_q155_brighter_lighting.jpg,46451,messy_test
+messy_test_q156_contrast_change,test_q156,51288,51288,Hop Scotch Girls Pink Sunglasses,Accessories,contrast_change,evaluation/queries/messy/messy_test_q156_contrast_change.jpg,51278,messy_test
+messy_test_q157_small_rotation,test_q157,27839,27839,Bulchee Men Navy Blue Leather Belt,Accessories,small_rotation,evaluation/queries/messy/messy_test_q157_small_rotation.jpg,27834,messy_test
+messy_test_q158_mild_perspective,test_q158,13890,13890,Scullers Women Solid Purple Tops,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q158_mild_perspective.jpg,11130,messy_test
+messy_test_q159_blur,test_q159,11161,11161,John Miller Men Solid Black Shirts,Apparel,blur,evaluation/queries/messy/messy_test_q159_blur.jpg,11162,messy_test
+messy_test_q160_background_padding,test_q160,40198,40198,Mumbai Slang Women White Printed Top,Apparel,background_padding,evaluation/queries/messy/messy_test_q160_background_padding.jpg,40195,messy_test
+messy_test_q161_crop,test_q161,30756,30756,Fabindia Men Green Kurta,Apparel,crop,evaluation/queries/messy/messy_test_q161_crop.jpg,56699,messy_test
+messy_test_q162_darker_lighting,test_q162,52828,52828,Adrika Black Earrings,Accessories,darker_lighting,evaluation/queries/messy/messy_test_q162_darker_lighting.jpg,"52837,52851",messy_test
+messy_test_q163_brighter_lighting,test_q163,41993,41993,Gini and Jony Boys Customised Black Shorts,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q163_brighter_lighting.jpg,"40125,41992",messy_test
+messy_test_q164_contrast_change,test_q164,52121,52121,Doodle Boys Navy Blue Printed T-Shirt,Apparel,contrast_change,evaluation/queries/messy/messy_test_q164_contrast_change.jpg,50718,messy_test
+messy_test_q165_small_rotation,test_q165,32970,32970,Angry Birds Men Printed Black T-shirt,Apparel,small_rotation,evaluation/queries/messy/messy_test_q165_small_rotation.jpg,"32954,32962",messy_test
+messy_test_q166_mild_perspective,test_q166,13447,13447,United Colors of Benetton Men Stripes Pink Tshirts,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q166_mild_perspective.jpg,13425,messy_test
+messy_test_q167_blur,test_q167,11927,11927,Skechers Women Tone White Sports Shoes,Footwear,blur,evaluation/queries/messy/messy_test_q167_blur.jpg,11928,messy_test
+messy_test_q168_background_padding,test_q168,22104,22104,Flying Machine Men Blue Casual Shoes,Footwear,background_padding,evaluation/queries/messy/messy_test_q168_background_padding.jpg,14480,messy_test
+messy_test_q169_crop,test_q169,44123,44123,Hugo Women Pure Purple Perfume,Personal Care,crop,evaluation/queries/messy/messy_test_q169_crop.jpg,44122,messy_test
+messy_test_q170_darker_lighting,test_q170,28097,28097,Jockey MC Men Navy Blue Y Front Briefs 8003,Apparel,darker_lighting,evaluation/queries/messy/messy_test_q170_darker_lighting.jpg,28096,messy_test
+messy_test_q171_brighter_lighting,test_q171,57907,57907,Fruit of the Loom Women Black Pack of Three Socks,Accessories,brighter_lighting,evaluation/queries/messy/messy_test_q171_brighter_lighting.jpg,57909,messy_test
+messy_test_q172_contrast_change,test_q172,58517,58517,Tonga Women Pink Top,Apparel,contrast_change,evaluation/queries/messy/messy_test_q172_contrast_change.jpg,58497,messy_test
+messy_test_q173_small_rotation,test_q173,40147,40147,Gini and Jony Girls Blue Pedal Pusher,Apparel,small_rotation,evaluation/queries/messy/messy_test_q173_small_rotation.jpg,41995,messy_test
+messy_test_q174_mild_perspective,test_q174,27189,27189,Mark Taylor Men Printed Olive T-shirt,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q174_mild_perspective.jpg,31585,messy_test
+messy_test_q175_blur,test_q175,42083,42083,American Tourister Unisex Brown Passport Holder,Accessories,blur,evaluation/queries/messy/messy_test_q175_blur.jpg,42084,messy_test
+messy_test_q176_background_padding,test_q176,9494,9494,Puma Unisex Blaze Black Backpacks,Accessories,background_padding,evaluation/queries/messy/messy_test_q176_background_padding.jpg,9495,messy_test
+messy_test_q177_crop,test_q177,22161,22161,Lee Cooper Men Brown Casual Shoes,Footwear,crop,evaluation/queries/messy/messy_test_q177_crop.jpg,"12857,13127,22158",messy_test
+messy_test_q178_darker_lighting,test_q178,5287,5287,Lee Cooper Men's Brown Semi Formal Shoe,Footwear,darker_lighting,evaluation/queries/messy/messy_test_q178_darker_lighting.jpg,5292,messy_test
+messy_test_q179_brighter_lighting,test_q179,46261,46261,109F Women Multicoloured Printed Tunic,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q179_brighter_lighting.jpg,"46280,46286",messy_test
+messy_test_q180_contrast_change,test_q180,5462,5462,Nike Men's Air Trail Ridge Black Shoe,Footwear,contrast_change,evaluation/queries/messy/messy_test_q180_contrast_change.jpg,6646,messy_test
+messy_test_q181_small_rotation,test_q181,53752,53752,ADIDAS Men Blue Shorts,Apparel,small_rotation,evaluation/queries/messy/messy_test_q181_small_rotation.jpg,53755,messy_test
+messy_test_q182_mild_perspective,test_q182,37738,37738,John Players Men Stripes Pink Shirt,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q182_mild_perspective.jpg,37810,messy_test
+messy_test_q183_blur,test_q183,36763,36763,Maxima Men Green Dial Watch,Free Items,blur,evaluation/queries/messy/messy_test_q183_blur.jpg,36764,messy_test
+messy_test_q184_background_padding,test_q184,33955,33955,ADIDAS Men Polo White T-shirt,Apparel,background_padding,evaluation/queries/messy/messy_test_q184_background_padding.jpg,"32455,32462",messy_test
+messy_test_q185_crop,test_q185,17798,17798,Chhota Bheem Kids Boy Men Journey to Petra Orange Tshirt,Apparel,crop,evaluation/queries/messy/messy_test_q185_crop.jpg,17799,messy_test
+messy_test_q186_darker_lighting,test_q186,35074,35074,Allen Solly Men Leather Brown Belt,Accessories,darker_lighting,evaluation/queries/messy/messy_test_q186_darker_lighting.jpg,"35060,35061,35073,35075",messy_test
+messy_test_q187_brighter_lighting,test_q187,40691,40691,Numero Uno Men Black Shoes,Footwear,brighter_lighting,evaluation/queries/messy/messy_test_q187_brighter_lighting.jpg,55612,messy_test
+messy_test_q188_contrast_change,test_q188,19859,19859,U.S. Polo Assn. Men Solid Olive Jacket,Apparel,contrast_change,evaluation/queries/messy/messy_test_q188_contrast_change.jpg,19860,messy_test
+messy_test_q189_small_rotation,test_q189,11625,11625,W Women Printed Red Kurtas,Apparel,small_rotation,evaluation/queries/messy/messy_test_q189_small_rotation.jpg,"11553,12085",messy_test
+messy_test_q190_mild_perspective,test_q190,22041,22041,Vishudh Women Printed Cream Kurta,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q190_mild_perspective.jpg,22036,messy_test
+messy_test_q191_blur,test_q191,24392,24392,Folklore Women Purple Printed Kurta,Apparel,blur,evaluation/queries/messy/messy_test_q191_blur.jpg,24380,messy_test
+messy_test_q192_background_padding,test_q192,11236,11236,Flying Machine Women Low Rise Blue Jeans,Apparel,background_padding,evaluation/queries/messy/messy_test_q192_background_padding.jpg,11240,messy_test
+messy_test_q193_crop,test_q193,11456,11456,United Colors of Benetton Men Light Winter Olive Tshirts,Apparel,crop,evaluation/queries/messy/messy_test_q193_crop.jpg,11531,messy_test
+messy_test_q194_darker_lighting,test_q194,34138,34138,Turtle Men Leather Brown Wallet,Accessories,darker_lighting,evaluation/queries/messy/messy_test_q194_darker_lighting.jpg,34140,messy_test
+messy_test_q195_brighter_lighting,test_q195,24375,24375,Folklore Women Blue  Kurta,Apparel,brighter_lighting,evaluation/queries/messy/messy_test_q195_brighter_lighting.jpg,24359,messy_test
+messy_test_q196_contrast_change,test_q196,10246,10246,Murcia Women Zoe Brown Handbags,Accessories,contrast_change,evaluation/queries/messy/messy_test_q196_contrast_change.jpg,10247,messy_test
+messy_test_q197_small_rotation,test_q197,28082,28082,Jockey MODERN CLASSIC Men Navy Blue Y Front Briefs 2007,Apparel,small_rotation,evaluation/queries/messy/messy_test_q197_small_rotation.jpg,28083,messy_test
+messy_test_q198_mild_perspective,test_q198,9879,9879,Indigo Nation Men Hot Stepper Blue Striped Shirt,Apparel,mild_perspective,evaluation/queries/messy/messy_test_q198_mild_perspective.jpg,9878,messy_test
+messy_test_q199_blur,test_q199,32589,32589,Only  Women Black Shorts,Apparel,blur,evaluation/queries/messy/messy_test_q199_blur.jpg,32587,messy_test
+messy_test_q200_background_padding,test_q200,25392,25392,Levis Men Navy Blue Innerwear T-shirt,Apparel,background_padding,evaluation/queries/messy/messy_test_q200_background_padding.jpg,25368,messy_test

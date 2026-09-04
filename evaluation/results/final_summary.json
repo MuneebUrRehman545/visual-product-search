@@ -1,0 +1,276 @@
+{
+  "evaluation_timestamp": "2026-08-20T20:05:41.272696+00:00",
+  "dataset_summary": {
+    "catalog_items": 44119,
+    "clean_test_queries": 200,
+    "messy_test_queries": 200
+  },
+  "condition_summaries": [
+    {
+      "condition": "CLIP baseline \u2014 clean test",
+      "model": "CLIP",
+      "reranked": false,
+      "query_type": "clean",
+      "num_queries": 200,
+      "metrics": {
+        "P@1": 0.285,
+        "P@5": 0.118,
+        "P@10": 0.0725,
+        "R@1": 0.2162,
+        "R@5": 0.3608,
+        "R@10": 0.4132,
+        "Hit@1": 0.285,
+        "Hit@5": 0.46,
+        "Hit@10": 0.545,
+        "MRR": 0.3626
+      },
+      "latency_ms": {
+        "avg_embedding_ms": 123.53,
+        "avg_search_ms": 18.089,
+        "avg_rerank_ms": 0.045,
+        "avg_total_ms": 141.67
+      }
+    },
+    {
+      "condition": "CLIP + reranking \u2014 clean test",
+      "model": "CLIP",
+      "reranked": true,
+      "query_type": "clean",
+      "num_queries": 200,
+      "metrics": {
+        "P@1": 0.285,
+        "P@5": 0.118,
+        "P@10": 0.0725,
+        "R@1": 0.2162,
+        "R@5": 0.3608,
+        "R@10": 0.4132,
+        "Hit@1": 0.285,
+        "Hit@5": 0.46,
+        "Hit@10": 0.545,
+        "MRR": 0.3635
+      },
+      "latency_ms": {
+        "avg_embedding_ms": 116.17,
+        "avg_search_ms": 17.59,
+        "avg_rerank_ms": 4.944,
+        "avg_total_ms": 138.7
+      }
+    },
+    {
+      "condition": "ResNet baseline \u2014 clean test",
+      "model": "ResNet-50",
+      "reranked": false,
+      "query_type": "clean",
+      "num_queries": 200,
+      "metrics": {
+        "P@1": 0.235,
+        "P@5": 0.091,
+        "P@10": 0.058,
+        "R@1": 0.1716,
+        "R@5": 0.2691,
+        "R@10": 0.3286,
+        "Hit@1": 0.235,
+        "Hit@5": 0.38,
+        "Hit@10": 0.47,
+        "MRR": 0.3023
+      },
+      "latency_ms": {
+        "avg_embedding_ms": 166.51,
+        "avg_search_ms": 59.095,
+        "avg_rerank_ms": 0.04,
+        "avg_total_ms": 225.65
+      }
+    },
+    {
+      "condition": "ResNet + reranking \u2014 clean test",
+      "model": "ResNet-50",
+      "reranked": true,
+      "query_type": "clean",
+      "num_queries": 200,
+      "metrics": {
+        "P@1": 0.235,
+        "P@5": 0.091,
+        "P@10": 0.0585,
+        "R@1": 0.1716,
+        "R@5": 0.2691,
+        "R@10": 0.3298,
+        "Hit@1": 0.235,
+        "Hit@5": 0.38,
+        "Hit@10": 0.475,
+        "MRR": 0.3029
+      },
+      "latency_ms": {
+        "avg_embedding_ms": 166.43,
+        "avg_search_ms": 59.206,
+        "avg_rerank_ms": 4.152,
+        "avg_total_ms": 229.79
+      }
+    },
+    {
+      "condition": "CLIP baseline \u2014 messy test",
+      "model": "CLIP",
+      "reranked": false,
+      "query_type": "messy",
+      "num_queries": 200,
+      "metrics": {
+        "P@1": 0.13,
+        "P@5": 0.065,
+        "P@10": 0.0435,
+        "R@1": 0.1013,
+        "R@5": 0.2075,
+        "R@10": 0.2634,
+        "Hit@1": 0.13,
+        "Hit@5": 0.275,
+        "Hit@10": 0.36,
+        "MRR": 0.1895
+      },
+      "latency_ms": {
+        "avg_embedding_ms": 121.09,
+        "avg_search_ms": 17.677,
+        "avg_rerank_ms": 0.044,
+        "avg_total_ms": 138.81
+      }
+    },
+    {
+      "condition": "CLIP + reranking \u2014 messy test",
+      "model": "CLIP",
+      "reranked": true,
+      "query_type": "messy",
+      "num_queries": 200,
+      "metrics": {
+        "P@1": 0.13,
+        "P@5": 0.065,
+        "P@10": 0.044,
+        "R@1": 0.1013,
+        "R@5": 0.2075,
+        "R@10": 0.2684,
+        "Hit@1": 0.13,
+        "Hit@5": 0.275,
+        "Hit@10": 0.365,
+        "MRR": 0.1904
+      },
+      "latency_ms": {
+        "avg_embedding_ms": 121.49,
+        "avg_search_ms": 17.3,
+        "avg_rerank_ms": 4.444,
+        "avg_total_ms": 143.23
+      }
+    },
+    {
+      "condition": "ResNet baseline \u2014 messy test",
+      "model": "ResNet-50",
+      "reranked": false,
+      "query_type": "messy",
+      "num_queries": 200,
+      "metrics": {
+        "P@1": 0.13,
+        "P@5": 0.059,
+        "P@10": 0.0335,
+        "R@1": 0.0968,
+        "R@5": 0.176,
+        "R@10": 0.1978,
+        "Hit@1": 0.13,
+        "Hit@5": 0.245,
+        "Hit@10": 0.28,
+        "MRR": 0.1769
+      },
+      "latency_ms": {
+        "avg_embedding_ms": 168.32,
+        "avg_search_ms": 61.175,
+        "avg_rerank_ms": 0.039,
+        "avg_total_ms": 229.54
+      }
+    },
+    {
+      "condition": "ResNet + reranking \u2014 messy test",
+      "model": "ResNet-50",
+      "reranked": true,
+      "query_type": "messy",
+      "num_queries": 200,
+      "metrics": {
+        "P@1": 0.13,
+        "P@5": 0.059,
+        "P@10": 0.0335,
+        "R@1": 0.0968,
+        "R@5": 0.176,
+        "R@10": 0.1978,
+        "Hit@1": 0.13,
+        "Hit@5": 0.245,
+        "Hit@10": 0.28,
+        "MRR": 0.1773
+      },
+      "latency_ms": {
+        "avg_embedding_ms": 161.44,
+        "avg_search_ms": 57.436,
+        "avg_rerank_ms": 3.908,
+        "avg_total_ms": 222.78
+      }
+    }
+  ],
+  "messy_transformation_breakdown": {
+    "crop": {
+      "CLIP_P@5": 0.056,
+      "CLIP_R@5": 0.1647,
+      "CLIP_Hit@5": 0.28,
+      "ResNet_P@5": 0.056,
+      "ResNet_R@5": 0.1633,
+      "ResNet_Hit@5": 0.24
+    },
+    "darker_lighting": {
+      "CLIP_P@5": 0.096,
+      "CLIP_R@5": 0.2393,
+      "CLIP_Hit@5": 0.36,
+      "ResNet_P@5": 0.08,
+      "ResNet_R@5": 0.1633,
+      "ResNet_Hit@5": 0.28
+    },
+    "brighter_lighting": {
+      "CLIP_P@5": 0.064,
+      "CLIP_R@5": 0.2133,
+      "CLIP_Hit@5": 0.28,
+      "ResNet_P@5": 0.04,
+      "ResNet_R@5": 0.1133,
+      "ResNet_Hit@5": 0.16
+    },
+    "contrast_change": {
+      "CLIP_P@5": 0.064,
+      "CLIP_R@5": 0.29,
+      "CLIP_Hit@5": 0.32,
+      "ResNet_P@5": 0.08,
+      "ResNet_R@5": 0.368,
+      "ResNet_Hit@5": 0.4
+    },
+    "small_rotation": {
+      "CLIP_P@5": 0.12,
+      "CLIP_R@5": 0.3986,
+      "CLIP_Hit@5": 0.48,
+      "ResNet_P@5": 0.088,
+      "ResNet_R@5": 0.2733,
+      "ResNet_Hit@5": 0.36
+    },
+    "mild_perspective": {
+      "CLIP_P@5": 0.064,
+      "CLIP_R@5": 0.2137,
+      "CLIP_Hit@5": 0.28,
+      "ResNet_P@5": 0.088,
+      "ResNet_R@5": 0.2437,
+      "ResNet_Hit@5": 0.36
+    },
+    "blur": {
+      "CLIP_P@5": 0.024,
+      "CLIP_R@5": 0.04,
+      "CLIP_Hit@5": 0.08,
+      "ResNet_P@5": 0.0,
+      "ResNet_R@5": 0.0,
+      "ResNet_Hit@5": 0.0
+    },
+    "background_padding": {
+      "CLIP_P@5": 0.032,
+      "CLIP_R@5": 0.1,
+      "CLIP_Hit@5": 0.12,
+      "ResNet_P@5": 0.04,
+      "ResNet_R@5": 0.0833,
+      "ResNet_Hit@5": 0.16
+    }
+  }
+}

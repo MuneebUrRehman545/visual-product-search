@@ -1,0 +1,57 @@
+{
+  "status": "frozen_production_retrieval_pipeline",
+  "selected_model": {
+    "model_name": "OpenCLIP",
+    "architecture": "ViT-B-32",
+    "pretrained_weights": "laion2b_s34b_b79k",
+    "embedding_dimension": 512,
+    "vector_dtype": "float32",
+    "normalization": "L2",
+    "similarity_metric": "cosine / inner_product"
+  },
+  "artifacts": {
+    "embeddings_path": "artifacts/embeddings/clip_embeddings.npy",
+    "catalog_ids_path": "artifacts/embeddings/clip_catalog_ids.npy",
+    "fingerprint_path": "artifacts/embeddings/clip_fingerprint.json",
+    "faiss_index_path": "artifacts/faiss/clip.index",
+    "faiss_mapping_path": "artifacts/faiss/clip_mapping.csv",
+    "production_mapping_path": "artifacts/faiss/production_mapping.csv"
+  },
+  "database": {
+    "target_table": "catalog_items",
+    "vector_column": "embedding",
+    "vector_dimension": 512,
+    "indexing_method": "pgvector_ivfflat_or_hnsw",
+    "id_column": "id"
+  },
+  "reranking": {
+    "enabled": false,
+    "fallback_support": true,
+    "config": {
+      "initial_k": 20,
+      "embedding_weight": 1.0,
+      "color_weight": 0.0,
+      "secondary_feature": "HSV_Histogram",
+      "feature_dimension": 64,
+      "features_path": "artifacts/embeddings/color_features.npy",
+      "ids_path": "artifacts/embeddings/color_catalog_ids.npy"
+    }
+  },
+  "measured_benchmarks": {
+    "clean_test_p5": 0.1180,
+    "clean_test_r5": 0.3608,
+    "clean_test_hit5": 0.4600,
+    "clean_test_mrr": 0.3626,
+    "messy_test_p5": 0.0650,
+    "messy_test_r5": 0.2075,
+    "messy_test_hit5": 0.2750,
+    "messy_test_mrr": 0.1895,
+    "avg_embedding_latency_ms": 135.84,
+    "avg_faiss_latency_ms": 18.96,
+    "avg_total_query_latency_ms": 141.7,
+    "model_ram_mb": 340,
+    "vector_index_size_mb": 90.5
+  },
+  "selection_rationale": "OpenCLIP ViT-B/32 achieves superior semantic accuracy (+34.1% relative Recall@5 and +29.7% relative Precision@5 over ResNet-50), exhibits significantly higher robustness under messy queries (+17.9% Recall@5), and operates 37% faster per query (141.7 ms vs 225.7 ms) with an index size 4x smaller (512-dim vs 2048-dim), maximizing cloud database and memory deployment feasibility.",
+  "frozen_timestamp": "2026-08-20T20:07:00.000000+00:00"
+}

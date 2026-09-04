@@ -1,0 +1,22 @@
+{
+  "model": "CLIP",
+  "split": "validation",
+  "num_queries": 100,
+  "metrics": {
+    "P@1": 0.23,
+    "P@5": 0.106,
+    "P@10": 0.076,
+    "R@1": 0.1417,
+    "R@5": 0.2515,
+    "R@10": 0.3324,
+    "Hit@1": 0.23,
+    "Hit@5": 0.4,
+    "Hit@10": 0.48,
+    "MRR": 0.3033
+  },
+  "latency_ms": {
+    "avg_embedding_latency_ms": 135.84,
+    "avg_faiss_search_latency_ms": 18.959,
+    "avg_total_query_latency_ms": 154.79
+  }
+}

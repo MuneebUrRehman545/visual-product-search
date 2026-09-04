@@ -22,7 +22,9 @@ async function runResultsInterfaceTest() {
   let allPassed = true
 
   // 1. Fetch search response for 15025.jpg (topK=5)
-  const imagePath15025 = path.join(__dirname, '../../data/catalog/images/15025.jpg')
+  const imagePath15025 = fs.existsSync(path.join(__dirname, '../../data/images/15025.jpg'))
+    ? path.join(__dirname, '../../data/images/15025.jpg')
+    : path.join(__dirname, '../../data/catalog/images/15025.jpg')
   const imgBuffer15025 = fs.readFileSync(imagePath15025)
 
   console.log('\n[TEST 1] Render Query: 15025.jpg (topK=5)')

@@ -1,0 +1,30 @@
+{
+  "status": "frozen_after_validation",
+  "primary_tuning_metric": "P@5",
+  "selected_configuration": {
+    "initial_k": 20,
+    "embedding_weight": 1.0,
+    "color_weight": 0.0,
+    "feature_type": "HSV_Histogram",
+    "feature_dim": 64,
+    "normalization": "min_max_embedding_linear_fusion"
+  },
+  "validation_metrics": {
+    "P@1": 0.23,
+    "P@5": 0.106,
+    "P@10": 0.076,
+    "R@1": 0.1417,
+    "R@5": 0.2515,
+    "R@10": 0.3324,
+    "Hit@1": 0.23,
+    "Hit@5": 0.4,
+    "Hit@10": 0.48,
+    "MRR": 0.3033
+  },
+  "baseline_comparison": {
+    "baseline_P@5": 0.106,
+    "reranked_P@5": 0.106,
+    "delta_P@5": 0.0
+  },
+  "frozen_timestamp": "2026-08-20T19:57:10.718815+00:00"
+}

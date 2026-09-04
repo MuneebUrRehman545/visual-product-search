@@ -4,12 +4,20 @@
 
 /**
  * Dynamically resolve the backend API Base URL based on current environment or browser hostname.
- * Supports Localhost and LAN IP access (e.g. http://192.168.100.63:8000).
+ * Respects VITE_API_BASE_URL when set, otherwise falls back to window.location.hostname.
  */
 export const getApiBaseUrl = () => {
-  const envUrl = import.meta.env.VITE_API_BASE_URL
-  if (envUrl && envUrl.trim() !== '' && !envUrl.includes('127.0.0.1') && !envUrl.includes('localhost')) {
-    return envUrl.replace(/\/+$/, '')
+  let envUrl = null
+  try {
+    if (typeof import.meta !== 'undefined' && import.meta && import.meta.env) {
+      envUrl = import.meta.env.VITE_API_BASE_URL
+    }
+  } catch (e) {}
+  if (!envUrl && typeof process !== 'undefined' && process.env) {
+    envUrl = process.env.VITE_API_BASE_URL
+  }
+  if (envUrl && typeof envUrl === 'string' && envUrl.trim() !== '') {
+    return envUrl.trim().replace(/\/+$/, '')
   }
   if (typeof window !== 'undefined' && window.location && window.location.hostname) {
     const hostname = window.location.hostname
@@ -21,31 +29,41 @@ export const getApiBaseUrl = () => {
 export const API_BASE_URL = getApiBaseUrl()
 
 /**
- * Convert a relative catalog image path into a full HTTP browser URL.
+ * Convert a relative catalog image path or filename into a full HTTP browser URL.
+ * Supports: "/catalog-images/15025.jpg", "15025.jpg", "/15025.jpg", or full URLs.
  *
- * @param {string} imagePathOrUrl - e.g. "/catalog-images/15025.jpg"
- * @returns {string} - e.g. "http://192.168.100.63:8000/catalog-images/15025.jpg"
+ * @param {string} imagePathOrUrl
+ * @returns {string} - Full HTTP/HTTPS browser URL
  */
 export function getCatalogImageUrl(imagePathOrUrl) {
   if (!imagePathOrUrl) return ''
-  if (imagePathOrUrl.startsWith('http://') || imagePathOrUrl.startsWith('https://')) {
-    return imagePathOrUrl
+  const str = String(imagePathOrUrl).trim()
+  if (str.startsWith('http://') || str.startsWith('https://') || str.startsWith('data:')) {
+    return str
   }
   const baseUrl = getApiBaseUrl()
-  const cleanPath = imagePathOrUrl.startsWith('/') ? imagePathOrUrl : `/${imagePathOrUrl}`
-  return `${baseUrl}${cleanPath}`
+  let path = str
+  if (!path.startsWith('/')) {
+    path = `/${path}`
+  }
+  if (!path.startsWith('/catalog-images/')) {
+    path = `/catalog-images${path}`
+  }
+  return `${baseUrl}${path}`
 }
 
 /**
  * Execute visual product search query against backend API.
+ * Supports passing either an uploaded File object OR a catalog filename string (e.g. "10003.jpg").
  *
- * @param {File} imageFile - Uploaded image File object.
+ * @param {File|Blob|string} imageFileOrFilename - Uploaded image File or catalog image filename string.
  * @param {number} topK - Number of top results to return (1-50, default 10).
+ * @param {string} model - Embedding model choice ('clip' or 'resnet').
  * @returns {Promise<Object>} - SearchResponse payload.
  */
-export async function searchProducts(imageFile, topK = 10) {
-  if (!imageFile) {
-    throw new Error('An image file must be provided for visual search.')
+export async function searchProducts(imageFileOrFilename, topK = 10, model = 'clip') {
+  if (!imageFileOrFilename) {
+    throw new Error('An image file or catalog filename must be provided for visual search.')
   }
 
   const topKNum = Number(topK)
@@ -54,11 +72,18 @@ export async function searchProducts(imageFile, topK = 10) {
   }
 
   const formData = new FormData()
-  formData.append('file', imageFile)
+  if (typeof imageFileOrFilename === 'string') {
+    // Direct server-side catalog item search (fast, 0-network download)
+    formData.append('catalog_filename', imageFileOrFilename.trim())
+  } else {
+    // Uploaded user image search
+    formData.append('file', imageFileOrFilename)
+  }
   formData.append('top_k', topKNum.toString())
+  formData.append('model', model || 'clip')
 
   const baseUrl = getApiBaseUrl()
-  const searchUrl = `${baseUrl}/api/v1/search`
+  const searchUrl = `${baseUrl}/search`
 
   try {
     const response = await fetch(searchUrl, {
@@ -100,4 +125,29 @@ export async function searchProducts(imageFile, topK = 10) {
     networkError.status = 0
     throw networkError
   }
+}
+
+/**
+ * Fetch top categories with item counts and sample images.
+ */
+export async function fetchTopCategories(limit = 8) {
+  const baseUrl = getApiBaseUrl()
+  const res = await fetch(`${baseUrl}/api/catalog/categories?limit=${limit}`)
+  if (!res.ok) {
+    throw new Error('Failed to fetch catalog categories.')
+  }
+  return await res.json()
+}
+
+/**
+ * Fetch catalog products for a specific category or article type.
+ */
+export async function fetchCategoryProducts(categoryName, limit = 20) {
+  const baseUrl = getApiBaseUrl()
+  const cleanName = encodeURIComponent(categoryName)
+  const res = await fetch(`${baseUrl}/api/catalog/category/${cleanName}?limit=${limit}`)
+  if (!res.ok) {
+    throw new Error(`Failed to fetch items for category '${categoryName}'.`)
+  }
+  return await res.json()
 }

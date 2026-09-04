@@ -1,0 +1,301 @@
+query_id,query_image_id,query_filename,query_path,product_id,product_key,split,category,article_type,product_name,relevant_catalog_item_ids,relevant_catalog_count
+test_q001,26957,26957.jpg,data/images/26957.jpg,26957,jealous 21 women purple shirt|shirts|women|purple,test,Apparel,Shirts,Jealous 21 Women Purple Shirt,26960,1
+val_q001,37783,37783.jpg,data/images/37783.jpg,37783,john players men navy blue shirt|shirts|men|navy blue,validation,Apparel,Shirts,John Players Men Navy Blue Shirt,37812,1
+test_q002,29726,29726.jpg,data/images/29726.jpg,29726,kiara women teal handbag|handbags|women|teal,test,Accessories,Handbags,Kiara Women Teal Handbag,"29738,29742,53668,54018,54033",5
+test_q003,49660,49660.jpg,data/images/49660.jpg,49660,mineral women green top|tops|women|green,test,Apparel,Tops,Mineral Women Green Top,"37944,49653,49659",3
+test_q004,58177,58177.jpg,data/images/58177.jpg,58177,rocky s women brown handbag|handbags|women|brown,test,Accessories,Handbags,Rocky S Women Brown Handbag,58173,1
+val_q002,32568,32568.jpg,data/images/32568.jpg,32568,only women black top|tops|women|black,validation,Apparel,Tops,ONLY Women Black Top,"32573,32597,32599",3
+test_q005,30501,30501.jpg,data/images/30501.jpg,30501,lovable women fiona purple bra|bra|women|purple,test,Apparel,Bra,Lovable Women Fiona Purple Bra,"30496,30500",2
+val_q003,16768,16768.jpg,data/images/16768.jpg,16768,spice art women black handbag|handbags|women|black,validation,Accessories,Handbags,Spice Art Women Black Handbag,"26435,49567,59432",3
+val_q004,32432,32432.jpg,data/images/32432.jpg,32432,adidas men black jersey|tshirts|men|black,validation,Apparel,Tshirts,ADIDAS Men Black Jersey,"29321,40075,40094,53433",4
+test_q006,27210,27210.jpg,data/images/27210.jpg,27210,doodle kids boy check green shirt|shirts|men|green,test,Apparel,Shirts,Doodle Kids Boy Check Green Shirt,33489,1
+test_q007,41402,41402.jpg,data/images/41402.jpg,41402,wrangler women pink t-shirt|tshirts|women|pink,test,Apparel,Tshirts,Wrangler Women Pink T-shirt,41406,1
+test_q008,46411,46411.jpg,data/images/46411.jpg,46411,adidas men black sweatshirt|sweatshirts|men|black,test,Apparel,Sweatshirts,ADIDAS Men Black Sweatshirt,46383,1
+val_q005,51542,51542.jpg,data/images/51542.jpg,51542,fastrack men white dial watch|watches|men|white,validation,Accessories,Watches,Fastrack Men White Dial Watch,"43163,43179,43193,51510,51534,51552,56341",7
+val_q006,13332,13332.jpg,data/images/13332.jpg,13332,gini and jony kids boys check blue shirts|shirts|men|blue,validation,Apparel,Shirts,Gini and Jony Kids Boys Check Blue Shirts,"13283,13315,13316,13324,13333,13334",6
+test_q009,15354,15354.jpg,data/images/15354.jpg,15354,red tape men casual black casual shoes|casual shoes|men|black,test,Footwear,Casual Shoes,Red Tape Men Casual Black Casual Shoes,12507,1
+test_q010,29314,29314.jpg,data/images/29314.jpg,29314,adidas unisex blue backpack|backpacks|unisex|blue,test,Accessories,Backpacks,ADIDAS Unisex Blue Backpack,"24324,29317",2
+test_q011,43531,43531.jpg,data/images/43531.jpg,43531,french connection women off white top|tops|women|off white,test,Apparel,Tops,French Connection Women Off White Top,48501,1
+test_q012,34650,34650.jpg,data/images/34650.jpg,34650,fila women top fuel black sports shoes|sports shoes|women|black,test,Footwear,Sports Shoes,Fila Women Top Fuel Black Sports Shoes,34651,1
+test_q013,20054,20054.jpg,data/images/20054.jpg,20054,united colors of benetton women black muffler|mufflers|women|black,test,Accessories,Mufflers,United Colors Of Benetton Women Black Muffler,20063,1
+test_q014,58188,58188.jpg,data/images/58188.jpg,58188,rocky s women blue handbag|handbags|women|blue,test,Accessories,Handbags,Rocky S Women Blue Handbag,58179,1
+val_q007,40280,40280.jpg,data/images/40280.jpg,40280,scullers men grey trousers|trousers|men|grey,validation,Apparel,Trousers,Scullers Men Grey Trousers,"27610,27622",2
+test_q015,27870,27870.jpg,data/images/27870.jpg,27870,scullers for her women white striped shirt|shirts|women|white,test,Apparel,Shirts,Scullers For Her Women White Striped Shirt,27868,1
+val_q008,11378,11378.jpg,data/images/11378.jpg,11378,united colors of benetton men summer white shirts|shirts|men|white,validation,Apparel,Shirts,United Colors of Benetton Men Summer White Shirts,11473,1
+test_q016,49674,49674.jpg,data/images/49674.jpg,49674,united colors of benetton men sunglass|sunglasses|men|black,test,Accessories,Sunglasses,United Colors of Benetton Men Sunglass,"49663,49665,49672,49675",4
+val_q009,19115,19115.jpg,data/images/19115.jpg,19115,campbell men pack of 3 solid tshirts|tshirts|men|white,validation,Apparel,Tshirts,Campbell Men Pack of 3 Solid Tshirts,19113,1
+test_q017,27209,27209.jpg,data/images/27209.jpg,27209,doodle kids boy check red shirt|shirts|men|red,test,Apparel,Shirts,Doodle Kids Boy Check Red Shirt,"27202,33487",2
+test_q018,47734,47734.jpg,data/images/47734.jpg,47734,murcia women grey handbag|handbags|women|grey,test,Accessories,Handbags,Murcia Women Grey Handbag,"27703,27726,27733,47880",4
+test_q019,33995,33995.jpg,data/images/33995.jpg,33995,femella women black top|tops|women|black,test,Apparel,Tops,Femella Women Black Top,"25969,33966,34000,54146,54987,59898",6
+test_q020,46878,46878.jpg,data/images/46878.jpg,46878,lino perros men pack of 2 socks|socks|men|black,test,Accessories,Socks,Lino Perros Men Pack of 2 Socks,"46862,46863,46868,46872",4
+val_q010,15747,15747.jpg,data/images/15747.jpg,15747,nike men ballista sl white sports shoes|sports shoes|men|white,validation,Footwear,Sports Shoes,Nike Men Ballista SL White Sports Shoes,13898,1
+test_q021,27693,27693.jpg,data/images/27693.jpg,27693,murcia women maroon handbag|handbags|women|maroon,test,Accessories,Handbags,Murcia Women Maroon Handbag,"43334,57247,57266",3
+val_q011,52407,52407.jpg,data/images/52407.jpg,52407,red rose women black nightdress|nightdress|women|black,validation,Apparel,Nightdress,Red Rose Women Black Nightdress,"52405,52410,52413",3
+test_q022,32162,32162.jpg,data/images/32162.jpg,32162,playboy women playmate black ankle socks|socks|women|black,test,Accessories,Socks,Playboy Women Playmate Black Ankle Socks,32156,1
+val_q012,42677,42677.jpg,data/images/42677.jpg,42677,alma women green kurta|kurtas|women|green,validation,Apparel,Kurtas,Alma Women Green Kurta,"42644,42659,42666,42668,42671,53411,53421,53426",8
+val_q013,40589,40589.jpg,data/images/40589.jpg,40589,aurelia women printed white kurta|kurtas|women|white,validation,Apparel,Kurtas,Aurelia Women Printed White Kurta,"28765,31319",2
+test_q023,51255,51255.jpg,data/images/51255.jpg,51255,park avenue men black belt|belts|men|black,test,Accessories,Belts,Park Avenue Men Black Belt,"51252,51259",2
+test_q024,52884,52884.jpg,data/images/52884.jpg,52884,fnf orange printed sari|sarees|women|orange,test,Apparel,Sarees,FNF Orange Printed Sari,52917,1
+test_q025,57991,57991.jpg,data/images/57991.jpg,57991,latin quarters women blue dress|dresses|women|blue,test,Apparel,Dresses,Latin Quarters Women Blue Dress,"38836,57989,57997,57998,58003",5
+test_q026,25914,25914.jpg,data/images/25914.jpg,25914,femella women olive leggings|leggings|women|olive,test,Apparel,Leggings,Femella Women Olive Leggings,40495,1
+test_q027,39745,39745.jpg,data/images/39745.jpg,39745,gini jony boys blue shorts|shorts|boys|blue,test,Apparel,Shorts,Gini Jony Boys Blue Shorts,36211,1
+val_q014,48158,48158.jpg,data/images/48158.jpg,48158,fossil women red wallet|wallets|women|red,validation,Accessories,Wallets,Fossil Women Red Wallet,"48148,48151",2
+test_q028,12130,12130.jpg,data/images/12130.jpg,12130,aurelia women printed green kurtas|kurtas|women|green,test,Apparel,Kurtas,Aurelia Women Printed Green Kurtas,12121,1
+test_q029,48511,48511.jpg,data/images/48511.jpg,48511,french connection women black top|tops|women|black,test,Apparel,Tops,French Connection Women Black Top,"48088,48488,48502,48507,48513",5
+val_q015,33884,33884.jpg,data/images/33884.jpg,33884,citizen men black dial eco-drive watch|watches|men|black,validation,Accessories,Watches,Citizen Men Black Dial Eco-Drive Watch,"33882,33883,33891,33914,33915",5
+test_q030,16538,16538.jpg,data/images/16538.jpg,16538,basics men white slim fit checked shirt|shirts|men|white,test,Apparel,Shirts,Basics Men White Slim Fit Checked Shirt,"12172,12180,12183,12187,12936,12948,12950,14660,14665,14667,14668,16544,16548",13
+test_q031,14808,14808.jpg,data/images/14808.jpg,14808,united colors of benetton women solid maroon handbags|handbags|women|maroon,test,Accessories,Handbags,United Colors of Benetton Women Solid Maroon Handbags,"14794,14797,14802,14811",4
+test_q032,29607,29607.jpg,data/images/29607.jpg,29607,indigo nation men striped purple shirt|shirts|men|purple,test,Apparel,Shirts,Indigo Nation Men Striped Purple Shirt,"29632,29652,29665,31635,31648,32759",6
+val_q016,21075,21075.jpg,data/images/21075.jpg,21075,clarks men brown leather sandals|sandals|men|brown,validation,Footwear,Sandals,Clarks Men Brown Leather Sandals,"10303,34119,50776",3
+test_q033,54580,54580.jpg,data/images/54580.jpg,54580,sushilas women printed red kurta|kurtas|women|red,test,Apparel,Kurtas,Sushilas Women Printed Red Kurta,"54570,54590",2
+test_q034,14096,14096.jpg,data/images/14096.jpg,14096,flying machine men stripes blue tshirts|tshirts|men|blue,test,Apparel,Tshirts,Flying Machine Men Stripes Blue Tshirts,14105,1
+test_q035,10457,10457.jpg,data/images/10457.jpg,10457,flying machine men pink polo tshirts|tshirts|men|pink,test,Apparel,Tshirts,Flying Machine Men Pink Polo Tshirts,10436,1
+val_q017,26134,26134.jpg,data/images/26134.jpg,26134,john miller men black trousers|trousers|men|black,validation,Apparel,Trousers,John Miller Men Black Trousers,"10262,26136,26138,26154,26157,26162,26169",7
+test_q036,27999,27999.jpg,data/images/27999.jpg,27999,jockey zone men grey tanga brief us18|briefs|men|grey,test,Apparel,Briefs,Jockey ZONE Men Grey Tanga Brief US18,28002,1
+val_q018,36234,36234.jpg,data/images/36234.jpg,36234,w women pink kurta|kurtas|women|pink,validation,Apparel,Kurtas,W Women Pink Kurta,42416,1
+val_q019,59763,59763.jpg,data/images/59763.jpg,59763,rocia women black wedges|heels|women|black,validation,Footwear,Heels,Rocia Women Black Wedges,"34458,50160,50165,50177,57302",5
+test_q037,47207,47207.jpg,data/images/47207.jpg,47207,franco leone men brown shoes|formal shoes|men|brown,test,Footwear,Formal Shoes,Franco Leone Men Brown Shoes,"11903,47190",2
+test_q038,42239,42239.jpg,data/images/42239.jpg,42239,sepia women blue tunic|tunics|women|blue,test,Apparel,Tunics,Sepia Women Blue Tunic,"33183,42249",2
+test_q039,12996,12996.jpg,data/images/12996.jpg,12996,timberland kids boys brown casual shoes|casual shoes|boys|brown,test,Footwear,Casual Shoes,Timberland Kids Boys Brown Casual Shoes,12995,1
+val_q020,59065,59065.jpg,data/images/59065.jpg,59065,peri peri women blue bra|bra|women|blue,validation,Apparel,Bra,Peri Peri Women Blue Bra,59068,1
+test_q040,54382,54382.jpg,data/images/54382.jpg,54382,baggit women olive handbag|handbags|women|olive,test,Accessories,Handbags,Baggit Women Olive Handbag,"47334,47394,54406,58268",4
+test_q041,39717,39717.jpg,data/images/39717.jpg,39717,arrow woman red top|tops|women|red,test,Apparel,Tops,Arrow Woman Red Top,"27259,44642",2
+val_q021,29115,29115.jpg,data/images/29115.jpg,29115,puma men foundation quarters white socks|socks|men|white,validation,Accessories,Socks,Puma Men Foundation Quarters White Socks,19499,1
+val_q022,16341,16341.jpg,data/images/16341.jpg,16341,peter england men check blue shirt|shirts|men|blue,validation,Apparel,Shirts,Peter England Men Check Blue Shirt,"16343,16362,16363,16367",4
+test_q042,23837,23837.jpg,data/images/23837.jpg,23837,adidas men white razor sports shoes|sports shoes|men|white,test,Footwear,Sports Shoes,ADIDAS Men White Razor Sports Shoes,23848,1
+test_q043,33602,33602.jpg,data/images/33602.jpg,33602,lino perros women black wallet|wallets|women|black,test,Accessories,Wallets,Lino Perros Women Black Wallet,"33609,33622",2
+test_q044,31723,31723.jpg,data/images/31723.jpg,31723,fabindia women ananya gold pendant|pendant|women|gold,test,Accessories,Pendant,Fabindia Women Ananya Gold Pendant,35335,1
+test_q045,33074,33074.jpg,data/images/33074.jpg,33074,u.s.polo assn. men green polo t-shirt|tshirts|men|green,test,Apparel,Tshirts,U.S.Polo Assn. Men Green Polo T-shirt,33073,1
+val_q023,38581,38581.jpg,data/images/38581.jpg,38581,nike men red t-shirt|tshirts|men|red,validation,Apparel,Tshirts,Nike Men Red T-shirt,"22596,22616",2
+val_q024,32206,32206.jpg,data/images/32206.jpg,32206,fabindia women green kurta|kurtas|women|green,validation,Apparel,Kurtas,Fabindia Women Green Kurta,"30838,46018",2
+val_q025,51815,51815.jpg,data/images/51815.jpg,51815,bwitch black bra|bra|women|black,validation,Apparel,Bra,Bwitch Black Bra,"39533,51867",2
+test_q046,42663,42663.jpg,data/images/42663.jpg,42663,alma women cream printed kurta|kurtas|women|cream,test,Apparel,Kurtas,Alma Women Cream Printed Kurta,"42646,53424",2
+val_q026,22832,22832.jpg,data/images/22832.jpg,22832,woodland men brown shoes|casual shoes|men|brown,validation,Footwear,Casual Shoes,Woodland Men Brown Shoes,"22841,22862,38774,38779,38785,43478,50377",7
+test_q047,17644,17644.jpg,data/images/17644.jpg,17644,converse unisex casual green slipper|flip flops|unisex|green,test,Footwear,Flip Flops,Converse Unisex Casual Green Slipper,17649,1
+test_q048,50946,50946.jpg,data/images/50946.jpg,50946,lee womens blue roxy fit jeans|jeans|women|blue,test,Apparel,Jeans,Lee Womens Blue Roxy Fit Jeans,"50952,50955",2
+test_q049,30610,30610.jpg,data/images/30610.jpg,30610,nike men black shorts|shorts|men|black,test,Apparel,Shorts,Nike Men Black Shorts,"22604,28514,30609,30634,32649,44625",6
+val_q027,58261,58261.jpg,data/images/58261.jpg,58261,baggit women brown purse|clutches|women|brown,validation,Accessories,Clutches,Baggit Women Brown Purse,47302,1
+test_q050,25118,25118.jpg,data/images/25118.jpg,25118,lino perros women beaded black clutch|clutches|women|black,test,Accessories,Clutches,Lino Perros Women Beaded Black Clutch,25120,1
+val_q028,39786,39786.jpg,data/images/39786.jpg,39786,peter england men blue formal shirt|shirts|men|blue,validation,Apparel,Shirts,Peter England Men Blue Formal Shirt,"39790,39798",2
+val_q029,43686,43686.jpg,data/images/43686.jpg,43686,doodle boys printed white t-shirt|tshirts|boys|white,validation,Apparel,Tshirts,Doodle Boys Printed White T-shirt,"34099,35452,35453,41745,41754,43685,43692,43693,43697",9
+val_q030,52356,52356.jpg,data/images/52356.jpg,52356,red rose women white nightdress|nightdress|women|white,validation,Apparel,Nightdress,Red Rose Women White Nightdress,52429,1
+test_q051,35208,35208.jpg,data/images/35208.jpg,35208,wildcraft unisex blue & grey backpack|backpacks|unisex|blue,test,Accessories,Backpacks,Wildcraft Unisex Blue & Grey Backpack,"7092,7097,32860,35187,35201,35211,38136",7
+val_q031,59470,59470.jpg,data/images/59470.jpg,59470,lucera gold plated ring|ring|women|gold,validation,Accessories,Ring,Lucera Gold Plated Ring,59469,1
+val_q032,18406,18406.jpg,data/images/18406.jpg,18406,skechers men usa black shoe|casual shoes|men|black,validation,Footwear,Casual Shoes,Skechers Men USA Black Shoe,18402,1
+test_q052,7869,7869.jpg,data/images/7869.jpg,7869,provogue men's formal black shoe|formal shoes|men|black,test,Footwear,Formal Shoes,Provogue Men's Formal Black Shoe,"7858,7860,7863,7871,7876,7877,7881",7
+test_q053,29608,29608.jpg,data/images/29608.jpg,29608,indigo nation men striped blue shirt|shirts|men|blue,test,Apparel,Shirts,Indigo Nation Men Striped Blue Shirt,"29649,29653,31611,31649",4
+val_q033,47384,47384.jpg,data/images/47384.jpg,47384,baggit women teal purse|clutches|women|teal,validation,Accessories,Clutches,Baggit Women Teal Purse,58254,1
+val_q034,35001,35001.jpg,data/images/35001.jpg,35001,fabindia women printed beige & black stole|stoles|women|beige,validation,Accessories,Stoles,Fabindia Women Printed Beige & Black Stole,"35006,35009,35012",3
+val_q035,40655,40655.jpg,data/images/40655.jpg,40655,span women green kurta|kurtas|women|green,validation,Apparel,Kurtas,Span Women Green Kurta,"40602,40604,40611,40612,40617,40636,40637,40641,40645,40646,40653,40657,40663",13
+val_q036,28773,28773.jpg,data/images/28773.jpg,28773,aurelia women printed green kurti|kurtis|women|green,validation,Apparel,Kurtis,Aurelia Women Printed Green Kurti,"24173,28770,28771,28779",4
+test_q054,35465,35465.jpg,data/images/35465.jpg,35465,franco leone men blue shoes|casual shoes|men|blue,test,Footwear,Casual Shoes,Franco Leone Men Blue Shoes,31332,1
+test_q055,5721,5721.jpg,data/images/5721.jpg,5721,basics men blue & white striped polo t-shirt|tshirts|men|blue,test,Apparel,Tshirts,Basics Men Blue & White Striped Polo T-shirt,3794,1
+test_q056,22594,22594.jpg,data/images/22594.jpg,22594,nike men navy blue t-shirt|tshirts|men|navy blue,test,Apparel,Tshirts,Nike Men Navy Blue T-shirt,22614,1
+val_q037,34749,34749.jpg,data/images/34749.jpg,34749,puma men white benecio shoes|casual shoes|men|white,validation,Footwear,Casual Shoes,Puma Men White Benecio Shoes,38535,1
+val_q038,26880,26880.jpg,data/images/26880.jpg,26880,jealous 21 women printed white t-shirt|tshirts|women|white,validation,Apparel,Tshirts,Jealous 21 Women Printed White T-shirt,"26866,26882,26896,26937",4
+test_q057,53002,53002.jpg,data/images/53002.jpg,53002,fnf purple printed sari|sarees|women|purple,test,Apparel,Sarees,FNF Purple Printed Sari,"52892,52897,52903,52973",4
+test_q058,29467,29467.jpg,data/images/29467.jpg,29467,giordano men silver dial watch|watches|men|silver,test,Accessories,Watches,Giordano Men Silver Dial Watch,"29413,29416,29466",3
+test_q059,40258,40258.jpg,data/images/40258.jpg,40258,scullers men white & navy blue shirt|shirts|men|white,test,Apparel,Shirts,Scullers Men White & Navy Blue Shirt,43036,1
+test_q060,36446,36446.jpg,data/images/36446.jpg,36446,spinn men orbit black sports shoes|sports shoes|men|black,test,Footwear,Sports Shoes,Spinn Men Orbit Black Sports Shoes,36445,1
+test_q061,22404,22404.jpg,data/images/22404.jpg,22404,mark taylor men striped green shirt|shirts|men|green,test,Apparel,Shirts,Mark Taylor Men Striped Green Shirt,27153,1
+test_q062,15569,15569.jpg,data/images/15569.jpg,15569,catwalk women casual red flats|heels|women|red,test,Footwear,Heels,Catwalk Women Casual Red Flats,14371,1
+val_q039,36719,36719.jpg,data/images/36719.jpg,36719,gini and jony boys printed black t-shirt|tshirts|boys|black,validation,Apparel,Tshirts,Gini and Jony Boys Printed Black T-Shirt,"31103,31153,34174,34175,39838,39839,39855,39856",8
+test_q063,17512,17512.jpg,data/images/17512.jpg,17512,classic polo men stripes blue polo t-shirt|tshirts|men|navy blue,test,Apparel,Tshirts,Classic Polo Men Stripes Blue Polo T-Shirt,17500,1
+test_q064,44408,44408.jpg,data/images/44408.jpg,44408,force 10 men grey sports shoes|sports shoes|men|grey,test,Footwear,Sports Shoes,Force 10 Men Grey Sports Shoes,51741,1
+val_q040,35681,35681.jpg,data/images/35681.jpg,35681,u.s. polo assn. men brown shoes|casual shoes|men|brown,validation,Footwear,Casual Shoes,U.S. Polo Assn. Men Brown Shoes,"35659,35678,35680,35682,35691",5
+val_q041,28445,28445.jpg,data/images/28445.jpg,28445,kiara women pink handbag|handbags|women|pink,validation,Accessories,Handbags,Kiara Women Pink Handbag,"28446,53661,53667,53678,53679,53887,53895",7
+test_q065,16888,16888.jpg,data/images/16888.jpg,16888,police men casual black sunglasses|sunglasses|men|black,test,Accessories,Sunglasses,Police Men Casual Black Sunglasses,"16883,16887,16889,16891",4
+val_q042,57213,57213.jpg,data/images/57213.jpg,57213,kraus jeans women blue jeggings|jeggings|women|blue,validation,Apparel,Jeggings,Kraus Jeans Women Blue Jeggings,"51615,51618,57208,57210,57212",5
+val_q043,50212,50212.jpg,data/images/50212.jpg,50212,stoln women brown sunglasses|sunglasses|women|brown,validation,Accessories,Sunglasses,Stoln Women Brown Sunglasses,"50200,50205,50209,50230",4
+test_q066,45949,45949.jpg,data/images/45949.jpg,45949,tokyo talkies women white top|tops|women|white,test,Apparel,Tops,Tokyo Talkies Women White Top,40373,1
+val_q044,17364,17364.jpg,data/images/17364.jpg,17364,arrow men formal red tie+cufflink+pocket square - combo pack|accessory gift set|men|red,validation,Accessories,Accessory Gift Set,Arrow Men Formal Red Tie+Cufflink+Pocket square - Combo Pack,"17360,17371,17376",3
+test_q067,29837,29837.jpg,data/images/29837.jpg,29837,basics men yellow checked shirt|shirts|men|yellow,test,Apparel,Shirts,Basics Men Yellow Checked Shirt,41611,1
+val_q045,18546,18546.jpg,data/images/18546.jpg,18546,catwalk women tan heels|heels|women|tan,validation,Footwear,Heels,Catwalk Women Tan Heels,"19036,46599",2
+val_q046,29202,29202.jpg,data/images/29202.jpg,29202,fila men white socks|socks|men|white,validation,Accessories,Socks,Fila Men White Socks,"29201,29207,58634",3
+test_q068,12238,12238.jpg,data/images/12238.jpg,12238,genesis men stripes blue shirts|shirts|men|blue,test,Apparel,Shirts,Genesis Men Stripes Blue Shirts,"12271,12297",2
+test_q069,11084,11084.jpg,data/images/11084.jpg,11084,scullers men check blue shirts|shirts|men|blue,test,Apparel,Shirts,Scullers Men Check Blue Shirts,"11053,11054,11056,11083,11090,13856,13857,13858,13859,13862,13863",11
+test_q070,35409,35409.jpg,data/images/35409.jpg,35409,enroute men black formal shoes|formal shoes|men|black,test,Footwear,Formal Shoes,Enroute Men Black Formal Shoes,"35399,35407,35411,35414,35416,35418,58555",7
+test_q071,15000,15000.jpg,data/images/15000.jpg,15000,adidas men solid white tshirts|tshirts|men|white,test,Apparel,Tshirts,ADIDAS Men Solid White Tshirts,14317,1
+test_q072,53043,53043.jpg,data/images/53043.jpg,53043,fnf printed purple sari|sarees|women|purple,test,Apparel,Sarees,FNF Printed Purple Sari,"52937,52962,52965",3
+val_q047,45784,45784.jpg,data/images/45784.jpg,45784,senorita women black sandals|heels|women|black,validation,Footwear,Heels,Senorita Women Black Sandals,"44454,44456,44458,45795",4
+test_q073,39035,39035.jpg,data/images/39035.jpg,39035,belmonte men steel bright assorted cufflinks|cufflinks|men|steel,test,Accessories,Cufflinks,Belmonte Men Steel Bright Assorted Cufflinks,"39032,39033,39037,39041,39043",5
+test_q074,16824,16824.jpg,data/images/16824.jpg,16824,little miss women printed purple t-shirt|tshirts|women|purple,test,Apparel,Tshirts,Little Miss Women Printed Purple T-shirt,"9821,9836,16821,16825",4
+test_q075,53878,53878.jpg,data/images/53878.jpg,53878,u.s. polo assn. men navy blue flip flops|flip flops|men|navy blue,test,Footwear,Flip Flops,U.S. Polo Assn. Men Navy Blue Flip Flops,"53875,53880",2
+val_q048,28710,28710.jpg,data/images/28710.jpg,28710,w women printed multi coloured kurta|kurtas|women|multi,validation,Apparel,Kurtas,W Women Printed Multi Coloured Kurta,28723,1
+test_q076,59919,59919.jpg,data/images/59919.jpg,59919,diva women multi colour kurta|kurtas|women|multi,test,Apparel,Kurtas,Diva Women Multi Colour Kurta,59920,1
+val_q049,24129,24129.jpg,data/images/24129.jpg,24129,adidas men printed black sweatshirt|sweatshirts|men|black,validation,Apparel,Sweatshirts,ADIDAS Men Printed Black Sweatshirt,24304,1
+test_q077,16807,16807.jpg,data/images/16807.jpg,16807,locomotive men check blue shirt|shirts|men|blue,test,Apparel,Shirts,Locomotive Men Check Blue Shirt,"16456,16460,16466,16468,16470,16472,16482,16532,16812,16814,16817,21389",12
+test_q078,17787,17787.jpg,data/images/17787.jpg,17787,reid & taylor men solid grey socks|socks|men|grey,test,Accessories,Socks,Reid & Taylor Men Solid Grey Socks,"12398,12404,17786,17792",4
+val_q050,51173,51173.jpg,data/images/51173.jpg,51173,raymond men navy socks|socks|men|navy blue,validation,Accessories,Socks,Raymond Men Navy Socks,"51152,51157,51177,51183,51341,51347",6
+test_q079,59917,59917.jpg,data/images/59917.jpg,59917,diva women pink kurta|kurtas|women|pink,test,Apparel,Kurtas,Diva Women Pink Kurta,"39466,39478",2
+val_q051,21500,21500.jpg,data/images/21500.jpg,21500,kiara women square design black handbag|handbags|women|black,validation,Accessories,Handbags,Kiara Women Square Design Black Handbag,21499,1
+test_q080,12485,12485.jpg,data/images/12485.jpg,12485,clarks men leather brown sandals|sandals|men|brown,test,Footwear,Sandals,Clarks Men Leather Brown Sandals,12489,1
+test_q081,32846,32846.jpg,data/images/32846.jpg,32846,grendha women jola cigana brown flats|heels|women|brown,test,Footwear,Heels,Grendha Women Jola Cigana Brown Flats,32839,1
+val_q052,49530,49530.jpg,data/images/49530.jpg,49530,rocia women red purse|clutches|women|red,validation,Accessories,Clutches,Rocia Women Red Purse,53075,1
+test_q082,22068,22068.jpg,data/images/22068.jpg,22068,vishudh women printed grey kurta|kurtas|women|grey,test,Apparel,Kurtas,Vishudh Women Printed Grey Kurta,"22054,32270",2
+test_q083,25465,25465.jpg,data/images/25465.jpg,25465,nike men downshifter 4 msl white sports shoes|sports shoes|men|white,test,Footwear,Sports Shoes,Nike Men Downshifter 4 MSL White Sports Shoes,15743,1
+val_q053,39739,39739.jpg,data/images/39739.jpg,39739,arrow men black sandals|sandals|men|black,validation,Footwear,Sandals,Arrow Men Black Sandals,"39737,45577,45579,45580",4
+test_q084,19059,19059.jpg,data/images/19059.jpg,19059,aurelia women solid black kurta|kurtas|women|black,test,Apparel,Kurtas,Aurelia Women Solid Black Kurta,19055,1
+test_q085,26476,26476.jpg,data/images/26476.jpg,26476,puma men graphic black t-shirt|tshirts|men|black,test,Apparel,Tshirts,Puma Men Graphic Black T-shirt,"26489,26726",2
+val_q054,49704,49704.jpg,data/images/49704.jpg,49704,park avenue men blue tie|ties|men|blue,validation,Accessories,Ties,Park Avenue Men Blue Tie,"49684,49686,49688,49694,49708,49709,49710,49713,49714,49716,49719,49723,49732,49744,50310,50318",16
+test_q086,12040,12040.jpg,data/images/12040.jpg,12040,mark taylor men solid blue shirts|shirts|men|blue,test,Apparel,Shirts,Mark Taylor Men Solid Blue Shirts,"8869,9069,9070",3
+test_q087,13355,13355.jpg,data/images/13355.jpg,13355,timberland men toddler brown casual shoes|casual shoes|men|brown,test,Footwear,Casual Shoes,Timberland Men Toddler Brown Casual Shoes,"13369,13384",2
+val_q055,16898,16898.jpg,data/images/16898.jpg,16898,police men casual blue sunglasses|sunglasses|men|blue,validation,Accessories,Sunglasses,Police Men Casual Blue Sunglasses,"16885,16894",2
+val_q056,43270,43270.jpg,data/images/43270.jpg,43270,aneri women red kurta|kurtas|women|red,validation,Apparel,Kurtas,Aneri Women Red Kurta,"39169,39173,43252",3
+test_q088,34593,34593.jpg,data/images/34593.jpg,34593,tonga women pink printed top|tops|women|pink,test,Apparel,Tops,Tonga Women Pink Printed Top,34587,1
+val_q057,12765,12765.jpg,data/images/12765.jpg,12765,spykar women washed black jeans|jeans|women|black,validation,Apparel,Jeans,Spykar Women Washed Black Jeans,13351,1
+test_q089,7910,7910.jpg,data/images/7910.jpg,7910,proline men multicoloured striped polo t-shirt|tshirts|men|multi,test,Apparel,Tshirts,Proline Men Multicoloured Striped Polo T-shirt,"7873,7918",2
+test_q090,13389,13389.jpg,data/images/13389.jpg,13389,united colors of benetton men check green shirts|shirts|men|green,test,Apparel,Shirts,United Colors of Benetton Men Check Green Shirts,"13393,13404,13405,13934",4
+test_q091,41976,41976.jpg,data/images/41976.jpg,41976,gini and jony girls white pedal pusher|capris|girls|white,test,Apparel,Capris,Gini and Jony Girls White Pedal Pusher,"40161,41975",2
+test_q092,12519,12519.jpg,data/images/12519.jpg,12519,red tape men beige shoes|casual shoes|men|beige,test,Footwear,Casual Shoes,Red Tape Men Beige Shoes,34542,1
+test_q093,39656,39656.jpg,data/images/39656.jpg,39656,lotto men black shoes|casual shoes|men|black,test,Footwear,Casual Shoes,Lotto Men Black Shoes,"39639,39640,39645,39658,39659,39663,39678,39685",8
+test_q094,51165,51165.jpg,data/images/51165.jpg,51165,raymond men navy blue socks|socks|men|navy blue,test,Accessories,Socks,Raymond Men Navy Blue Socks,"51175,51179,51185,51338",4
+val_q058,48093,48093.jpg,data/images/48093.jpg,48093,french connection women blue shirt|shirts|women|blue,validation,Apparel,Shirts,French Connection Women Blue Shirt,48091,1
+test_q095,51843,51843.jpg,data/images/51843.jpg,51843,new hide men black wallet|wallets|men|black,test,Accessories,Wallets,New Hide Men Black Wallet,"50825,50826,50827,50828,58201",5
+test_q096,21610,21610.jpg,data/images/21610.jpg,21610,enamor women smooth black bra|bra|women|black,test,Apparel,Bra,Enamor Women Smooth Black Bra,"21624,21639,21652,21659",4
+test_q097,40232,40232.jpg,data/images/40232.jpg,40232,provogue men black leather belt|belts|men|black,test,Accessories,Belts,Provogue Men Black Leather Belt,"40221,40223,40227,40230",4
+val_q059,56992,56992.jpg,data/images/56992.jpg,56992,hm women black shoes|flats|women|black,validation,Footwear,Flats,HM Women Black Shoes,56867,1
+test_q098,30515,30515.jpg,data/images/30515.jpg,30515,lovable women spice blue bra|bra|women|blue,test,Apparel,Bra,Lovable Women Spice Blue Bra,30517,1
+test_q099,24921,24921.jpg,data/images/24921.jpg,24921,united colors of benetton women black top|tops|women|black,test,Apparel,Tops,United Colors of Benetton Women Black Top,"24918,24987,37161,37164,37186,37189,37190",7
+test_q100,23563,23563.jpg,data/images/23563.jpg,23563,police pure men perfume|perfume and body mist|men|navy blue,test,Personal Care,Perfume and Body Mist,Police Pure Men Perfume,23557,1
+val_q060,20774,20774.jpg,data/images/20774.jpg,20774,carlton london women classy gold heels|heels|women|gold,validation,Footwear,Heels,Carlton London Women Classy Gold Heels,20782,1
+test_q101,48074,48074.jpg,data/images/48074.jpg,48074,french connection men purple t-shirt|tshirts|men|purple,test,Apparel,Tshirts,French Connection Men Purple T-shirt,48448,1
+test_q102,26239,26239.jpg,data/images/26239.jpg,26239,proline men black printed t-shirt|tshirts|men|black,test,Apparel,Tshirts,Proline Men Black Printed T-shirt,26281,1
+test_q103,18536,18536.jpg,data/images/18536.jpg,18536,puma men commander white sports shoes|sports shoes|men|white,test,Footwear,Sports Shoes,Puma Men Commander White Sports Shoes,18602,1
+val_q061,11817,11817.jpg,data/images/11817.jpg,11817,playboy men casual white casual shoes|casual shoes|men|white,validation,Footwear,Casual Shoes,Playboy Men Casual White Casual Shoes,"11816,11829",2
+val_q062,40626,40626.jpg,data/images/40626.jpg,40626,span women pink kurta|kurtas|women|pink,validation,Apparel,Kurtas,Span Women Pink Kurta,"40642,40654",2
+test_q104,49555,49555.jpg,data/images/49555.jpg,49555,rocia women brown handbag|handbags|women|brown,test,Accessories,Handbags,Rocia Women Brown Handbag,"49553,53061,53064,53065,53067,53070",6
+test_q105,16002,16002.jpg,data/images/16002.jpg,16002,turtle solid men grey sweaters|sweaters|men|grey,test,Apparel,Sweaters,Turtle Solid Men Grey Sweaters,16003,1
+test_q106,22652,22652.jpg,data/images/22652.jpg,22652,wildcraft unisex grey duffle bag|duffel bag|unisex|grey,test,Accessories,Duffel Bag,Wildcraft Unisex Grey Duffle Bag,22645,1
+val_q063,48419,48419.jpg,data/images/48419.jpg,48419,french connection men black printed t-shirt|tshirts|men|black,validation,Apparel,Tshirts,French Connection Men Black Printed T-shirt,"48436,48440",2
+test_q107,32864,32864.jpg,data/images/32864.jpg,32864,wildcraft unisex pink & grey backpack|backpacks|unisex|pink,test,Accessories,Backpacks,Wildcraft Unisex Pink & Grey Backpack,"38137,38138",2
+test_q108,48407,48407.jpg,data/images/48407.jpg,48407,french connection men brown printed t-shirt|tshirts|men|brown,test,Apparel,Tshirts,French Connection Men Brown Printed T-shirt,43495,1
+test_q109,9719,9719.jpg,data/images/9719.jpg,9719,hush puppies men walsh black sandals|sandals|men|black,test,Footwear,Sandals,Hush Puppies Men Walsh Black Sandals,9706,1
+test_q110,38931,38931.jpg,data/images/38931.jpg,38931,gini and jony girls blue jeans|jeans|girls|blue,test,Apparel,Jeans,Gini and Jony Girls Blue Jeans,"33147,38930",2
+test_q111,43321,43321.jpg,data/images/43321.jpg,43321,united colors of benetton women pink t-shirt|tshirts|women|pink,test,Apparel,Tshirts,United Colors of Benetton Women Pink T-shirt,"19673,24953,24972,37183,43325",5
+test_q112,48070,48070.jpg,data/images/48070.jpg,48070,french connection men off white t-shirt|tshirts|men|off white,test,Apparel,Tshirts,French Connection Men Off White T-shirt,43492,1
+test_q113,48248,48248.jpg,data/images/48248.jpg,48248,the amazing spiderman boys black t-shirt|tshirts|boys|black,test,Apparel,Tshirts,The Amazing Spiderman Boys Black T-shirt,"48258,48259",2
+test_q114,18220,18220.jpg,data/images/18220.jpg,18220,manchester united men red socks|socks|men|red,test,Accessories,Socks,Manchester United Men Red Socks,"35240,35244,35247",3
+test_q115,32005,32005.jpg,data/images/32005.jpg,32005,playboy men grey socks|socks|men|grey,test,Accessories,Socks,Playboy Men Grey Socks,"31993,32002,32035",3
+val_q064,49305,49305.jpg,data/images/49305.jpg,49305,arrow men pack of 5 basic plating socks|socks|men|black,validation,Accessories,Socks,Arrow Men Pack Of 5 Basic Plating Socks,"49304,49306,49308",3
+test_q116,48218,48218.jpg,data/images/48218.jpg,48218,united colors of benetton women black sunglasses|sunglasses|women|black,test,Accessories,Sunglasses,United Colors of Benetton Women Black Sunglasses,"48220,48222,48224,48232,48235",5
+val_q065,53806,53806.jpg,data/images/53806.jpg,53806,puma kids unisex pack of 3 socks|socks|unisex|white,validation,Accessories,Socks,Puma Kids Unisex Pack of 3 Socks,53805,1
+test_q117,31819,31819.jpg,data/images/31819.jpg,31819,titan men chronograph blue dial watch|watches|men|blue,test,Accessories,Watches,Titan Men Chronograph Blue Dial Watch,"31816,31863",2
+test_q118,35645,35645.jpg,data/images/35645.jpg,35645,u.s. polo assn. men black sandals|sandals|men|black,test,Footwear,Sandals,U.S. Polo Assn. Men Black Sandals,"35644,35649,35662,35664,51876",5
+test_q119,58194,58194.jpg,data/images/58194.jpg,58194,puma women black handbag|handbags|women|black,test,Accessories,Handbags,Puma Women Black Handbag,"25707,34556,43570,43572",4
+test_q120,45535,45535.jpg,data/images/45535.jpg,45535,fila men white t-shirt|tshirts|men|white,test,Apparel,Tshirts,Fila Men White T-Shirt,45534,1
+test_q121,20015,20015.jpg,data/images/20015.jpg,20015,united colors of benetton women printed olive t-shirt|tshirts|women|olive,test,Apparel,Tshirts,United Colors of Benetton Women Printed Olive T-shirt,19671,1
+val_q066,14945,14945.jpg,data/images/14945.jpg,14945,status quo men stripes navy blue tshirts|tshirts|men|navy blue,validation,Apparel,Tshirts,Status Quo Men Stripes Navy Blue Tshirts,"14952,14953",2
+test_q122,17183,17183.jpg,data/images/17183.jpg,17183,u.s. polo assn. men stripes maroon shirt|shirts|men|maroon,test,Apparel,Shirts,U.S. Polo Assn. Men Stripes Maroon Shirt,"17192,19847",2
+val_q067,17588,17588.jpg,data/images/17588.jpg,17588,speedo men funky eyewear black sunglasses|sunglasses|men|black,validation,Accessories,Sunglasses,Speedo Men Funky Eyewear Black Sunglasses,"17585,17589",2
+val_q068,47206,47206.jpg,data/images/47206.jpg,47206,franco leone men black shoes|formal shoes|men|black,validation,Footwear,Formal Shoes,Franco Leone Men Black Shoes,44939,1
+test_q123,19876,19876.jpg,data/images/19876.jpg,19876,adidas men plugged in blue flip flops|flip flops|men|blue,test,Footwear,Flip Flops,ADIDAS Men Plugged IN Blue Flip Flops,20945,1
+val_q069,32210,32210.jpg,data/images/32210.jpg,32210,fabindia women black kurta|kurtas|women|black,validation,Apparel,Kurtas,Fabindia Women Black Kurta,35041,1
+test_q124,32228,32228.jpg,data/images/32228.jpg,32228,fabindia women printed mustard kurta|kurtas|women|mustard,test,Apparel,Kurtas,Fabindia Women Printed Mustard Kurta,32230,1
+test_q125,30555,30555.jpg,data/images/30555.jpg,30555,opium men black sunglass|sunglasses|men|black,test,Accessories,Sunglasses,Opium Men Black Sunglass,30567,1
+test_q126,7914,7914.jpg,data/images/7914.jpg,7914,proline men purple printed t-shirt|tshirts|men|purple,test,Apparel,Tshirts,Proline Men Purple Printed T-shirt,7859,1
+test_q127,40929,40929.jpg,data/images/40929.jpg,40929,gini and jony boys rodeo blue jeans|jeans|boys|blue,test,Apparel,Jeans,Gini and Jony Boys Rodeo Blue Jeans,"38993,38996,40928,40933",4
+test_q128,50485,50485.jpg,data/images/50485.jpg,50485,chromozome men grey melange briefs|briefs|men|grey melange,test,Apparel,Briefs,Chromozome Men Grey Melange Briefs,"50451,50615,50625",3
+test_q129,47600,47600.jpg,data/images/47600.jpg,47600,portia women maroon flats|flats|women|brown,test,Footwear,Flats,Portia Women Maroon Flats,47585,1
+test_q130,24160,24160.jpg,data/images/24160.jpg,24160,aurelia women purple striped kurta|kurtas|women|purple,test,Apparel,Kurtas,Aurelia Women Purple Striped Kurta,24156,1
+test_q131,30907,30907.jpg,data/images/30907.jpg,30907,fabindia women black kurti|kurtis|women|black,test,Apparel,Kurtis,Fabindia Women Black Kurti,"30911,30934",2
+test_q132,25871,25871.jpg,data/images/25871.jpg,25871,american tourister unisex buzz black backpack|backpacks|unisex|black,test,Accessories,Backpacks,American Tourister Unisex Buzz Black Backpack,"25873,25876",2
+test_q133,26068,26068.jpg,data/images/26068.jpg,26068,john miller men striped green shirt|shirts|men|green,test,Apparel,Shirts,John Miller Men Striped Green Shirt,29709,1
+test_q134,55825,55825.jpg,data/images/55825.jpg,55825,sdl by sweet dreams women black nightdress|nightdress|women|black,test,Apparel,Nightdress,SDL by Sweet Dreams Women Black Nightdress,"55786,55789,55790",3
+test_q135,51592,51592.jpg,data/images/51592.jpg,51592,wrangler women black jeggings|jeggings|women|black,test,Apparel,Jeggings,Wrangler Women Black Jeggings,51582,1
+test_q136,59008,59008.jpg,data/images/59008.jpg,59008,skechers women white sports shoes|sports shoes|women|white,test,Footwear,Sports Shoes,Skechers Women White Sports Shoes,"41827,41840",2
+test_q137,12926,12926.jpg,data/images/12926.jpg,12926,id men casual black shoes|casual shoes|men|black,test,Footwear,Casual Shoes,iD Men Casual Black Shoes,"12923,12927",2
+val_q070,48154,48154.jpg,data/images/48154.jpg,48154,fossil women sea green wallet|wallets|women|green,validation,Accessories,Wallets,Fossil Women Sea Green Wallet,48162,1
+val_q071,54225,54225.jpg,data/images/54225.jpg,54225,highlander men khaki chinos|trousers|men|khaki,validation,Apparel,Trousers,Highlander Men Khaki Chinos,54192,1
+test_q138,18241,18241.jpg,data/images/18241.jpg,18241,manchester united men printed red tshirt|tshirts|men|red,test,Apparel,Tshirts,Manchester United Men Printed Red Tshirt,"18224,18229,18233,18249",4
+test_q139,44791,44791.jpg,data/images/44791.jpg,44791,calvin klein mens blue boxers|boxers|men|blue,test,Apparel,Boxers,Calvin Klein Mens blue Boxers,44790,1
+val_q072,21593,21593.jpg,data/images/21593.jpg,21593,nike women solid grey capris|capris|women|grey,validation,Apparel,Capris,Nike Women Solid Grey Capris,"15338,15351",2
+val_q073,20216,20216.jpg,data/images/20216.jpg,20216,wrangler men rib red sweater|sweaters|men|red,validation,Apparel,Sweaters,Wrangler Men Rib Red Sweater,20219,1
+test_q140,13650,13650.jpg,data/images/13650.jpg,13650,adidas white  snova sequence 4m sports shoe|sports shoes|men|white,test,Footwear,Sports Shoes,ADIDAS White  Snova Sequence 4M Sports Shoe,13652,1
+val_q074,13460,13460.jpg,data/images/13460.jpg,13460,united colors of benetton men solid green shirts|shirts|men|green,validation,Apparel,Shirts,United Colors of Benetton Men Solid Green Shirts,13407,1
+test_q141,56855,56855.jpg,data/images/56855.jpg,56855,john players men blue shirt|shirts|men|blue,test,Apparel,Shirts,John Players Men Blue Shirt,56819,1
+test_q142,45025,45025.jpg,data/images/45025.jpg,45025,maxima women silver dial pearl strap watch|watches|women|silver,test,Accessories,Watches,Maxima Women Silver Dial Pearl Strap Watch,45026,1
+val_q075,23653,23653.jpg,data/images/23653.jpg,23653,music men off white printed t-shirt|tshirts|men|off white,validation,Apparel,Tshirts,Music Men Off White Printed T-shirt,23644,1
+test_q143,10643,10643.jpg,data/images/10643.jpg,10643,doodle boy d print blue tshirts|tshirts|men|blue,test,Apparel,Tshirts,Doodle Boy D Print Blue Tshirts,10644,1
+val_q076,25762,25762.jpg,data/images/25762.jpg,25762,lino perros men red suspenders|suspenders|men|red,validation,Apparel,Suspenders,Lino Perros Men Red Suspenders,25757,1
+val_q077,32719,32719.jpg,data/images/32719.jpg,32719,facit men navy blue brief|briefs|men|navy blue,validation,Apparel,Briefs,Facit Men Navy Blue Brief,47513,1
+test_q144,32511,32511.jpg,data/images/32511.jpg,32511,franco leone men slip on black formal shoes|formal shoes|men|black,test,Footwear,Formal Shoes,Franco Leone Men Slip On Black Formal Shoes,31331,1
+val_q078,41276,41276.jpg,data/images/41276.jpg,41276,arrow men black leather wallet|wallets|men|black,validation,Accessories,Wallets,Arrow Men Black Leather Wallet,"41274,41278",2
+test_q145,25160,25160.jpg,data/images/25160.jpg,25160,lino perros women leatherite black handbag|handbags|women|black,test,Accessories,Handbags,Lino Perros Women Leatherite Black Handbag,25165,1
+test_q146,48752,48752.jpg,data/images/48752.jpg,48752,lucera women silver bangle|bangle|women|silver,test,Accessories,Bangle,Lucera Women Silver Bangle,"48747,48748,48749,48750,48751,48753",6
+val_q079,37235,37235.jpg,data/images/37235.jpg,37235,united colors of benetton men leather black wallet|wallets|men|black,validation,Accessories,Wallets,United Colors of Benetton Men Leather Black Wallet,36541,1
+test_q147,58235,58235.jpg,data/images/58235.jpg,58235,baggit women grey wallet|wallets|women|grey,test,Accessories,Wallets,Baggit Women Grey Wallet,"47387,54390",2
+test_q148,13466,13466.jpg,data/images/13466.jpg,13466,united colors of benetton men stripes blue tshirts|tshirts|men|blue,test,Apparel,Tshirts,United Colors of Benetton Men Stripes Blue Tshirts,"13433,13435",2
+test_q149,13291,13291.jpg,data/images/13291.jpg,13291,gini and jony kids boys printed green tshirts|tshirts|men|green,test,Apparel,Tshirts,Gini and Jony Kids Boys Printed Green Tshirts,13292,1
+test_q150,43972,43972.jpg,data/images/43972.jpg,43972,dkny men perfume|perfume and body mist|men|silver,test,Personal Care,Perfume and Body Mist,DKNY Men Perfume,43971,1
+val_q080,21955,21955.jpg,data/images/21955.jpg,21955,murcia women casual maroon handbag|handbags|women|maroon,validation,Accessories,Handbags,Murcia Women Casual Maroon Handbag,"21962,22012,22015",3
+test_q151,50962,50962.jpg,data/images/50962.jpg,50962,lee womens blue maxi fit jeans|jeans|women|blue,test,Apparel,Jeans,Lee Womens Blue Maxi Fit Jeans,"50943,50945,50953",3
+test_q152,20818,20818.jpg,data/images/20818.jpg,20818,red tape men brown leather casual shoes|casual shoes|men|brown,test,Footwear,Casual Shoes,Red Tape Men Brown Leather Casual Shoes,"20711,20716",2
+test_q153,30083,30083.jpg,data/images/30083.jpg,30083,ed hardy women silver dial watch|watches|women|silver,test,Accessories,Watches,Ed Hardy Women Silver Dial Watch,30086,1
+test_q154,22559,22559.jpg,data/images/22559.jpg,22559,reebok men reeplay deo|deodorant|men|red,test,Personal Care,Deodorant,Reebok Men Reeplay Deo,26744,1
+val_q081,21541,21541.jpg,data/images/21541.jpg,21541,kiara women classic brown handbag|handbags|women|brown,validation,Accessories,Handbags,Kiara Women Classic Brown Handbag,21753,1
+val_q082,40300,40300.jpg,data/images/40300.jpg,40300,warner bros kids unisex brown sandals|sandals|unisex|brown,validation,Footwear,Sandals,Warner Bros Kids Unisex Brown sandals,40305,1
+val_q083,49845,49845.jpg,data/images/49845.jpg,49845,q&q women white dial analog watch|watches|women|white,validation,Accessories,Watches,Q&Q Women White Dial Analog Watch,49883,1
+test_q155,46529,46529.jpg,data/images/46529.jpg,46529,timex men silver toned dial watch|watches|men|silver,test,Accessories,Watches,Timex Men Silver Toned Dial Watch,46451,1
+test_q156,51288,51288.jpg,data/images/51288.jpg,51288,hop scotch girls pink sunglasses|sunglasses|girls|pink,test,Accessories,Sunglasses,Hop Scotch Girls Pink Sunglasses,51278,1
+test_q157,27839,27839.jpg,data/images/27839.jpg,27839,bulchee men navy blue leather belt|belts|men|navy blue,test,Accessories,Belts,Bulchee Men Navy Blue Leather Belt,27834,1
+val_q084,47584,47584.jpg,data/images/47584.jpg,47584,portia women silver flats|flats|women|brown,validation,Footwear,Flats,Portia Women Silver Flats,47588,1
+val_q085,52839,52839.jpg,data/images/52839.jpg,52839,adrika pink earrings|earrings|women|pink,validation,Accessories,Earrings,Adrika Pink Earrings,52869,1
+val_q086,59279,59279.jpg,data/images/59279.jpg,59279,titan women blue watch|watches|women|blue,validation,Accessories,Watches,Titan Women Blue Watch,59273,1
+test_q158,13890,13890.jpg,data/images/13890.jpg,13890,scullers women solid purple tops|tops|women|purple,test,Apparel,Tops,Scullers Women Solid Purple Tops,11130,1
+test_q159,11161,11161.jpg,data/images/11161.jpg,11161,john miller men solid black shirts|shirts|men|black,test,Apparel,Shirts,John Miller Men Solid Black Shirts,11162,1
+test_q160,40198,40198.jpg,data/images/40198.jpg,40198,mumbai slang women white printed top|tops|women|white,test,Apparel,Tops,Mumbai Slang Women White Printed Top,40195,1
+test_q161,30756,30756.jpg,data/images/30756.jpg,30756,fabindia men green kurta|kurtas|men|green,test,Apparel,Kurtas,Fabindia Men Green Kurta,56699,1
+test_q162,52828,52828.jpg,data/images/52828.jpg,52828,adrika black earrings|earrings|women|black,test,Accessories,Earrings,Adrika Black Earrings,"52837,52851",2
+test_q163,41993,41993.jpg,data/images/41993.jpg,41993,gini and jony boys customised black shorts|shorts|boys|black,test,Apparel,Shorts,Gini and Jony Boys Customised Black Shorts,"40125,41992",2
+test_q164,52121,52121.jpg,data/images/52121.jpg,52121,doodle boys navy blue printed t-shirt|tshirts|boys|navy blue,test,Apparel,Tshirts,Doodle Boys Navy Blue Printed T-Shirt,50718,1
+test_q165,32970,32970.jpg,data/images/32970.jpg,32970,angry birds men printed black t-shirt|tshirts|men|black,test,Apparel,Tshirts,Angry Birds Men Printed Black T-shirt,"32954,32962",2
+test_q166,13447,13447.jpg,data/images/13447.jpg,13447,united colors of benetton men stripes pink tshirts|tshirts|men|pink,test,Apparel,Tshirts,United Colors of Benetton Men Stripes Pink Tshirts,13425,1
+val_q087,8514,8514.jpg,data/images/8514.jpg,8514,nike unisex ultimatum max grey backpacks|backpacks|unisex|grey,validation,Accessories,Backpacks,Nike Unisex Ultimatum Max Grey Backpacks,8515,1
+test_q167,11927,11927.jpg,data/images/11927.jpg,11927,skechers women tone white sports shoes|sports shoes|women|white,test,Footwear,Sports Shoes,Skechers Women Tone White Sports Shoes,11928,1
+test_q168,22104,22104.jpg,data/images/22104.jpg,22104,flying machine men blue casual shoes|casual shoes|men|blue,test,Footwear,Casual Shoes,Flying Machine Men Blue Casual Shoes,14480,1
+val_q088,22336,22336.jpg,data/images/22336.jpg,22336,john players men stripes grey polo t-shirt|tshirts|men|grey,validation,Apparel,Tshirts,John Players Men Stripes Grey Polo T-Shirt,22331,1
+test_q169,44123,44123.jpg,data/images/44123.jpg,44123,hugo women pure purple perfume|perfume and body mist|women|purple,test,Personal Care,Perfume and Body Mist,Hugo Women Pure Purple Perfume,44122,1
+test_q170,28097,28097.jpg,data/images/28097.jpg,28097,jockey mc men navy blue y front briefs 8003|briefs|men|navy blue,test,Apparel,Briefs,Jockey MC Men Navy Blue Y Front Briefs 8003,28096,1
+test_q171,57907,57907.jpg,data/images/57907.jpg,57907,fruit of the loom women black pack of three socks|socks|women|black,test,Accessories,Socks,Fruit of the Loom Women Black Pack of Three Socks,57909,1
+test_q172,58517,58517.jpg,data/images/58517.jpg,58517,tonga women pink top|tops|women|pink,test,Apparel,Tops,Tonga Women Pink Top,58497,1
+test_q173,40147,40147.jpg,data/images/40147.jpg,40147,gini and jony girls blue pedal pusher|capris|girls|blue,test,Apparel,Capris,Gini and Jony Girls Blue Pedal Pusher,41995,1
+test_q174,27189,27189.jpg,data/images/27189.jpg,27189,mark taylor men printed olive t-shirt|tshirts|men|olive,test,Apparel,Tshirts,Mark Taylor Men Printed Olive T-shirt,31585,1
+test_q175,42083,42083.jpg,data/images/42083.jpg,42083,american tourister unisex brown passport holder|wallets|unisex|brown,test,Accessories,Wallets,American Tourister Unisex Brown Passport Holder,42084,1
+test_q176,9494,9494.jpg,data/images/9494.jpg,9494,puma unisex blaze black backpacks|backpacks|unisex|black,test,Accessories,Backpacks,Puma Unisex Blaze Black Backpacks,9495,1
+test_q177,22161,22161.jpg,data/images/22161.jpg,22161,lee cooper men brown casual shoes|casual shoes|men|brown,test,Footwear,Casual Shoes,Lee Cooper Men Brown Casual Shoes,"12857,13127,22158",3
+test_q178,5287,5287.jpg,data/images/5287.jpg,5287,lee cooper men's brown semi formal shoe|casual shoes|men|brown,test,Footwear,Casual Shoes,Lee Cooper Men's Brown Semi Formal Shoe,5292,1
+test_q179,46261,46261.jpg,data/images/46261.jpg,46261,109f women multicoloured printed tunic|tunics|women|multi,test,Apparel,Tunics,109F Women Multicoloured Printed Tunic,"46280,46286",2
+test_q180,5462,5462.jpg,data/images/5462.jpg,5462,nike men's air trail ridge black shoe|sports shoes|men|black,test,Footwear,Sports Shoes,Nike Men's Air Trail Ridge Black Shoe,6646,1
+val_q089,19340,19340.jpg,data/images/19340.jpg,19340,united colors of benetton men solid black jacket|jackets|men|black,validation,Apparel,Jackets,United Colors of Benetton Men Solid Black Jacket,"19338,19339",2
+test_q181,53752,53752.jpg,data/images/53752.jpg,53752,adidas men blue shorts|shorts|men|blue,test,Apparel,Shorts,ADIDAS Men Blue Shorts,53755,1
+val_q090,36104,36104.jpg,data/images/36104.jpg,36104,otls men brown zebra wallet|wallets|men|brown,validation,Accessories,Wallets,OTLS Men Brown Zebra Wallet,36103,1
+val_q091,49900,49900.jpg,data/images/49900.jpg,49900,q&q kids unisex white dial watch|watches|unisex|white,validation,Accessories,Watches,Q&Q Kids Unisex White Dial Watch,53569,1
+test_q182,37738,37738.jpg,data/images/37738.jpg,37738,john players men stripes pink shirt|shirts|men|pink,test,Apparel,Shirts,John Players Men Stripes Pink Shirt,37810,1
+test_q183,36763,36763.jpg,data/images/36763.jpg,36763,maxima men green dial watch|free gifts|men|green,test,Free Items,Free Gifts,Maxima Men Green Dial Watch,36764,1
+test_q184,33955,33955.jpg,data/images/33955.jpg,33955,adidas men polo white t-shirt|tshirts|men|white,test,Apparel,Tshirts,ADIDAS Men Polo White T-shirt,"32455,32462",2
+test_q185,17798,17798.jpg,data/images/17798.jpg,17798,chhota bheem kids boy men journey to petra orange tshirt|tshirts|men|orange,test,Apparel,Tshirts,Chhota Bheem Kids Boy Men Journey to Petra Orange Tshirt,17799,1
+val_q092,38575,38575.jpg,data/images/38575.jpg,38575,nike men breakline black track pants|track pants|men|black,validation,Apparel,Track Pants,Nike Men Breakline Black Track Pants,28519,1
+test_q186,35074,35074.jpg,data/images/35074.jpg,35074,allen solly men leather brown belt|belts|men|brown,test,Accessories,Belts,Allen Solly Men Leather Brown Belt,"35060,35061,35073,35075",4
+test_q187,40691,40691.jpg,data/images/40691.jpg,40691,numero uno men black shoes|formal shoes|men|black,test,Footwear,Formal Shoes,Numero Uno Men Black Shoes,55612,1
+test_q188,19859,19859.jpg,data/images/19859.jpg,19859,u.s. polo assn. men solid olive jacket|jackets|men|olive,test,Apparel,Jackets,U.S. Polo Assn. Men Solid Olive Jacket,19860,1
+val_q093,5730,5730.jpg,data/images/5730.jpg,5730,reebok men's hex run white shoe|sports shoes|men|white,validation,Footwear,Sports Shoes,Reebok Men's Hex Run White Shoe,5749,1
+val_q094,25652,25652.jpg,data/images/25652.jpg,25652,fastrack men white casual watch|watches|men|white,validation,Accessories,Watches,Fastrack Men White Casual Watch,"25640,25641,25653",3
+val_q095,34148,34148.jpg,data/images/34148.jpg,34148,gini and jony girls washed blue skirt|skirts|girls|blue,validation,Apparel,Skirts,Gini and Jony Girls Washed Blue Skirt,34149,1
+val_q096,28997,28997.jpg,data/images/28997.jpg,28997,status quo men printed white t-shirt|tshirts|men|white,validation,Apparel,Tshirts,Status Quo Men Printed White T-shirt,29001,1
+test_q189,11625,11625.jpg,data/images/11625.jpg,11625,w women printed red kurtas|kurtas|women|red,test,Apparel,Kurtas,W Women Printed Red Kurtas,"11553,12085",2
+test_q190,22041,22041.jpg,data/images/22041.jpg,22041,vishudh women printed cream kurta|kurtas|women|cream,test,Apparel,Kurtas,Vishudh Women Printed Cream Kurta,22036,1
+test_q191,24392,24392.jpg,data/images/24392.jpg,24392,folklore women purple printed kurta|kurtas|women|purple,test,Apparel,Kurtas,Folklore Women Purple Printed Kurta,24380,1
+test_q192,11236,11236.jpg,data/images/11236.jpg,11236,flying machine women low rise blue jeans|jeans|women|blue,test,Apparel,Jeans,Flying Machine Women Low Rise Blue Jeans,11240,1
+test_q193,11456,11456.jpg,data/images/11456.jpg,11456,united colors of benetton men light winter olive tshirts|tshirts|men|olive,test,Apparel,Tshirts,United Colors of Benetton Men Light Winter Olive Tshirts,11531,1
+test_q194,34138,34138.jpg,data/images/34138.jpg,34138,turtle men leather brown wallet|wallets|men|brown,test,Accessories,Wallets,Turtle Men Leather Brown Wallet,34140,1
+test_q195,24375,24375.jpg,data/images/24375.jpg,24375,folklore women blue  kurta|kurtas|women|blue,test,Apparel,Kurtas,Folklore Women Blue  Kurta,24359,1
+val_q097,15475,15475.jpg,data/images/15475.jpg,15475,puma men logo blue tshirts|tshirts|men|blue,validation,Apparel,Tshirts,Puma Men Logo Blue Tshirts,15472,1
+val_q098,7177,7177.jpg,data/images/7177.jpg,7177,scullers men blue check shirt|shirts|men|blue,validation,Apparel,Shirts,Scullers Men Blue Check Shirt,11089,1
+test_q196,10246,10246.jpg,data/images/10246.jpg,10246,murcia women zoe brown handbags|handbags|women|brown,test,Accessories,Handbags,Murcia Women Zoe Brown Handbags,10247,1
+val_q099,11951,11951.jpg,data/images/11951.jpg,11951,ganuchi men blue shoes|casual shoes|men|blue,validation,Footwear,Casual Shoes,Ganuchi Men Blue Shoes,44934,1
+test_q197,28082,28082.jpg,data/images/28082.jpg,28082,jockey modern classic men navy blue y front briefs 2007|briefs|men|navy blue,test,Apparel,Briefs,Jockey MODERN CLASSIC Men Navy Blue Y Front Briefs 2007,28083,1
+val_q100,58338,58338.jpg,data/images/58338.jpg,58338,lotto women purple flip flops|flip flops|women|purple,validation,Footwear,Flip Flops,Lotto Women Purple Flip Flops,58339,1
+test_q198,9879,9879.jpg,data/images/9879.jpg,9879,indigo nation men hot stepper blue striped shirt|shirts|men|blue,test,Apparel,Shirts,Indigo Nation Men Hot Stepper Blue Striped Shirt,9878,1
+test_q199,32589,32589.jpg,data/images/32589.jpg,32589,only  women black shorts|shorts|women|black,test,Apparel,Shorts,Only  Women Black Shorts,32587,1
+test_q200,25392,25392.jpg,data/images/25392.jpg,25392,levis men navy blue innerwear t-shirt|innerwear vests|men|navy blue,test,Apparel,Innerwear Vests,Levis Men Navy Blue Innerwear T-shirt,25368,1

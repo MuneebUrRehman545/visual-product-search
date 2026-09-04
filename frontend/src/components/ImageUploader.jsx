@@ -6,26 +6,20 @@ const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp']
 export default function ImageUploader({ file, onFileChange }) {
   const [previewUrl, setPreviewUrl] = useState(null)
   const [errorMessage, setErrorMessage] = useState('')
+  const [isDragging, setIsDragging] = useState(false)
   const fileInputRef = useRef(null)
 
-  // Sync previewUrl with prop 'file' and clean up object URLs
   useEffect(() => {
     if (!file) {
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl)
-      }
+      if (previewUrl) URL.revokeObjectURL(previewUrl)
       setPreviewUrl(null)
-      if (fileInputRef.current) {
-        fileInputRef.current.value = ''
-      }
+      if (fileInputRef.current) fileInputRef.current.value = ''
       return
     }
 
     const objectUrl = URL.createObjectURL(file)
     setPreviewUrl((oldUrl) => {
-      if (oldUrl) {
-        URL.revokeObjectURL(oldUrl)
-      }
+      if (oldUrl) URL.revokeObjectURL(oldUrl)
       return objectUrl
     })
 
@@ -41,29 +35,51 @@ export default function ImageUploader({ file, onFileChange }) {
     return ALLOWED_EXTENSIONS.some((ext) => fileName.endsWith(ext))
   }
 
-  const handleFileChange = (e) => {
-    const selected = e.target.files && e.target.files[0]
+  const processSelectedFile = (selected) => {
     if (!selected) return
 
     if (!isValidImageFile(selected)) {
-      setErrorMessage('Unsupported file type. Please select a valid JPG, PNG, or WebP image.')
-      if (onFileChange) {
-        onFileChange(null)
-      }
+      setErrorMessage('Unsupported format. Please upload a JPG, PNG, or WebP image.')
+      if (onFileChange) onFileChange(null)
       return
     }
 
     setErrorMessage('')
-    if (onFileChange) {
-      onFileChange(selected)
+    if (onFileChange) onFileChange(selected)
+  }
+
+  const handleFileInputChange = (e) => {
+    const selected = e.target.files && e.target.files[0]
+    processSelectedFile(selected)
+  }
+
+  const handleDragOver = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(true)
+  }
+
+  const handleDragLeave = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(false)
+  }
+
+  const handleDrop = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(false)
+
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const droppedFile = e.dataTransfer.files[0]
+      processSelectedFile(droppedFile)
     }
   }
 
-  const handleReset = () => {
+  const handleReset = (e) => {
+    e.stopPropagation()
     setErrorMessage('')
-    if (onFileChange) {
-      onFileChange(null)
-    }
+    if (onFileChange) onFileChange(null)
   }
 
   return (
@@ -73,54 +89,96 @@ export default function ImageUploader({ file, onFileChange }) {
         ref={fileInputRef}
         accept="image/jpeg,image/png,image/webp"
         capture="environment"
-        onChange={handleFileChange}
+        onChange={handleFileInputChange}
         style={{ display: 'none' }}
         id="image-file-input"
       />
 
       {errorMessage && (
-        <div className="error-banner" role="alert">
-          {errorMessage}
+        <div className="error-banner compact-error" role="alert">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <span>{errorMessage}</span>
         </div>
       )}
 
       {!file ? (
-        <div className="upload-box">
-          <p className="upload-prompt">Select an image to search the catalog</p>
+        <div
+          className={`upload-box-compact ${isDragging ? 'drag-over' : ''}`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          onClick={() => fileInputRef.current?.click()}
+        >
+          <div className="compact-upload-left">
+            <div className="compact-upload-icon-wrapper">
+              <svg
+                className="compact-cloud-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+            </div>
+            <div className="compact-text-group">
+              <span className="compact-upload-prompt">
+                {isDragging ? 'Drop your image now!' : 'Upload or drag & drop any product photo'}
+              </span>
+              <span className="compact-upload-subtext">JPG, PNG, WebP up to 25 MB</span>
+            </div>
+          </div>
+
           <button
             type="button"
-            className="btn btn-primary"
-            onClick={() => fileInputRef.current?.click()}
+            className="btn-compact-browse"
+            onClick={(e) => {
+              e.stopPropagation()
+              fileInputRef.current?.click()
+            }}
           >
-            Choose Image
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            </svg>
+            Browse Image
           </button>
-          <p className="supported-formats">Supported formats: JPG, PNG, WebP</p>
         </div>
       ) : (
-        <div className="preview-container">
-          <div className="preview-card">
-            {previewUrl && (
-              <img src={previewUrl} alt="Query Image Preview" className="preview-image" />
-            )}
-            <div className="preview-info">
-              <span className="file-name" title={file.name}>
+        <div className="compact-preview-card">
+          <div className="compact-preview-left">
+            <div className="compact-preview-thumb">
+              {previewUrl && (
+                <img src={previewUrl} alt="Query Image Preview" />
+              )}
+            </div>
+            <div className="compact-preview-info">
+              <span className="compact-file-name" title={file.name}>
                 {file.name}
               </span>
-              <span className="file-size">
-                {(file.size / 1024).toFixed(1)} KB
+              <span className="compact-file-meta">
+                {(file.size / 1024).toFixed(1)} KB • Image Loaded
               </span>
             </div>
           </div>
-          <div className="preview-actions">
+
+          <div className="compact-preview-actions">
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn-compact-change"
               onClick={() => fileInputRef.current?.click()}
             >
-              Change Image
+              Change
             </button>
-            <button type="button" className="btn btn-danger" onClick={handleReset}>
-              Remove Image
+            <button type="button" className="btn-compact-remove" onClick={handleReset}>
+              Remove
             </button>
           </div>
         </div>

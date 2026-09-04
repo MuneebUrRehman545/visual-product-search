@@ -8,12 +8,20 @@ class SearchResultItem(BaseModel):
     """Schema for individual ranked product search result."""
 
     rank: int = Field(..., description="1-based rank position of similarity")
-    product_id: int = Field(..., description="SQLite primary key ID")
-    external_id: str = Field(..., description="Unique external product identifier")
+    catalog_item_id: int = Field(..., description="Catalog item primary key ID (stable database ID)")
+    product_id: int = Field(..., description="Source dataset product identifier")
+    external_id: Optional[str] = Field(None, description="Unique external product identifier")
     filename: str = Field(..., description="Catalog image filename")
-    category: Optional[str] = Field(None, description="Product category")
+    product_display_name: Optional[str] = Field(None, description="Product display name / title")
+    category: Optional[str] = Field(None, description="Product master category")
+    sub_category: Optional[str] = Field(None, description="Product sub category")
+    article_type: Optional[str] = Field(None, description="Article type")
+    base_colour: Optional[str] = Field(None, description="Base colour")
+    gender: Optional[str] = Field(None, description="Target gender")
+    season: Optional[str] = Field(None, description="Season")
+    usage: Optional[str] = Field(None, description="Usage category")
     image_url: str = Field(..., description="Frontend-accessible HTTP image URL")
-    similarity_score: float = Field(..., description="Cosine similarity score")
+    similarity_score: float = Field(..., description="Similarity score (cosine or combined)")
 
 
 class SearchResponse(BaseModel):
@@ -22,4 +30,5 @@ class SearchResponse(BaseModel):
     query_filename: str = Field(..., description="Filename of uploaded query image")
     top_k: int = Field(..., description="Requested top_k count")
     total_results: int = Field(..., description="Number of results returned")
+    model_used: Optional[str] = Field("OpenCLIP_ViT_B_32", description="Selected embedding retrieval model")
     results: List[SearchResultItem] = Field(..., description="Ranked list of search results")

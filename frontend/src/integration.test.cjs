@@ -32,7 +32,9 @@ async function runIntegrationTest() {
   if (!isSearchDisabledLoading || buttonText !== 'Searching...') allPassed = false
 
   // 3. Real API Test topK=5 (15025.jpg)
-  const imagePath15025 = path.join(__dirname, '../../data/catalog/images/15025.jpg')
+  const imagePath15025 = fs.existsSync(path.join(__dirname, '../../data/images/15025.jpg'))
+    ? path.join(__dirname, '../../data/images/15025.jpg')
+    : path.join(__dirname, '../../data/catalog/images/15025.jpg')
   if (!fs.existsSync(imagePath15025)) {
     console.error(`Error: Image file not found at ${imagePath15025}`)
     process.exit(1)
@@ -69,7 +71,9 @@ async function runIntegrationTest() {
   }
 
   // 4. Real API Test topK=10 (17888.jpg)
-  const imagePath17888 = path.join(__dirname, '../../data/catalog/images/17888.jpg')
+  const imagePath17888 = fs.existsSync(path.join(__dirname, '../../data/images/17888.jpg'))
+    ? path.join(__dirname, '../../data/images/17888.jpg')
+    : path.join(__dirname, '../../data/catalog/images/17888.jpg')
   const imgBuffer17888 = fs.readFileSync(imagePath17888)
 
   console.log('\n[TEST 4] Real Backend API Query: 17888.jpg (topK=10)')

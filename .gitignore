@@ -1,16 +1,44 @@
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Python bytecode & virtual environments
 .venv/
 __pycache__/
 *.py[cod]
-.env
-.env.local
-frontend/.env
-frontend/.env.local
+*.pyc
+
+# Node / Frontend build artifacts
 node_modules/
 frontend/node_modules/
 frontend/dist/
 dist/
-data/catalog.db
-data/embeddings/*.npy
-data/embeddings/*.index
-data/embeddings/*.json
 
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+data/catalog.db
+
+# Large dataset raw images (do not commit 44k+ raw image files)
+data/images/
+data/images/*
+
+# Generated vector embeddings & FAISS indices
+data/embeddings/
+artifacts/embeddings/
+artifacts/faiss/
+
+# Logs
+logs/
+*.log
+
+# Operating system / IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

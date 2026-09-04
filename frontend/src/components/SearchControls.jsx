@@ -2,36 +2,110 @@ import React from 'react'
 
 const TOP_K_OPTIONS = [5, 10, 20, 50]
 
-export default function SearchControls({ topK, onTopKChange, onSearch, disabled, loading }) {
-  return (
-    <div className="search-controls">
-      <div className="control-group">
-        <label htmlFor="top-k-select" className="control-label">
-          Top Results:
-        </label>
-        <select
-          id="top-k-select"
-          className="select-input"
-          value={topK}
-          onChange={(e) => onTopKChange(Number(e.target.value))}
-          disabled={loading}
-        >
-          {TOP_K_OPTIONS.map((val) => (
-            <option key={val} value={val}>
-              {val} Results
-            </option>
-          ))}
-        </select>
-      </div>
+const MODEL_OPTIONS = [
+  {
+    id: 'clip',
+    name: 'OpenCLIP ViT-B/32',
+    dim: '512-dim',
+    desc: 'Multimodal Transformer',
+    badge: 'Recommended',
+  },
+  {
+    id: 'resnet',
+    name: 'ResNet-50',
+    dim: '2048-dim',
+    desc: 'Deep CNN Features',
+    badge: 'Baseline',
+  },
+]
 
-      <button
-        type="button"
-        className="btn btn-search"
-        onClick={onSearch}
-        disabled={disabled || loading}
-      >
-        {loading ? 'Searching...' : 'Search Catalog'}
-      </button>
+export default function SearchControls({
+  topK,
+  onTopKChange,
+  selectedModel,
+  onModelChange,
+  onSearch,
+  disabled,
+  loading,
+}) {
+  return (
+    <div className="search-controls-card">
+      <div className="search-controls-horizontal">
+        {/* Model Selection */}
+        <div className="control-section model-section">
+          <div className="control-label-group">
+            <span className="control-label">Embedding Model:</span>
+          </div>
+          <div className="model-pill-group">
+            {MODEL_OPTIONS.map((m) => {
+              const isActive = (selectedModel || 'clip') === m.id
+              return (
+                <button
+                  key={m.id}
+                  type="button"
+                  className={`model-select-pill ${isActive ? 'active' : ''}`}
+                  onClick={() => onModelChange && onModelChange(m.id)}
+                  disabled={loading}
+                >
+                  <div className="model-pill-content">
+                    <div className="model-title-row">
+                      <span className="model-name">{m.name}</span>
+                      <span className={`model-badge ${m.id === 'clip' ? 'badge-clip' : 'badge-resnet'}`}>
+                        {m.badge}
+                      </span>
+                    </div>
+                    <span className="model-dim-label">{m.dim} • {m.desc}</span>
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Depth & Search Row */}
+        <div className="control-bottom-row">
+          <div className="control-left-section">
+            <span className="control-label">Retrieval Depth:</span>
+            <div className="top-k-pill-group">
+              {TOP_K_OPTIONS.map((val) => (
+                <button
+                  key={val}
+                  type="button"
+                  className={`top-k-pill ${topK === val ? 'active' : ''}`}
+                  onClick={() => onTopKChange(val)}
+                  disabled={loading}
+                >
+                  Top {val}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className={`btn btn-search ${loading ? 'btn-searching' : ''}`}
+            onClick={onSearch}
+            disabled={disabled || loading}
+          >
+            {loading ? (
+              <>
+                <span className="spinner-inline"></span>
+                <span>
+                  Searching with {selectedModel === 'resnet' ? 'ResNet-50' : 'OpenCLIP'}...
+                </span>
+              </>
+            ) : (
+              <>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>Find Similar Products</span>
+              </>
+            )}
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
