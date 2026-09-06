@@ -1,4 +1,4 @@
-﻿# Visual Product Search — Frontend
+# Visual Product Search — Frontend
 
 React + Vite SPA for the Visual Product Search Engine. Provides drag-and-drop image upload, quick-select category browsing, dual-model search controls, and a rich ranked-results experience.
 
@@ -95,3 +95,8 @@ npm run preview
 1. `VITE_API_BASE_URL` environment variable (Vite build-time or runtime)
 2. `window.location.hostname` → `http://<hostname>:8000` (auto LAN detection)
 3. Fallback: `http://127.0.0.1:8000`
+
+## Unified Team Architecture (Week 5)
+
+For details on integrating the Autonomous Research Agent (WebSocket live trace, step execution, replanning, and markdown reports) into this Vite base, see the full architectural blueprint:
+👉 [`docs/integration/frontend-shared-architecture.md`](../docs/integration/frontend-shared-architecture.md)
