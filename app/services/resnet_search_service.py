@@ -120,3 +120,74 @@ class ResNetSearchService:
             )
 
         return results
+
+    def search_by_embedding(
+        self,
+        query_embedding: np.ndarray,
+        top_k: int = 10,
+    ) -> List[Dict[str, Any]]:
+        """Search catalog for visually similar products given a precomputed embedding vector."""
+        if not isinstance(top_k, int) or not (1 <= top_k <= 50):
+            raise ValueError(f"top_k must be an integer between 1 and 50, got {top_k}")
+
+        query_vector = np.ascontiguousarray(
+            query_embedding.reshape(1, -1).astype(np.float32)
+        )
+
+        try:
+            scores, faiss_ids = self.index.search(query_vector, top_k)
+        except Exception as e:
+            raise RuntimeError(f"FAISS index search failed: {e}") from e
+
+        if len(scores) == 0 or len(faiss_ids) == 0:
+            return []
+
+        raw_scores = scores[0]
+        raw_ids = faiss_ids[0]
+
+        valid_matches = [
+            (int(cid), float(score))
+            for cid, score in zip(raw_ids, raw_scores)
+            if cid != -1
+        ]
+
+        if not valid_matches:
+            return []
+
+        target_item_ids = [item_id for item_id, _ in valid_matches]
+        scores_by_id = {item_id: score for item_id, score in valid_matches}
+
+        db_items = fetch_catalog_items_by_ids(
+            target_item_ids,
+            database_url=self.database_url,
+            db_path=self.db_path,
+        )
+
+        results: List[Dict[str, Any]] = []
+        for rank, item in enumerate(db_items, start=1):
+            cid = item["id"]
+            fn = item.get("filename") or f"{item.get('image_id')}.jpg"
+            img_url = item.get("image_url") or f"/catalog-images/{fn}"
+
+            results.append(
+                {
+                    "rank": rank,
+                    "catalog_item_id": cid,
+                    "id": cid,
+                    "product_id": item.get("product_id", cid),
+                    "external_id": str(item.get("external_id") or item.get("image_id") or cid),
+                    "filename": fn,
+                    "product_display_name": item.get("product_display_name"),
+                    "category": item.get("category") or item.get("master_category"),
+                    "sub_category": item.get("sub_category"),
+                    "article_type": item.get("article_type"),
+                    "base_colour": item.get("base_colour"),
+                    "gender": item.get("gender"),
+                    "season": item.get("season"),
+                    "usage": item.get("usage"),
+                    "image_url": img_url,
+                    "similarity_score": round(scores_by_id.get(cid, 0.0), 4),
+                }
+            )
+
+        return results

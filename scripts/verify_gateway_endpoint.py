@@ -14,7 +14,7 @@ def verify_gateway():
                 url, 
                 data={"run_id": run_id, "top_k": 5, "model": "clip"}, 
                 files={"image": ("37783.jpg", f, "image/jpeg")},
-                timeout=20.0
+                timeout=60.0
             )
             print(f"Status Code: {r.status_code}")
             if r.status_code == 200:

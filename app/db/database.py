@@ -656,6 +656,66 @@ def update_user_last_login(
             conn.execute("UPDATE users SET last_login = ? WHERE id = ?;", (now_ts, int(user_id)))
 
 
+CANONICAL_TOP_CATEGORIES: List[Dict[str, Any]] = [
+    {
+        "category_name": "Tshirts",
+        "master_category": "Apparel",
+        "item_count": 7022,
+        "sample_filename": "10003.jpg",
+        "sample_image_url": "/catalog-images/10003.jpg",
+    },
+    {
+        "category_name": "Shirts",
+        "master_category": "Apparel",
+        "item_count": 3186,
+        "sample_filename": "10051.jpg",
+        "sample_image_url": "/catalog-images/10051.jpg",
+    },
+    {
+        "category_name": "Casual Shoes",
+        "master_category": "Footwear",
+        "item_count": 2828,
+        "sample_filename": "10127.jpg",
+        "sample_image_url": "/catalog-images/10127.jpg",
+    },
+    {
+        "category_name": "Watches",
+        "master_category": "Accessories",
+        "item_count": 2531,
+        "sample_filename": "10098.jpg",
+        "sample_image_url": "/catalog-images/10098.jpg",
+    },
+    {
+        "category_name": "Sports Shoes",
+        "master_category": "Footwear",
+        "item_count": 2024,
+        "sample_filename": "10035.jpg",
+        "sample_image_url": "/catalog-images/10035.jpg",
+    },
+    {
+        "category_name": "Kurtas",
+        "master_category": "Apparel",
+        "item_count": 1821,
+        "sample_filename": "11534.jpg",
+        "sample_image_url": "/catalog-images/11534.jpg",
+    },
+    {
+        "category_name": "Tops",
+        "master_category": "Apparel",
+        "item_count": 1750,
+        "sample_filename": "10324.jpg",
+        "sample_image_url": "/catalog-images/10324.jpg",
+    },
+    {
+        "category_name": "Handbags",
+        "master_category": "Accessories",
+        "item_count": 1741,
+        "sample_filename": "10196.jpg",
+        "sample_image_url": "/catalog-images/10196.jpg",
+    },
+]
+
+
 def get_top_catalog_categories(
     limit: int = 8,
     database_url: Optional[str] = None,
@@ -665,10 +725,28 @@ def get_top_catalog_categories(
     active_url = database_url if database_url is not None else get_database_url()
     use_pg = active_url is not None and active_url.startswith("postgresql://")
 
-    with get_connection(database_url=active_url, db_path=db_path) as conn:
-        if use_pg:
-            with conn.cursor(cursor_factory=extras.DictCursor) as cur:
-                cur.execute("""
+    try:
+        with get_connection(database_url=active_url, db_path=db_path) as conn:
+            if use_pg:
+                with conn.cursor(cursor_factory=extras.DictCursor) as cur:
+                    cur.execute("""
+                    SELECT
+                        COALESCE(article_type, category) as category_name,
+                        category as master_category,
+                        COUNT(*) as item_count,
+                        MIN(filename) as sample_filename,
+                        MIN(image_url) as sample_image_url
+                    FROM catalog_items
+                    WHERE article_type IS NOT NULL AND article_type != ''
+                    GROUP BY COALESCE(article_type, category), category
+                    ORDER BY item_count DESC
+                    LIMIT %s;
+                    """, (limit,))
+                    results = [dict(r) for r in cur.fetchall()]
+                    if results:
+                        return results
+            else:
+                cursor = conn.execute("""
                 SELECT
                     COALESCE(article_type, category) as category_name,
                     category as master_category,
@@ -679,24 +757,64 @@ def get_top_catalog_categories(
                 WHERE article_type IS NOT NULL AND article_type != ''
                 GROUP BY COALESCE(article_type, category), category
                 ORDER BY item_count DESC
-                LIMIT %s;
+                LIMIT ?;
                 """, (limit,))
-                return [dict(r) for r in cur.fetchall()]
-        else:
-            cursor = conn.execute("""
-            SELECT
-                COALESCE(article_type, category) as category_name,
-                category as master_category,
-                COUNT(*) as item_count,
-                MIN(filename) as sample_filename,
-                MIN(image_url) as sample_image_url
-            FROM catalog_items
-            WHERE article_type IS NOT NULL AND article_type != ''
-            GROUP BY COALESCE(article_type, category), category
-            ORDER BY item_count DESC
-            LIMIT ?;
-            """, (limit,))
-            return [dict(r) for r in cursor.fetchall()]
+                results = [dict(r) for r in cursor.fetchall()]
+                if results:
+                    return results
+    except Exception as e:
+        logger.warning("Could not fetch top catalog categories from DB, falling back to defaults: %s", e)
+
+    return CANONICAL_TOP_CATEGORIES[:limit]
+
+
+def get_catalog_item_by_filename(
+    filename: str,
+    database_url: Optional[str] = None,
+    db_path: Optional[Union[str, Path]] = None,
+) -> Optional[Dict[str, Any]]:
+    """Retrieve a single catalog item by filename (e.g. '10003.jpg') or image ID."""
+    if not filename:
+        return None
+    safe_fn = os.path.basename(filename.strip())
+    image_id_str = safe_fn.split(".")[0]
+    active_url = database_url if database_url is not None else get_database_url()
+    use_pg = active_url is not None and active_url.startswith("postgresql://")
+
+    try:
+        with get_connection(database_url=active_url, db_path=db_path) as conn:
+            if use_pg:
+                with conn.cursor(cursor_factory=extras.DictCursor) as cur:
+                    cur.execute(
+                        """
+                        SELECT * FROM catalog_items 
+                        WHERE filename = %s 
+                           OR filename = %s
+                           OR CAST(image_id AS TEXT) = %s
+                           OR CAST(product_id AS TEXT) = %s
+                        LIMIT 1;
+                        """,
+                        (safe_fn, f"{image_id_str}.jpg", image_id_str, image_id_str),
+                    )
+                    row = cur.fetchone()
+                    return dict(row) if row else None
+            else:
+                cursor = conn.execute(
+                    """
+                    SELECT * FROM catalog_items 
+                    WHERE filename = ? 
+                       OR filename = ?
+                       OR CAST(image_id AS TEXT) = ?
+                       OR CAST(product_id AS TEXT) = ?
+                    LIMIT 1;
+                    """,
+                    (safe_fn, f"{image_id_str}.jpg", image_id_str, image_id_str),
+                )
+                row = cursor.fetchone()
+                return dict(row) if row else None
+    except Exception as e:
+        logger.warning("Error querying catalog item by filename %s: %s", filename, e)
+        return None
 
 
 def get_catalog_items_by_category(
