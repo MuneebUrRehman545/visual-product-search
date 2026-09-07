@@ -13,10 +13,11 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from app.db.database import fetch_all_products, get_product_count
 
-EMBEDDINGS_DIR = PROJECT_ROOT / "data" / "embeddings" / "clip_vit_b32"
-EMBEDDINGS_FILE = EMBEDDINGS_DIR / "catalog_embeddings.npy"
-PRODUCT_IDS_FILE = EMBEDDINGS_DIR / "product_ids.npy"
-INDEX_FILE = EMBEDDINGS_DIR / "catalog.index"
+EMBEDDINGS_DIR = PROJECT_ROOT / "artifacts" / "faiss"
+# Embeddings and product ID files are not stored in artifacts; they remain in data folder if needed.
+EMBEDDINGS_FILE = PROJECT_ROOT / "data" / "embeddings" / "clip_vit_b32" / "catalog_embeddings.npy"
+PRODUCT_IDS_FILE = PROJECT_ROOT / "data" / "embeddings" / "clip_vit_b32" / "product_ids.npy"
+INDEX_FILE = EMBEDDINGS_DIR / "clip.index"
 EXPECTED_COUNT = 2000
 EXPECTED_DIMENSION = 512
 
