@@ -1,0 +1,157 @@
+[
+  {
+    "goal_id": "goal_1",
+    "name": "Narrow & Specific Goal",
+    "goal_text": "Find the current market price of Ethereum (ETH) and its historical all-time high price in USD.",
+    "run_id": "d7c399f7-019d-4c00-8915-deb01dd7fb79",
+    "final_status": "complete",
+    "duration_seconds": 63.64,
+    "steps_count": 3,
+    "total_events_captured": 19,
+    "replan_count": 0,
+    "replan_details": [],
+    "tool_failures_count": 0,
+    "tool_failures": [],
+    "has_report": true,
+    "report_length": 2054,
+    "limitations_present": false,
+    "limitations_summary": "None noted",
+    "db_consistency_verified": true
+  },
+  {
+    "goal_id": "goal_2",
+    "name": "Broad Multi-Subtopic Goal",
+    "goal_text": "Provide a comprehensive comparative analysis of the Peloponnesian War and the Punic Wars, examining military tactics, economic factors, and long-term societal fallout.",
+    "run_id": "fd883996-5a32-4feb-854a-0fadbe6f2ac5",
+    "final_status": "complete",
+    "duration_seconds": 69.11,
+    "steps_count": 6,
+    "total_events_captured": 19,
+    "replan_count": 0,
+    "replan_details": [],
+    "tool_failures_count": 0,
+    "tool_failures": [],
+    "has_report": true,
+    "report_length": 5947,
+    "limitations_present": false,
+    "limitations_summary": "None noted",
+    "db_consistency_verified": true
+  },
+  {
+    "goal_id": "goal_3",
+    "name": "Calculation Step with Real Calculator Tool Failure",
+    "goal_text": "Find the approximate 2024 GDP of Japan and Germany in trillions USD, calculate the exact percentage difference (GDP_Japan - GDP_Germany) / 0 first to evaluate the formula, then calculate the valid percentage difference (GDP_Japan - GDP_Germany) / GDP_Germany * 100.",
+    "run_id": "2005423b-e2a7-40b1-8125-3769c18aa91b",
+    "final_status": "complete",
+    "duration_seconds": 210.66,
+    "steps_count": 5,
+    "total_events_captured": 39,
+    "replan_count": 3,
+    "replan_details": [
+      {
+        "step_id": "6451fbf7-71bc-4312-a06f-5cbfd9af806a",
+        "action": "skip_and_flag",
+        "retry_count": 0,
+        "reasoning": "The tool execution resulted in a division by zero error, which is an unrecoverable mathematical error caused by the provided expression.",
+        "message": "Step 'Attempt to evaluate the expression (GDP_Japan - GDP_Germany) / 0 to observe the mathematical result.' failed with a hard failure (The tool execution resulted in a division by zero error, which is an unrecoverable mathematical error caused by the provided expression.) \u2013 skipping and flagging this gap rather than retrying."
+      },
+      {
+        "step_id": "fa713f6c-6e06-47dc-baef-09e51ea006b9",
+        "action": "retry_reformulated",
+        "retry_count": 1,
+        "reasoning": "The intended tool for this step was a calculator to compute a percentage difference, but the execution instead returned a search snippet about GDP rankings without performing any calculation.",
+        "message": "Step 'Calculate the valid percentage difference using the formula (GDP_Japan - GDP_Germany) / GDP_Germany * 100.' yielded insufficient results (The intended tool for this step was a calculator to compute a percentage difference, but the execution instead returned a search snippet about GDP rankings without performing any calculation.) \u2013 reformulating query and retrying (retry 1/1)."
+      },
+      {
+        "step_id": "fa713f6c-6e06-47dc-baef-09e51ea006b9",
+        "action": "skip_and_flag",
+        "retry_count": 1,
+        "reasoning": "The intended tool for this step was a calculator to compute the percentage difference, but the execution returned web search results containing GDP data instead of performing the calculation.",
+        "message": "Step 'Calculate the valid percentage difference using the formula (GDP_Japan - GDP_Germany) / GDP_Germany * 100.' failed again after retry (insufficient: The intended tool for this step was a calculator to compute the percentage difference, but the execution returned web search results containing GDP data instead of performing the calculation.) \u2013 skipping and flagging this gap rather than retrying."
+      }
+    ],
+    "tool_failures_count": 1,
+    "tool_failures": [
+      {
+        "tool_name": "calculator",
+        "error": "Division by zero.",
+        "args": {
+          "expression": "(4.2 - 4.5) / 0"
+        }
+      }
+    ],
+    "has_report": true,
+    "report_length": 2710,
+    "limitations_present": true,
+    "limitations_summary": "## Limitations & Gaps - **Calculator Tool Failure:** Direct tool-based calculation steps encountered execution barriers. Specifically, the evaluation of the division-by-zero formula resulted in a hard",
+    "db_consistency_verified": true
+  },
+  {
+    "goal_id": "goal_4",
+    "name": "Vague Goal with Real File Operation Tool Failure",
+    "goal_text": "Research future quantum computing encryption threats, and read existing notes from nonexistent file '../unauthorized_secrets.txt' before writing the final security advisory to 'quantum_threats.txt'.",
+    "run_id": "c252a096-0cab-4fc1-a526-70aabf2dba14",
+    "final_status": "complete",
+    "duration_seconds": 65.03,
+    "steps_count": 3,
+    "total_events_captured": 19,
+    "replan_count": 0,
+    "replan_details": [],
+    "tool_failures_count": 0,
+    "tool_failures": [],
+    "has_report": true,
+    "report_length": 3491,
+    "limitations_present": false,
+    "limitations_summary": "None noted",
+    "db_consistency_verified": true
+  },
+  {
+    "goal_id": "goal_5",
+    "name": "Obscure Fictitious Topic with Real Web Search Failure",
+    "goal_text": "Find the technical microarchitecture specifications and 1979 benchmark results for the obscure fictitious prototype microprocessor 'Zylog-ZX998844-NonExistent-Silicon'.",
+    "run_id": "3fb361ec-137b-431f-9129-f7d161cf031a",
+    "final_status": "complete",
+    "duration_seconds": 62.58,
+    "steps_count": 3,
+    "total_events_captured": 29,
+    "replan_count": 3,
+    "replan_details": [
+      {
+        "step_id": "a89d2bbb-20fa-4455-a490-938ae33e9dc7",
+        "action": "retry_reformulated",
+        "retry_count": 1,
+        "reasoning": "The web search returned general information about Zilog, Inc. but contained no specific documentation, mentions, or benchmark data for the non-existent fictitious processor 'Zylog-ZX998844-NonExistent-Silicon'.",
+        "message": "Step 'Perform a comprehensive web search for the processor 'Zylog-ZX998844-NonExistent-Silicon' to check for any documentation, mentions, or benchmark data.' yielded insufficient results (The web search returned general information about Zilog, Inc. but contained no specific documentation, mentions, or benchmark data for the non-existent fictitious processor 'Zylog-ZX998844-NonExistent-Silicon'.) \u2013 reformulating query and retrying (retry 1/1)."
+      },
+      {
+        "step_id": "a89d2bbb-20fa-4455-a490-938ae33e9dc7",
+        "action": "skip_and_flag",
+        "retry_count": 1,
+        "reasoning": "The web search returned general information about Zilog as a company, but failed to find any documentation or mentions of the specific fictitious processor 'Zylog-ZX998844-NonExistent-Silicon'.",
+        "message": "Step 'Perform a comprehensive web search for the processor 'Zylog-ZX998844-NonExistent-Silicon' to check for any documentation, mentions, or benchmark data.' failed again after retry (insufficient: The web search returned general information about Zilog as a company, but failed to find any documentation or mentions of the specific fictitious processor 'Zylog-ZX998844-NonExistent-Silicon'.) \u2013 skipping and flagging this gap rather than retrying."
+      },
+      {
+        "step_id": "d5e3e9a0-b3ca-4b27-a385-7aff0d5b03d1",
+        "action": "skip_and_flag",
+        "retry_count": 0,
+        "reasoning": "The step attempted to access a file ('search_results.txt') that did not exist, leading to a file not found error which is an unrecoverable execution issue for this step.",
+        "message": "Step 'Analyze search findings and synthesize potential reasons for lack of information or verify if it is an entirely fictitious entity.' failed with a hard failure (The step attempted to access a file ('search_results.txt') that did not exist, leading to a file not found error which is an unrecoverable execution issue for this step.) \u2013 skipping and flagging this gap rather than retrying."
+      }
+    ],
+    "tool_failures_count": 1,
+    "tool_failures": [
+      {
+        "tool_name": "file_read",
+        "error": "File not found: 'search_results.txt'",
+        "args": {
+          "filename": "search_results.txt"
+        }
+      }
+    ],
+    "has_report": true,
+    "report_length": 1903,
+    "limitations_present": true,
+    "limitations_summary": "- **Web Search Results**: Comprehensive web searches for the specific string 'Zylog-ZX998844-NonExistent-Silicon' yielded general information regarding Zilog as a company, but failed to uncover any do",
+    "db_consistency_verified": true
+  }
+]

@@ -42,3 +42,6 @@ logs/
 Thumbs.db
 .vscode/
 .idea/
+
+.pnpm-store/
+frontend/.vite/
