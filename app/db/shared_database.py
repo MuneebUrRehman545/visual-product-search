@@ -15,7 +15,7 @@ import logging
 import os
 from pathlib import Path
 import uuid
-from typing import Any, Dict, Generator, Optional
+from typing import Any, Dict, Generator, List, Optional
 
 from dotenv import load_dotenv
 
