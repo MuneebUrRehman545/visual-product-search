@@ -15,6 +15,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.services.search_service_registry import get_search_service
 from app.vision_router import router as vision_router, CATALOG_IMAGES_DIR
+from app.rag_router import router as rag_router
 
 logger = logging.getLogger(__name__)
 
@@ -80,3 +81,4 @@ app.add_middleware(
 
 # Mount Vision & Catalog Router with all routes and aliases
 app.include_router(vision_router)
+app.include_router(rag_router)
