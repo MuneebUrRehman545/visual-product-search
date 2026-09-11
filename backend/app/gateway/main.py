@@ -23,6 +23,7 @@ from backend.app.gateway.router import router as gateway_router
 from backend.app.modules.agent.router import router as agent_router
 from app.services.search_service_registry import get_search_service
 from app.vision_router import router as vision_router
+from app.rag_router import router as rag_router
 
 logging.basicConfig(
     level=logging.INFO,
@@ -117,3 +118,4 @@ async def health_check():
 # Vision's image routes already attach their own ORB/CORP response headers;
 # CORS remains centralized in this Gateway application.
 app.include_router(vision_router)
+app.include_router(rag_router)
