@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { AuthProvider } from './context/AuthContext'
 import { SearchProvider, useSearch } from './context/SearchContext'
+import { PipelineProvider } from './context/PipelineContext'
 import { BrowserRouter, Routes, Route, useNavigate } from './context/RouterContext'
 import Navbar from './components/Navbar'
 import AuthModal from './components/AuthModal'
 import HomePage from './pages/HomePage'
 import ResultsPage from './pages/ResultsPage'
+import DashboardPage from './pages/DashboardPage'
+import AgentPage from './pages/AgentPage'
 
 function NavigationHeader({ onOpenAuth }) {
   const { clearSearch } = useSearch()
@@ -37,6 +40,8 @@ function MainApp() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/results" element={<ResultsPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/agent" element={<AgentPage />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
 
@@ -54,9 +59,11 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <SearchProvider>
-          <MainApp />
-        </SearchProvider>
+        <PipelineProvider>
+          <SearchProvider>
+            <MainApp />
+          </SearchProvider>
+        </PipelineProvider>
       </BrowserRouter>
     </AuthProvider>
   )

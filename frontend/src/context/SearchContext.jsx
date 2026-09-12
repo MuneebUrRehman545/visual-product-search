@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import { searchProducts, getCatalogImageUrl } from '../services/searchApi'
+import { createPipelineRun } from '../services/pipelineApi'
+import { usePipeline } from './PipelineContext'
 
 const SearchContext = createContext(null)
 const SESSION_STORAGE_KEY = 'vps_last_search_state'
@@ -21,6 +23,7 @@ function fileToDataUrl(file) {
 }
 
 export function SearchProvider({ children }) {
+  const { setCurrentPipelineRunId } = usePipeline()
   const [selectedFile, setSelectedFile] = useState(null)
   const [queryPreview, setQueryPreview] = useState(null)
   const [queryFilename, setQueryFilename] = useState(null)
@@ -93,6 +96,13 @@ export function SearchProvider({ children }) {
       setTopK(requestedTopK)
 
       try {
+        const pipelineRun = await createPipelineRun()
+        const pipelineRunId = pipelineRun?.pipeline_run_id
+        if (!pipelineRunId) {
+          throw new Error('Pipeline run was created without a pipeline_run_id.')
+        }
+        setCurrentPipelineRunId(pipelineRunId)
+
         const response = await searchProducts(fileOrFilename, requestedTopK, requestedModel)
         setSearchResults(response)
 
@@ -121,7 +131,7 @@ export function SearchProvider({ children }) {
         setLoading(false)
       }
     },
-    []
+    [setCurrentPipelineRunId]
   )
 
   /**

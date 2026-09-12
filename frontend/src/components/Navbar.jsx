@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { Link } from '../context/RouterContext'
 
 export default function Navbar({ onOpenAuth, onResetSearch }) {
   const { user, isAuthenticated, logout } = useAuth()
@@ -38,6 +39,12 @@ export default function Navbar({ onOpenAuth, onResetSearch }) {
           <span className="pill-text">44,119 Products Indexed</span>
           <span className="pill-model">OpenCLIP ViT-B/32</span>
         </div>
+
+        <nav aria-label="Pipeline navigation">
+          <Link to="/dashboard">Dashboard</Link>
+          {' · '}
+          <Link to="/agent">Agent</Link>
+        </nav>
 
         {/* User / Auth Actions */}
         <div className="navbar-actions">
