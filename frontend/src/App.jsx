@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage'
 import ResultsPage from './pages/ResultsPage'
 import DashboardPage from './pages/DashboardPage'
 import AgentPage from './pages/AgentPage'
+import RagSection from './components/rag/RagSection'
 
 function NavigationHeader({ onOpenAuth }) {
   const { clearSearch } = useSearch()
@@ -42,6 +43,7 @@ function MainApp() {
         <Route path="/results" element={<ResultsPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/agent" element={<AgentPage />} />
+        <Route path="/rag" element={<RagSection />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
 
