@@ -43,6 +43,8 @@ export default function Navbar({ onOpenAuth, onResetSearch }) {
         <nav aria-label="Pipeline navigation">
           <Link to="/dashboard">Dashboard</Link>
           {' · '}
+          <Link to="/rag">RAG</Link>
+          {' · '}
           <Link to="/agent">Agent</Link>
         </nav>
 
