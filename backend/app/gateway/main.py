@@ -21,6 +21,7 @@ from backend.app.gateway.database import init_db
 from backend.app.gateway.orchestrator_poller import poll_and_trigger
 from backend.app.gateway.router import router as gateway_router
 from backend.app.modules.agent.router import router as agent_router
+from backend.app.modules.agent.standalone_router import router as standalone_agent_router
 from app.services.search_service_registry import get_search_service
 from app.vision_router import router as vision_router
 from app.rag_router import router as rag_router
@@ -100,6 +101,7 @@ app.add_middleware(
 # Mount Routers
 app.include_router(gateway_router)
 app.include_router(agent_router)
+app.include_router(standalone_agent_router)
 
 
 @app.get("/health", tags=["Health"])
