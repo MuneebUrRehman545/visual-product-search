@@ -25,7 +25,7 @@ RAG_PROCESS_URL = os.getenv(
     "RAG_PROCESS_URL",
     "http://127.0.0.1:8000/api/v1/rag/process",
 )
-RAG_REQUEST_TIMEOUT_SECONDS = 30.0
+RAG_REQUEST_TIMEOUT_SECONDS = 60.0
 
 
 def _list_run_ids_with_status(status: str) -> list[str]:

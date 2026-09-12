@@ -81,29 +81,46 @@ export default function SearchControls({
             </div>
           </div>
 
-          <button
-            type="button"
-            className={`btn btn-search ${loading ? 'btn-searching' : ''}`}
-            onClick={onSearch}
-            disabled={disabled || loading}
-          >
-            {loading ? (
-              <>
-                <span className="spinner-inline"></span>
-                <span>
-                  Searching with {selectedModel === 'resnet' ? 'ResNet-50' : 'OpenCLIP'}...
-                </span>
-              </>
-            ) : (
-              <>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                <span>Find Similar Products</span>
-              </>
+          <div className="search-btn-wrapper">
+            <button
+              type="button"
+              className={`btn btn-search ${loading ? 'btn-searching' : ''}`}
+              onClick={onSearch}
+              disabled={disabled || loading}
+              title={
+                disabled
+                  ? 'Please select or upload an image above first'
+                  : loading
+                  ? 'Search is currently in progress...'
+                  : 'Find visually similar products in catalog'
+              }
+            >
+              {loading ? (
+                <>
+                  <span className="spinner-inline"></span>
+                  <span>
+                    Searching with {selectedModel === 'resnet' ? 'ResNet-50' : 'OpenCLIP'}...
+                  </span>
+                </>
+              ) : (
+                <>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  <span>Find Similar Products</span>
+                </>
+              )}
+            </button>
+            {disabled && !loading && (
+              <span className="search-hint-text">Select or drop a product photo above to search</span>
             )}
-          </button>
+            {loading && (
+              <span className="search-hint-text processing">
+                Extracting deep visual embeddings & querying FAISS index…
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </div>

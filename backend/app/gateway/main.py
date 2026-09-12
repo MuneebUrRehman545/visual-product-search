@@ -1,8 +1,10 @@
 import asyncio
 import logging
+import os
 import sys
 from contextlib import asynccontextmanager, suppress
 from pathlib import Path
+from typing import List
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -89,10 +91,42 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+def get_allowed_origins() -> List[str]:
+    """Retrieve allowed CORS origins with production environment variable support."""
+    default_dev_origins = [
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:5174",
+        "http://127.0.0.1:3000",
+    ]
+    env_origins = os.getenv("ALLOWED_ORIGINS")
+    if env_origins:
+        parsed = [origin.strip() for origin in env_origins.split(",") if origin.strip()]
+        if "*" in parsed:
+            return ["*"]
+        app_env = os.getenv("APP_ENV", "development").lower()
+        if app_env != "production":
+            for o in default_dev_origins:
+                if o not in parsed:
+                    parsed.append(o)
+        return parsed
+
+    app_env = os.getenv("APP_ENV", "development").lower()
+    if app_env == "production":
+        logger.warning(
+            "APP_ENV is set to 'production' but ALLOWED_ORIGINS is not set. "
+            "Set ALLOWED_ORIGINS to your production frontend URL."
+        )
+    return default_dev_origins
+
+
 # Configure CORS for frontend access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=get_allowed_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -1,5 +1,6 @@
 """Service for visual product search using OpenCLIP ViT-B-32 and FAISS IndexIDMap2."""
 
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 import faiss
@@ -11,9 +12,35 @@ from app.services.embedding_service import EmbeddingService
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
-# Week 3 production FAISS index location (with legacy fallback)
-PRODUCTION_INDEX_PATH = PROJECT_ROOT / "artifacts" / "faiss" / "clip.index"
-LEGACY_INDEX_PATH = PROJECT_ROOT / "data" / "embeddings" / "clip_vit_b32" / "catalog.index"
+
+def resolve_clip_index_path() -> Path:
+    """Resolve CLIP FAISS index path with environment variable precedence."""
+    # 1. Explicit full path to index
+    env_exact_path = os.getenv("FAISS_CLIP_INDEX_PATH")
+    if env_exact_path:
+        p = Path(env_exact_path)
+        return p if p.is_absolute() else PROJECT_ROOT / p
+
+    # 2. Configured FAISS directory
+    env_dir = os.getenv("FAISS_INDEX_DIR")
+    if env_dir:
+        p_dir = Path(env_dir)
+        base = p_dir if p_dir.is_absolute() else PROJECT_ROOT / p_dir
+        candidate = base / "clip.index"
+        if candidate.exists():
+            return candidate
+
+    # 3. Production artifacts location
+    prod_path = PROJECT_ROOT / "artifacts" / "faiss" / "clip.index"
+    if prod_path.exists():
+        return prod_path
+
+    # 4. Legacy fallback location
+    legacy_path = PROJECT_ROOT / "data" / "embeddings" / "clip_vit_b32" / "catalog.index"
+    if legacy_path.exists():
+        return legacy_path
+
+    return prod_path
 
 
 class CLIPSearchService:
@@ -28,16 +55,17 @@ class CLIPSearchService:
     ) -> None:
         if index_path:
             self.index_path = Path(index_path)
-        elif PRODUCTION_INDEX_PATH.exists():
-            self.index_path = PRODUCTION_INDEX_PATH
         else:
-            self.index_path = LEGACY_INDEX_PATH
+            self.index_path = resolve_clip_index_path()
 
         self.db_path = Path(db_path) if db_path else get_db_path()
         self.database_url = database_url if database_url else get_database_url()
 
         if not self.index_path.exists():
-            raise FileNotFoundError(f"CLIP FAISS index file not found at: {self.index_path}")
+            raise FileNotFoundError(
+                f"CLIP FAISS index file not found at: {self.index_path}. "
+                f"Ensure artifacts/faiss/clip.index is present or set FAISS_INDEX_DIR."
+            )
 
         try:
             self.index = faiss.read_index(str(self.index_path))

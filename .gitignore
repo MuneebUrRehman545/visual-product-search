@@ -32,6 +32,7 @@ data/images/*
 data/embeddings/
 artifacts/embeddings/
 artifacts/faiss/
+*.zip
 
 # Logs
 logs/

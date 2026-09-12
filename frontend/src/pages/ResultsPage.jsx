@@ -191,8 +191,10 @@ export default function ResultsPage() {
               <line x1="8" y1="12" x2="16" y2="12"></line>
             </svg>
           </div>
-          <h2 className="fallback-title">No similar products were found.</h2>
-          <p className="fallback-desc">Try another image or choose a different category preset.</p>
+          <h2 className="fallback-title">No matching products found.</h2>
+          <p className="fallback-desc">
+            The visual search service did not find any catalog items matching this image. Try uploading a different product photo or exploring our category presets.
+          </p>
           <div className="fallback-actions">
             <button
               className="btn btn-primary"
@@ -201,7 +203,7 @@ export default function ResultsPage() {
                 navigate('/')
               }}
             >
-              Try Another Image
+              Upload Another Image
             </button>
           </div>
         </div>

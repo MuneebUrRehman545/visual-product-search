@@ -113,7 +113,6 @@ export default function SampleQueries({ onSelectCategoryData, onSelectSample, lo
       }
     } catch (err) {
       console.error('Failed to search quick select sample:', err)
-      alert(`Failed to load category search: ${err.message}`)
     } finally {
       setActiveCategoryName(null)
     }

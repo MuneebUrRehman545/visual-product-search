@@ -71,9 +71,12 @@ export default function ResultCard({ result, queryFilename, onFindSimilar }) {
     filename,
     product_display_name,
     category,
+    sub_category,
     article_type,
     base_colour,
     gender,
+    season,
+    usage,
     image_url,
     similarity_score,
   } = result
@@ -144,6 +147,7 @@ export default function ResultCard({ result, queryFilename, onFindSimilar }) {
         <div className="card-details">
           <div className="tags-container">
             {category && <span className="meta-tag category-tag">{category}</span>}
+            {sub_category && <span className="meta-tag category-tag">{sub_category}</span>}
             {article_type && <span className="meta-tag article-tag">{article_type}</span>}
             {base_colour && <span className="meta-tag colour-tag">{base_colour}</span>}
             {gender && <span className="meta-tag gender-tag">{gender}</span>}

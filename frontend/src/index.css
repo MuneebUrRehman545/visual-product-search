@@ -200,11 +200,19 @@ body {
   gap: 1rem;
 }
 
-.upload-box-compact:hover,
-.upload-box-compact.drag-over {
+.upload-box-compact:hover:not(.disabled),
+.upload-box-compact.drag-over:not(.disabled) {
   border-color: var(--accent-color);
   background: rgba(56, 189, 248, 0.08);
   box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.upload-box-compact.disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.3);
 }
 
 .compact-upload-left {
@@ -1122,8 +1130,38 @@ body {
 }
 
 .btn-search:disabled {
-  opacity: 0.6;
+  opacity: 0.45;
   cursor: not-allowed;
+  filter: grayscale(0.5);
+  box-shadow: none;
+  transform: none;
+}
+
+.search-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.search-hint-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: right;
+  max-width: 260px;
+}
+
+.search-hint-text.processing {
+  color: var(--accent-color);
+  font-style: normal;
+  font-weight: 500;
+  animation: pulseOpacity 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseOpacity {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
 }
 
 .btn-search svg {
@@ -1200,6 +1238,25 @@ body {
 .error-message {
   font-size: 0.85rem;
   opacity: 0.9;
+}
+
+.error-dismiss-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #fecdd3;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.4rem;
+  border-radius: 0.25rem;
+  opacity: 0.7;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.error-dismiss-btn:hover {
+  opacity: 1;
+  transform: scale(1.15);
 }
 
 /* ==========================================================================

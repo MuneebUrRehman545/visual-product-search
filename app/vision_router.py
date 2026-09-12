@@ -193,6 +193,8 @@ def get_current_user(authorization: Optional[str] = Header(None)) -> Dict[str, A
 @router.get("/health", tags=["Health"])
 @router.get("/api/health", tags=["Health"])
 @router.get("/api/v1/health", tags=["Health"])
+@router.get("/api/v1/vision/health", tags=["Health"])
+@router.get("/vision/health", tags=["Health"])
 async def health_check():
     """Health check endpoint to verify backend operational status and catalog readiness."""
     try:
@@ -418,9 +420,13 @@ async def catalog_image_options(filename: str):
 
 
 @router.get("/catalog-images/{filename}", tags=["Catalog Images"])
+@router.head("/catalog-images/{filename}", tags=["Catalog Images"])
 @router.get("/images/{filename}", tags=["Catalog Images"])
+@router.head("/images/{filename}", tags=["Catalog Images"])
 @router.get("/api/catalog-images/{filename}", tags=["Catalog Images"])
+@router.head("/api/catalog-images/{filename}", tags=["Catalog Images"])
 @router.get("/api/v1/vision/catalog-images/{filename}", tags=["Catalog Images"])
+@router.head("/api/v1/vision/catalog-images/{filename}", tags=["Catalog Images"])
 async def get_catalog_image(filename: str):
     """Serve catalog product images safely with Cross-Origin-Resource-Policy.
     If the image is missing from disk, returns an inline SVG placeholder so Chrome ORB

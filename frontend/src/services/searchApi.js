@@ -99,12 +99,18 @@ export async function searchProducts(imageFileOrFilename, topK = 10, model = 'cl
     }
 
     if (!response.ok) {
-      const detailMsg =
-        data && data.detail
-          ? typeof data.detail === 'string'
-            ? data.detail
-            : JSON.stringify(data.detail)
-          : `Search API request failed (HTTP ${response.status})`
+      let detailMsg = `Search request failed (HTTP ${response.status})`
+      if (response.status >= 500) {
+        detailMsg = 'The visual search server encountered an error processing your request. Please try again.'
+      } else if (data && data.detail) {
+        if (typeof data.detail === 'string') {
+          detailMsg = data.detail
+        } else if (Array.isArray(data.detail)) {
+          detailMsg = data.detail.map((d) => d.msg || 'Invalid input parameter').join('; ')
+        } else {
+          detailMsg = 'The search request contained invalid parameters.'
+        }
+      }
 
       const error = new Error(detailMsg)
       error.status = response.status
@@ -113,7 +119,7 @@ export async function searchProducts(imageFileOrFilename, topK = 10, model = 'cl
     }
 
     if (!data || !Array.isArray(data.results)) {
-      throw new Error('Invalid or malformed response format received from search API.')
+      throw new Error('Invalid or malformed response format received from visual search API.')
     }
 
     return data
@@ -121,7 +127,7 @@ export async function searchProducts(imageFileOrFilename, topK = 10, model = 'cl
     if (err.status) {
       throw err
     }
-    const networkError = new Error(`Unable to connect to search service (${err.message})`)
+    const networkError = new Error('Unable to connect to visual search service. Please ensure the backend gateway is running.')
     networkError.status = 0
     throw networkError
   }

@@ -23,7 +23,7 @@ export default function ProductDetailModal({ product, onClose, onFindSimilar }) 
     similarity_score,
   } = product
 
-  const fullImageUrl = getCatalogImageUrl(image_url)
+  const fullImageUrl = getCatalogImageUrl(image_url || filename)
   const percentageScore = (Number(similarity_score != null ? similarity_score : 0) * 100).toFixed(2)
   const title = product_display_name || filename || `Product #${product_id}`
 
@@ -84,6 +84,18 @@ export default function ProductDetailModal({ product, onClose, onFindSimilar }) 
                 <span className="spec-label">Product Group ID:</span>
                 <span className="spec-value">#{product_id}</span>
               </div>
+              {sub_category && (
+                <div className="spec-row">
+                  <span className="spec-label">Sub-Category:</span>
+                  <span className="spec-value">{sub_category}</span>
+                </div>
+              )}
+              {article_type && (
+                <div className="spec-row">
+                  <span className="spec-label">Article Type:</span>
+                  <span className="spec-value">{article_type}</span>
+                </div>
+              )}
               {base_colour && (
                 <div className="spec-row">
                   <span className="spec-label">Color:</span>

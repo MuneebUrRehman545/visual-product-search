@@ -1,19 +1,28 @@
 """Script to generate data/catalog/manifest_2000.csv manifest."""
 
 import csv
+import os
 from pathlib import Path
 import sys
 import pandas as pd
 from PIL import Image
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-STYLES_CSV = Path("D:/archive/styles.csv")
-RAW_IMAGES_DIR = Path("D:/archive/images")
+STYLES_CSV = (
+    Path(os.getenv("STYLES_CSV")).resolve()
+    if os.getenv("STYLES_CSV")
+    else PROJECT_ROOT / "data" / "styles.csv"
+)
+RAW_IMAGES_DIR = (
+    Path(os.getenv("RAW_IMAGES_DIR")).resolve()
+    if os.getenv("RAW_IMAGES_DIR")
+    else PROJECT_ROOT / "data" / "images"
+)
 OUTPUT_MANIFEST = PROJECT_ROOT / "data" / "catalog" / "manifest_2000.csv"
 
 
 def main() -> None:
-    print("Loading metadata from D:/archive/styles.csv...")
+    print(f"Loading metadata from {STYLES_CSV}...")
     if not STYLES_CSV.exists():
         print(f"Error: Metadata file '{STYLES_CSV}' not found.", file=sys.stderr)
         sys.exit(1)

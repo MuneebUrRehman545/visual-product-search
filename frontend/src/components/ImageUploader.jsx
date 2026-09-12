@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from 'react'
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp']
+const MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024 // 25 MB
 
-export default function ImageUploader({ file, onFileChange }) {
+export default function ImageUploader({ file, onFileChange, disabled = false }) {
   const [previewUrl, setPreviewUrl] = useState(null)
   const [errorMessage, setErrorMessage] = useState('')
   const [isDragging, setIsDragging] = useState(false)
@@ -36,7 +37,20 @@ export default function ImageUploader({ file, onFileChange }) {
   }
 
   const processSelectedFile = (selected) => {
+    if (disabled) return
     if (!selected) return
+
+    if (selected.size === 0) {
+      setErrorMessage('Selected file is empty (0 bytes). Please upload a valid image.')
+      if (onFileChange) onFileChange(null)
+      return
+    }
+
+    if (selected.size > MAX_FILE_SIZE_BYTES) {
+      setErrorMessage('File size exceeds the 25 MB limit. Please select a smaller image.')
+      if (onFileChange) onFileChange(null)
+      return
+    }
 
     if (!isValidImageFile(selected)) {
       setErrorMessage('Unsupported format. Please upload a JPG, PNG, or WebP image.')
@@ -49,6 +63,7 @@ export default function ImageUploader({ file, onFileChange }) {
   }
 
   const handleFileInputChange = (e) => {
+    if (disabled) return
     const selected = e.target.files && e.target.files[0]
     processSelectedFile(selected)
   }
@@ -56,6 +71,7 @@ export default function ImageUploader({ file, onFileChange }) {
   const handleDragOver = (e) => {
     e.preventDefault()
     e.stopPropagation()
+    if (disabled) return
     setIsDragging(true)
   }
 
@@ -69,6 +85,7 @@ export default function ImageUploader({ file, onFileChange }) {
     e.preventDefault()
     e.stopPropagation()
     setIsDragging(false)
+    if (disabled) return
 
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const droppedFile = e.dataTransfer.files[0]
@@ -78,6 +95,7 @@ export default function ImageUploader({ file, onFileChange }) {
 
   const handleReset = (e) => {
     e.stopPropagation()
+    if (disabled) return
     setErrorMessage('')
     if (onFileChange) onFileChange(null)
   }
@@ -92,6 +110,7 @@ export default function ImageUploader({ file, onFileChange }) {
         onChange={handleFileInputChange}
         style={{ display: 'none' }}
         id="image-file-input"
+        disabled={disabled}
       />
 
       {errorMessage && (
@@ -107,11 +126,13 @@ export default function ImageUploader({ file, onFileChange }) {
 
       {!file ? (
         <div
-          className={`upload-box-compact ${isDragging ? 'drag-over' : ''}`}
+          className={`upload-box-compact ${isDragging ? 'drag-over' : ''} ${disabled ? 'disabled' : ''}`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
-          onClick={() => fileInputRef.current?.click()}
+          onClick={() => {
+            if (!disabled) fileInputRef.current?.click()
+          }}
         >
           <div className="compact-upload-left">
             <div className="compact-upload-icon-wrapper">
@@ -140,9 +161,10 @@ export default function ImageUploader({ file, onFileChange }) {
           <button
             type="button"
             className="btn-compact-browse"
+            disabled={disabled}
             onClick={(e) => {
               e.stopPropagation()
-              fileInputRef.current?.click()
+              if (!disabled) fileInputRef.current?.click()
             }}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -173,11 +195,19 @@ export default function ImageUploader({ file, onFileChange }) {
             <button
               type="button"
               className="btn-compact-change"
-              onClick={() => fileInputRef.current?.click()}
+              disabled={disabled}
+              onClick={() => {
+                if (!disabled) fileInputRef.current?.click()
+              }}
             >
               Change
             </button>
-            <button type="button" className="btn-compact-remove" onClick={handleReset}>
+            <button
+              type="button"
+              className="btn-compact-remove"
+              disabled={disabled}
+              onClick={handleReset}
+            >
               Remove
             </button>
           </div>

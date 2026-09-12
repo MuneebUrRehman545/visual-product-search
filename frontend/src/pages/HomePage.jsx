@@ -57,20 +57,22 @@ export default function HomePage() {
         />
 
         {/* Upload Dropzone */}
-        <ImageUploader file={selectedFile} onFileChange={handleFileChange} />
+        <ImageUploader
+          file={selectedFile}
+          onFileChange={handleFileChange}
+          disabled={loading}
+        />
 
         {/* Search Controls (Model Selection, Retrieval Depth, Search Button) */}
-        {selectedFile && (
-          <SearchControls
-            topK={topK}
-            onTopKChange={setTopK}
-            selectedModel={selectedModel}
-            onModelChange={setSelectedModel}
-            onSearch={handleSearch}
-            disabled={!selectedFile}
-            loading={loading}
-          />
-        )}
+        <SearchControls
+          topK={topK}
+          onTopKChange={setTopK}
+          selectedModel={selectedModel}
+          onModelChange={setSelectedModel}
+          onSearch={handleSearch}
+          disabled={!selectedFile}
+          loading={loading}
+        />
 
         {/* Error Banner */}
         {error && (
@@ -84,6 +86,14 @@ export default function HomePage() {
               <p className="error-title">Unable to search for similar products</p>
               <p className="error-message">{error}</p>
             </div>
+            <button
+              type="button"
+              className="error-dismiss-btn"
+              onClick={() => setError(null)}
+              aria-label="Dismiss error"
+            >
+              &times;
+            </button>
           </div>
         )}
       </main>

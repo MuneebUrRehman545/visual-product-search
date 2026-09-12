@@ -1,4 +1,4 @@
-﻿import os
+import os
 
 from dotenv import load_dotenv
 from qdrant_client import QdrantClient
@@ -21,20 +21,29 @@ if not QDRANT_API_KEY:
 
 
 # ==========================================================
-# Qdrant Client
-# ==========================================================
-
-client = QdrantClient(
-    url=QDRANT_URL,
-    api_key=QDRANT_API_KEY
-)
-
-
-# ==========================================================
 # Collection Name
 # ==========================================================
 
 COLLECTION_NAME = "rag_documents"
+
+
+# ==========================================================
+# Qdrant Client
+# ==========================================================
+
+if QDRANT_URL == ":memory:":
+    client = QdrantClient(location=":memory:")
+    from qdrant_client.http.models import Distance, VectorParams
+    if not client.collection_exists(COLLECTION_NAME):
+        client.create_collection(
+            collection_name=COLLECTION_NAME,
+            vectors_config=VectorParams(size=384, distance=Distance.COSINE),
+        )
+else:
+    client = QdrantClient(
+        url=QDRANT_URL,
+        api_key=QDRANT_API_KEY
+    )
 
 
 # ==========================================================

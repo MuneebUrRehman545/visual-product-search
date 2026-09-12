@@ -70,10 +70,10 @@ async def add_corp_and_cors_headers(request: Request, call_next):
     return response
 
 
-# Add CORS Middleware supporting local development and LAN IP access
+# Add CORS Middleware supporting local development, LAN IP, and production origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

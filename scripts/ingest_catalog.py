@@ -23,17 +23,21 @@ from app.services.embedding_service import (
 
 MANIFEST_PATH = PROJECT_ROOT / "data" / "catalog" / "manifest_2000.csv"
 EMBEDDINGS_DIR = PROJECT_ROOT / "data" / "embeddings" / "clip_vit_b32"
-RAW_IMAGES_DIR_FALLBACK = Path("D:/archive/images")
+RAW_IMAGES_DIR_FALLBACK = (
+    Path(os.getenv("RAW_IMAGES_DIR")).resolve()
+    if os.getenv("RAW_IMAGES_DIR")
+    else PROJECT_ROOT / "data" / "images"
+)
 DEFAULT_BATCH_SIZE = 64
 
 
 def resolve_image_path(rel_image_path: str, filename: str) -> Path:
-    """Resolve image path checking project catalog, relative path, or archive fallback."""
+    """Resolve image path checking project catalog, relative path, or configured images fallback."""
     candidates = [
         PROJECT_ROOT / "data" / "catalog" / rel_image_path,
         PROJECT_ROOT / "data" / "catalog" / "images" / filename,
+        PROJECT_ROOT / "data" / "images" / filename,
         RAW_IMAGES_DIR_FALLBACK / filename,
-        Path("D:/archive") / rel_image_path,
     ]
     for candidate in candidates:
         if candidate.exists() and candidate.is_file():

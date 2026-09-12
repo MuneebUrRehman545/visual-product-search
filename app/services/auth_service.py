@@ -9,7 +9,25 @@ import os
 import secrets
 from typing import Any, Dict, Optional, Tuple
 
-JWT_SECRET = os.getenv("AUTH_SECRET_KEY", "visual-product-search-super-secret-key-2026-week3")
+_INSECURE_DEFAULT_SECRET = "visual-product-search-super-secret-key-2026-week3"
+_PLACEHOLDER_SECRETS = {"change-me-in-production", "your_secret_key_here", _INSECURE_DEFAULT_SECRET}
+
+
+def _resolve_jwt_secret() -> str:
+    secret = os.getenv("AUTH_SECRET_KEY")
+    app_env = os.getenv("APP_ENV", "development").lower()
+    if not secret or secret.strip() in _PLACEHOLDER_SECRETS:
+        if app_env == "production":
+            raise RuntimeError(
+                "CRITICAL SECURITY CONFIGURATION ERROR: AUTH_SECRET_KEY environment variable "
+                "must be explicitly set to a strong secret in production mode. "
+                "Refusing to start with insecure default secret."
+            )
+        return _INSECURE_DEFAULT_SECRET
+    return secret.strip()
+
+
+JWT_SECRET = _resolve_jwt_secret()
 TOKEN_EXPIRY_DAYS = 7
 
 

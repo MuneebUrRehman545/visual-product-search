@@ -3,8 +3,8 @@ Create a sample product dataset from a large image catalog.
 
 Example:
     python scripts/create_sample_dataset.py \
-        --images-dir D:/archive/images \
-        --metadata-file D:/archive/styles.csv \
+        --images-dir data/images \
+        --metadata-file data/styles.csv \
         --output-dir data/catalog \
         --sample-size 2000 \
         --replace
@@ -52,14 +52,14 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--images-dir",
         type=Path,
-        default=Path("D:/archive/images"),
+        default=Path("data/images"),
         help="Folder containing the complete image dataset.",
     )
 
     parser.add_argument(
         "--metadata-file",
         type=Path,
-        default=Path("D:/archive/styles.csv"),
+        default=Path("data/styles.csv"),
         help="Path to the metadata Excel or CSV file.",
     )
 
